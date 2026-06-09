@@ -1,0 +1,546 @@
+{
+  "last_updated": "2026-06-10T00:00:00Z",
+  "source_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/",
+  "tariffs": [
+    {
+      "country": "Canada",
+      "country_code": "CA",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Ecuador",
+      "country_code": "EC",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "European Union",
+      "country_code": "EU",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Indonesia",
+      "country_code": "ID",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Mexico",
+      "country_code": "MX",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Pakistan",
+      "country_code": "PK",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Argentina",
+      "country_code": "AR",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Bangladesh",
+      "country_code": "BD",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Cambodia",
+      "country_code": "KH",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "El Salvador",
+      "country_code": "SV",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Guatemala",
+      "country_code": "GT",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Malaysia",
+      "country_code": "MY",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Taiwan",
+      "country_code": "TW",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "United Kingdom",
+      "country_code": "GB",
+      "tariff_rate": "10%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Algeria",
+      "country_code": "DZ",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Angola",
+      "country_code": "AO",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Australia",
+      "country_code": "AU",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "The Bahamas",
+      "country_code": "BS",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Bahrain",
+      "country_code": "BH",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Brazil",
+      "country_code": "BR",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Chile",
+      "country_code": "CL",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "China",
+      "country_code": "CN",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Colombia",
+      "country_code": "CO",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Costa Rica",
+      "country_code": "CR",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Dominican Republic",
+      "country_code": "DO",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Egypt",
+      "country_code": "EG",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Guyana",
+      "country_code": "GY",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Honduras",
+      "country_code": "HN",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Hong Kong",
+      "country_code": "HK",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "India",
+      "country_code": "IN",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Iraq",
+      "country_code": "IQ",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Israel",
+      "country_code": "IL",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Japan",
+      "country_code": "JP",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Jordan",
+      "country_code": "JO",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Kazakhstan",
+      "country_code": "KZ",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Kuwait",
+      "country_code": "KW",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Libya",
+      "country_code": "LY",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Morocco",
+      "country_code": "MA",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "New Zealand",
+      "country_code": "NZ",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Nicaragua",
+      "country_code": "NI",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Nigeria",
+      "country_code": "NG",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Norway",
+      "country_code": "NO",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Oman",
+      "country_code": "OM",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Peru",
+      "country_code": "PE",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Philippines",
+      "country_code": "PH",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Qatar",
+      "country_code": "QA",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Russia",
+      "country_code": "RU",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Saudi Arabia",
+      "country_code": "SA",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Singapore",
+      "country_code": "SG",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "South Africa",
+      "country_code": "ZA",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "South Korea",
+      "country_code": "KR",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Sri Lanka",
+      "country_code": "LK",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Switzerland",
+      "country_code": "CH",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Thailand",
+      "country_code": "TH",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Trinidad and Tobago",
+      "country_code": "TT",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Türkiye",
+      "country_code": "TR",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "United Arab Emirates",
+      "country_code": "AE",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Uruguay",
+      "country_code": "UY",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Venezuela",
+      "country_code": "VE",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    },
+    {
+      "country": "Vietnam",
+      "country_code": "VN",
+      "tariff_rate": "12.5%",
+      "product_category": "All goods",
+      "status": "confirmed",
+      "effective_date": "2026-04-09",
+      "citation_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/"
+    }
+  ]
+}
