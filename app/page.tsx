@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { Tariff, TariffData, TariffRateTier } from '@/types/tariff';
+import { Tariff, TariffData } from '@/types/tariff';
+import { TariffSelection, getCountryColors, getFilterOptions } from '@/lib/tariffs';
 import CountryPanel from '@/components/CountryPanel';
 import Legend from '@/components/Legend';
 
@@ -11,7 +12,7 @@ const TariffMap = dynamic(() => import('@/components/TariffMap'), { ssr: false }
 export default function Home() {
   const [tariffData, setTariffData] = useState<TariffData | null>(null);
   const [selectedTariff, setSelectedTariff] = useState<Tariff | null>(null);
-  const [activeFilter, setActiveFilter] = useState<TariffRateTier | 'all'>('all');
+  const [selection, setSelection] = useState<TariffSelection | null>(null);
   const mapSectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -20,12 +21,15 @@ export default function Home() {
       .then(setTariffData);
   }, []);
 
-  const counts = tariffData
-    ? tariffData.tariffs.reduce((acc, t) => {
-        acc[t.tariff_rate] = (acc[t.tariff_rate] ?? 0) + 1;
-        return acc;
-      }, {} as Record<string, number>)
-    : {};
+  const countryColors = useMemo(
+    () => getCountryColors(tariffData?.tariffs ?? [], selection),
+    [tariffData, selection],
+  );
+
+  const filterOptions = useMemo(
+    () => getFilterOptions(tariffData?.tariffs ?? []),
+    [tariffData],
+  );
 
   const lastUpdated = tariffData
     ? new Date(tariffData.last_updated).toLocaleDateString('en-US', {
@@ -84,14 +88,14 @@ export default function Home() {
       <section
         ref={mapSectionRef}
         className="relative mb-10 rounded-2xl overflow-hidden border border-white/10"
-        style={{ height: '100vh', width: '75vw', marginLeft: 'auto', marginRight: 'auto' }}
+        style={{ height: '90vh', width: '75vw', marginLeft: 'auto', marginRight: 'auto' }}
       >
         {tariffData && (
           <TariffMap
             tariffs={tariffData.tariffs}
+            countryColors={countryColors}
             onCountrySelect={setSelectedTariff}
             selectedCountry={selectedTariff?.country_code ?? null}
-            activeFilter={activeFilter}
           />
         )}
 
@@ -104,7 +108,7 @@ export default function Home() {
         <CountryPanel tariff={selectedTariff} onClose={() => setSelectedTariff(null)} />
 
         {tariffData && (
-          <Legend activeFilter={activeFilter} onFilterChange={setActiveFilter} counts={counts} />
+          <Legend options={filterOptions} selection={selection} onSelect={setSelection} />
         )}
 
         {!selectedTariff && tariffData && (

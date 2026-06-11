@@ -3,57 +3,32 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Tariff, TariffRateTier } from '@/types/tariff';
+import { Tariff } from '@/types/tariff';
+import { NO_DATA } from '@/lib/tariffs';
 
 interface TariffMapProps {
   tariffs: Tariff[];
+  countryColors: Record<string, string>;
   onCountrySelect: (tariff: Tariff | null) => void;
   selectedCountry: string | null;
-  activeFilter: TariffRateTier | 'all';
 }
 
-const RATE_COLORS: Record<string, string> = {
-  '10%':   '#6E9171',
-  '12.5%': '#C54E24',
-};
-
-const EU_COUNTRIES = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
-
-function buildCountryCodes(tariffs: Tariff[]): Record<string, { color: string; tariff: Tariff }> {
-  const map: Record<string, { color: string; tariff: Tariff }> = {};
-  for (const t of tariffs) {
-    const color = RATE_COLORS[t.tariff_rate] ?? '#64748b';
-    if (t.country_code === 'EU') {
-      for (const code of EU_COUNTRIES) {
-        map[code] = { color, tariff: t };
-      }
-    } else {
-      map[t.country_code] = { color, tariff: t };
-    }
-  }
-  return map;
-}
-
-export default function TariffMap({ tariffs, onCountrySelect, selectedCountry, activeFilter }: TariffMapProps) {
+export default function TariffMap({ tariffs, countryColors, onCountrySelect, selectedCountry }: TariffMapProps) {
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  const filteredTariffs = activeFilter === 'all'
-    ? tariffs
-    : tariffs.filter(t => t.tariff_rate === activeFilter);
+  const countryByCode: Record<string, Tariff> = {};
+  for (const t of tariffs) countryByCode[t.country_code] = t;
 
-  const countryMap = buildCountryCodes(filteredTariffs);
-
-  // Build match expression for fill color
   const buildColorExpression = useCallback(() => {
     const expr: (string | string[])[] = ['match', ['get', 'iso_3166_1']];
-    for (const [code, { color }] of Object.entries(countryMap)) {
+    for (const [code, color] of Object.entries(countryColors)) {
       expr.push(code, color);
     }
-    expr.push('#1e293b'); // default
+    expr.push(NO_DATA);
     return expr;
-  }, [filteredTariffs]);
+  }, [countryColors]);
 
   // Init map
   useEffect(() => {
@@ -133,11 +108,7 @@ export default function TariffMap({ tariffs, onCountrySelect, selectedCountry, a
     map.on('mousemove', 'country-fills', (e) => {
       if (!e.features?.length) return;
       const code = e.features[0].properties?.iso_3166_1;
-      if (countryMap[code]) {
-        map.getCanvas().style.cursor = 'pointer';
-      } else {
-        map.getCanvas().style.cursor = '';
-      }
+      map.getCanvas().style.cursor = countryByCode[code] ? 'pointer' : '';
       if (hoveredId !== null) {
         map.setFeatureState({ source: 'country-fills', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: false });
       }
@@ -159,12 +130,7 @@ export default function TariffMap({ tariffs, onCountrySelect, selectedCountry, a
     map.on('click', 'country-fills', (e) => {
       const code = e.features?.[0]?.properties?.iso_3166_1;
       if (!code) return;
-      const match = countryMap[code];
-      if (match) {
-        onCountrySelect(match.tariff);
-      } else {
-        onCountrySelect(null);
-      }
+      onCountrySelect(countryByCode[code] ?? null);
     });
 
     map.on('click', (e) => {
@@ -177,12 +143,12 @@ export default function TariffMap({ tariffs, onCountrySelect, selectedCountry, a
     };
   }, []);
 
-  // Update fill colors when filter changes
+  // Update fill colors when the selection changes
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !mapLoaded) return;
     map.setPaintProperty('country-fills', 'fill-color', buildColorExpression() as mapboxgl.Expression);
-  }, [filteredTariffs, mapLoaded, buildColorExpression]);
+  }, [countryColors, mapLoaded, buildColorExpression]);
 
   return (
     <div

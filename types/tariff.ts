@@ -1,14 +1,27 @@
-export type TariffStatus = 'confirmed' | 'paused' | 'threatened';
-export type TariffRateTier = '10%' | '12.5%' | 'other';
+export type TariffStatus = 'implemented' | 'threatened' | 'confirmed' | 'paused' | 'none';
 
-export interface Tariff {
-  country: string;
-  country_code: string;
-  tariff_rate: string;
+export interface TariffType {
+  name: string;
+  sub_category?: string;
+  rate: string;
   product_category: string;
   status: TariffStatus;
   effective_date: string;
   citation_url: string;
+  exempted_country?: string[];
+}
+
+export interface Deal {
+  name: string;
+  announcement_date: string;
+  citation_url: string;
+}
+
+export interface Tariff {
+  country: string;
+  country_code: string;
+  tariff_types: TariffType[];
+  deals: Deal[];
 }
 
 export interface TariffData {
