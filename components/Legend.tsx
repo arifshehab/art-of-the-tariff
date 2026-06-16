@@ -1,131 +1,177 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Filter, X } from 'lucide-react';
 import {
-  TARIFF_GROUPS, TariffGroup, TariffSelection, FilterOption,
-  COLOR_SCHEMES,
+  FILTER_GROUPS, FilterGroup, TariffSelection, FilterOption,
+  STATUS_SCALES, MAX_SCALE_RATE, rateColor,
 } from '@/lib/tariffs';
 
 interface LegendProps {
-  options: Record<TariffGroup, FilterOption[]>;
+  options: Record<FilterGroup, FilterOption[]>;
   selection: TariffSelection | null;
+  scaleStatus: string;
   onSelect: (selection: TariffSelection | null) => void;
 }
 
-function RateScale({ group }: { group: TariffGroup }) {
-  const scheme = COLOR_SCHEMES[group];
+function RateScale({ status }: { status: string }) {
+  const [light, dark] = STATUS_SCALES[status] ?? STATUS_SCALES.implemented;
+  const label = status.charAt(0).toUpperCase() + status.slice(1);
   return (
-    <div className="px-3 pt-3 mt-1 border-t border-white/10">
-      <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">Rate scale</p>
-      <div className="flex items-center gap-1">
-        <span className="w-3.5 h-3.5 rounded-sm border border-white/20" style={{ backgroundColor: '#ffffff' }} title="0%" />
-        {scheme.map((c, i) => (
-          <span
-            key={c}
-            className="w-3.5 h-3.5 rounded-sm"
-            style={{ backgroundColor: c }}
-            title={`${i * 5 + 1}–${(i + 1) * 5}%${i === scheme.length - 1 ? '+' : ''}`}
-          />
-        ))}
-      </div>
+    <div className="mt-3">
+      <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">{label} rate</p>
+      <span
+        className="block h-2.5 rounded-sm"
+        style={{ background: `linear-gradient(to right, #ffffff, ${light}, ${dark})` }}
+      />
       <div className="flex justify-between text-[10px] text-slate-600 mt-1">
         <span>0% / TBD</span>
-        <span>{scheme.length * 5}%+</span>
+        <span>{MAX_SCALE_RATE}%+</span>
       </div>
     </div>
   );
 }
 
-export default function Legend({ options, selection, onSelect }: LegendProps) {
-  const [expanded, setExpanded] = useState<Record<TariffGroup, boolean>>({
-    'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false,
-  });
+function DealKey() {
+  return (
+    <div className="mt-3">
+      <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">Deal type</p>
+      <div className="flex items-center gap-4">
+        <span className="flex items-center gap-2 text-[11px] text-slate-400">
+          <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: rateColor('implemented', '20%') }} />
+          Agreement
+        </span>
+        <span className="flex items-center gap-2 text-[11px] text-slate-400">
+          <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: rateColor('threatened', '20%') }} />
+          Framework
+        </span>
+      </div>
+    </div>
+  );
+}
 
-  const toggle = (g: TariffGroup) =>
-    setExpanded(prev => ({ ...prev, [g]: !prev[g] }));
+export default function Legend({ options, selection, scaleStatus, onSelect }: LegendProps) {
+  const [picking, setPicking] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<FilterGroup | null>(null);
+
+  const closePicker = () => { setPicking(false); setActiveCategory(null); };
+  const choose = (sel: TariffSelection | null) => { onSelect(sel); closePicker(); };
+
+  // Compact (default) view — shows the active selection chip + scale.
+  if (!picking) {
+    const opts = selection ? options[selection.group] : [];
+    const activeLabel = selection
+      ? (opts.find(o => o.key === selection.key)?.label ?? selection.key)
+      : '';
+    const isSingle = opts.length <= 1;
+    const chipText = !selection ? '' : isSingle ? selection.group : `${selection.group} › ${activeLabel}`;
+
+    return (
+      <div className="flex-shrink-0 border-t border-white/10 bg-[#0a0f1e] p-4">
+        <p className="text-xs text-slate-500 uppercase tracking-widest mb-2">Coloring map by</p>
+
+        {selection ? (
+          <>
+            <div className="flex items-center gap-1.5 bg-white/[0.06] border border-white/10 rounded-lg pl-3 pr-1.5 py-2">
+              <span className="text-sm text-white flex-1 leading-snug">{chipText}</span>
+              <button
+                onClick={() => setPicking(true)}
+                aria-label="Change tariff"
+                className="p-1 rounded text-slate-400 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0"
+              >
+                <Filter size={14} />
+              </button>
+              <button
+                onClick={() => onSelect(null)}
+                aria-label="Clear filter"
+                className="p-1 rounded text-slate-500 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0"
+              >
+                <X size={14} />
+              </button>
+            </div>
+            {selection.group === 'Deal' ? <DealKey /> : <RateScale status={scaleStatus} />}
+          </>
+        ) : (
+          <button
+            onClick={() => setPicking(true)}
+            className="w-full flex items-center gap-2 bg-white/[0.06] border border-white/10 rounded-lg px-3 py-2 text-left hover:bg-white/[0.08] transition-colors"
+          >
+            <span className="text-sm text-slate-400 flex-1">Choose a tariff</span>
+            <Filter size={14} className="text-slate-400 flex-shrink-0" />
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  // Picker view — drill into a category, then pick a tariff.
+  const visibleGroups = FILTER_GROUPS.filter(g => options[g].length > 0);
 
   return (
-    <div className="absolute bottom-8 left-4 z-10 w-72 bg-[#0f172a]/95 backdrop-blur-sm border border-white/10 rounded-xl py-3 flex flex-col max-h-[70vh]">
-      <p className="text-xs text-slate-500 uppercase tracking-widest px-4 mb-2">Visualise a tariff</p>
-
-      <div className="overflow-y-auto">
-        {/* No filter */}
+    <div className="flex-shrink-0 border-t border-white/10 bg-[#0a0f1e]">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+        <div className="flex items-center gap-2 min-w-0">
+          <button
+            onClick={() => (activeCategory ? setActiveCategory(null) : closePicker())}
+            aria-label="Back"
+            className="p-0.5 -ml-1 rounded text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            <ChevronLeft size={16} />
+          </button>
+          <p className="text-xs text-slate-500 uppercase tracking-widest truncate">
+            {activeCategory ?? 'Choose a tariff'}
+          </p>
+        </div>
         <button
-          onClick={() => onSelect(null)}
-          className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-            selection === null ? 'text-white bg-white/10' : 'text-slate-400 hover:bg-white/5'
-          }`}
+          onClick={closePicker}
+          aria-label="Close picker"
+          className="p-1 rounded-md text-slate-500 hover:text-white hover:bg-white/10 transition-colors"
         >
-          No filter
+          <X size={14} />
         </button>
-
-        {/* Categories */}
-        {TARIFF_GROUPS.map((g) => {
-          const opts = options[g];
-          const isEmpty = opts.length === 0;
-          const isSingle = opts.length === 1;
-          const isOpen = expanded[g];
-          const hasActive = selection?.group === g;
-
-          // Single-option categories select directly instead of expanding.
-          const onHeaderClick = () => {
-            if (isEmpty) return;
-            if (isSingle) {
-              onSelect(hasActive ? null : { group: g, key: opts[0].key });
-            } else {
-              toggle(g);
-            }
-          };
-
-          return (
-            <div key={g}>
-              <button
-                onClick={onHeaderClick}
-                disabled={isEmpty}
-                className={`w-full flex items-center justify-between px-4 py-2 text-left transition-colors ${
-                  isEmpty ? 'cursor-default' : 'hover:bg-white/5'
-                } ${isSingle && hasActive ? 'bg-white/10' : ''}`}
-              >
-                <span className={`text-sm font-medium ${
-                  isEmpty ? 'text-slate-600' : hasActive ? 'text-white' : 'text-slate-300'
-                }`}>
-                  {g}
-                  {hasActive && <span className="ml-2 w-1.5 h-1.5 rounded-full bg-white inline-block align-middle" />}
-                </span>
-                {!isSingle && (
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-200 ${
-                      isEmpty ? 'text-slate-700' : 'text-slate-400'
-                    } ${isOpen ? 'rotate-180' : ''}`}
-                  />
-                )}
-              </button>
-              {isOpen && !isEmpty && !isSingle && (
-                <div className="pb-1">
-                  {opts.map((opt) => {
-                    const isActive = selection?.group === g && selection.key === opt.key;
-                    return (
-                      <button
-                        key={opt.key}
-                        onClick={() => onSelect(isActive ? null : { group: g, key: opt.key })}
-                        className={`w-full text-left pl-8 pr-4 py-1.5 text-xs leading-snug transition-colors ${
-                          isActive ? 'text-white bg-white/10' : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          );
-        })}
       </div>
 
-      {selection && <RateScale group={selection.group} />}
+      <div className="max-h-64 overflow-y-auto py-1">
+        {activeCategory === null
+          ? visibleGroups.map((g) => {
+              const isSingle = options[g].length <= 1;
+              const hasActive = selection?.group === g;
+              return (
+                <button
+                  key={g}
+                  onClick={() => {
+                    if (isSingle) {
+                      const opt = options[g][0];
+                      choose(hasActive ? null : { group: g, key: opt.key });
+                    } else {
+                      setActiveCategory(g);
+                    }
+                  }}
+                  className="w-full flex items-center justify-between px-4 py-2 text-left hover:bg-white/5 transition-colors"
+                >
+                  <span className={`text-sm font-medium ${hasActive ? 'text-white' : 'text-slate-300'}`}>
+                    {g}
+                    {hasActive && <span className="ml-2 w-1.5 h-1.5 rounded-full bg-white inline-block align-middle" />}
+                  </span>
+                  {!isSingle && <ChevronRight size={14} className="text-slate-400" />}
+                </button>
+              );
+            })
+          : options[activeCategory].map((opt) => {
+              const isActive = selection?.group === activeCategory && selection.key === opt.key;
+              return (
+                <button
+                  key={opt.key}
+                  onClick={() => choose(isActive ? null : { group: activeCategory, key: opt.key })}
+                  className={`w-full text-left px-4 py-2 text-xs leading-snug transition-colors ${
+                    isActive ? 'text-white bg-white/10' : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              );
+            })}
+      </div>
     </div>
   );
 }

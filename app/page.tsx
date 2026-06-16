@@ -3,16 +3,20 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { Tariff, TariffData } from '@/types/tariff';
-import { TariffSelection, getCountryColors, getFilterOptions } from '@/lib/tariffs';
+import { TariffSelection, getCountryColors, getFilterOptions, statusForSelection } from '@/lib/tariffs';
 import CountryPanel from '@/components/CountryPanel';
 import Legend from '@/components/Legend';
 
 const TariffMap = dynamic(() => import('@/components/TariffMap'), { ssr: false });
+const TradeTreemap = dynamic(() => import('@/components/TradeTreemap'), { ssr: false });
+
+type ViewMode = 'map' | 'trade';
 
 export default function Home() {
   const [tariffData, setTariffData] = useState<TariffData | null>(null);
-  const [selectedTariff, setSelectedTariff] = useState<Tariff | null>(null);
+  const [selectedCountryCode, setSelectedCountryCode] = useState<string | null>(null);
   const [selection, setSelection] = useState<TariffSelection | null>(null);
+  const [view, setView] = useState<ViewMode>('map');
   const mapSectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -20,6 +24,11 @@ export default function Home() {
       .then(r => r.json())
       .then(setTariffData);
   }, []);
+
+  const selectedTariff = useMemo(
+    () => tariffData?.tariffs.find(t => t.country_code === selectedCountryCode) ?? null,
+    [tariffData, selectedCountryCode],
+  );
 
   const countryColors = useMemo(
     () => getCountryColors(tariffData?.tariffs ?? [], selection),
@@ -31,6 +40,11 @@ export default function Home() {
     [tariffData],
   );
 
+  const scaleStatus = useMemo(
+    () => statusForSelection(tariffData?.tariffs ?? [], selection),
+    [tariffData, selection],
+  );
+
   const lastUpdated = tariffData
     ? new Date(tariffData.last_updated).toLocaleDateString('en-US', {
         month: 'long', day: 'numeric', year: 'numeric'
@@ -40,6 +54,9 @@ export default function Home() {
   const scrollToMap = () => {
     mapSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const handleCountrySelect = (tariff: Tariff | null) =>
+    setSelectedCountryCode(tariff?.country_code ?? null);
 
   return (
     <div className="min-h-screen bg-[#0a0f1e] overflow-x-hidden" style={{ fontFamily: "'Cera Pro', 'Trebuchet MS', sans-serif" }}>
@@ -84,38 +101,104 @@ export default function Home() {
         </button>
       </section>
 
-      {/* Map section */}
+      {/* View toggle (mobile: above the visualisation) */}
+      {tariffData && (
+        <div className="md:hidden mx-auto w-[92vw] mb-3 flex bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
+          <button
+            onClick={() => setView('map')}
+            className={`flex-1 px-4 py-2 text-xs font-medium transition-colors ${
+              view === 'map' ? 'bg-white/10 text-white' : 'text-slate-500'
+            }`}
+          >
+            World map
+          </button>
+          <button
+            onClick={() => setView('trade')}
+            className={`flex-1 px-4 py-2 text-xs font-medium transition-colors ${
+              view === 'trade' ? 'bg-white/10 text-white' : 'text-slate-500'
+            }`}
+          >
+            By Trade Volume
+          </button>
+        </div>
+      )}
+
+      {/* Map section: docked rail on desktop, stacked below the map on mobile */}
       <section
         ref={mapSectionRef}
-        className="relative mb-10 rounded-2xl overflow-hidden border border-white/10"
-        style={{ height: '90vh', width: '75vw', marginLeft: 'auto', marginRight: 'auto' }}
+        className="relative mb-10 mx-auto rounded-2xl overflow-hidden border border-white/10 flex flex-col md:flex-row w-[92vw] md:w-[75vw] h-[90vh]"
       >
-        {tariffData && (
-          <TariffMap
-            tariffs={tariffData.tariffs}
-            countryColors={countryColors}
-            onCountrySelect={setSelectedTariff}
-            selectedCountry={selectedTariff?.country_code ?? null}
+        {/* Map area */}
+        <div className="relative w-full h-[45vh] md:h-full md:flex-1 min-w-0">
+          {tariffData && view === 'map' && (
+            <TariffMap
+              tariffs={tariffData.tariffs}
+              countryColors={countryColors}
+              selection={selection}
+              onCountrySelect={handleCountrySelect}
+              selectedCountry={selectedCountryCode}
+            />
+          )}
+
+          {tariffData && view === 'trade' && (
+            <TradeTreemap
+              tariffs={tariffData.tariffs}
+              countryColors={countryColors}
+              selection={selection}
+              onCountrySelect={handleCountrySelect}
+              selectedCountry={selectedCountryCode}
+            />
+          )}
+
+          {!tariffData && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[#0f172a]">
+              <div className="text-slate-500 text-sm animate-pulse">Loading map…</div>
+            </div>
+          )}
+
+          {/* View toggle (desktop: overlay on the map) */}
+          {tariffData && (
+            <div className="hidden md:flex absolute top-4 left-4 z-10 bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setView('map')}
+                className={`px-4 py-2 text-xs font-medium transition-colors ${
+                  view === 'map' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
+                }`}
+              >
+                World map
+              </button>
+              <button
+                onClick={() => setView('trade')}
+                className={`px-4 py-2 text-xs font-medium transition-colors ${
+                  view === 'trade' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
+                }`}
+              >
+                By Trade Volume
+              </button>
+            </div>
+          )}
+
+        </div>
+
+        {/* Rail: docked right on desktop, stacked below the map on mobile.
+            Mobile scrolls as one column (filter below the panel); desktop pins the
+            filter at the bottom with the panel scrolling internally. */}
+        <div className="w-full md:w-80 flex-1 md:flex-none min-h-0 md:h-full bg-[#0f172a] border-t md:border-t-0 md:border-l border-white/10 flex flex-col overflow-y-auto md:overflow-hidden">
+          <CountryPanel
+            tariff={selectedTariff}
+            selection={selection}
+            onClose={() => setSelectedCountryCode(null)}
+            onSelectFilter={setSelection}
           />
-        )}
-
-        {!tariffData && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#0f172a]">
-            <div className="text-slate-500 text-sm animate-pulse">Loading map…</div>
-          </div>
-        )}
-
-        <CountryPanel tariff={selectedTariff} onClose={() => setSelectedTariff(null)} />
-
-        {tariffData && (
-          <Legend options={filterOptions} selection={selection} onSelect={setSelection} />
-        )}
-
-        {!selectedTariff && tariffData && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-xs text-slate-600 pointer-events-none whitespace-nowrap">
-            Click a highlighted country to view tariff details
-          </div>
-        )}
+          {tariffData && (
+            <Legend
+              options={filterOptions}
+              selection={selection}
+              scaleStatus={scaleStatus}
+              onSelect={setSelection}
+            />
+          )}
+        </div>
       </section>
 
     </div>

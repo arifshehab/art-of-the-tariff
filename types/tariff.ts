@@ -1,4 +1,4 @@
-export type TariffStatus = 'implemented' | 'threatened' | 'confirmed' | 'paused' | 'none';
+export type TariffStatus = 'implemented' | 'threatened' | 'delayed' | 'confirmed' | 'paused' | 'none';
 
 export interface TariffType {
   name: string;

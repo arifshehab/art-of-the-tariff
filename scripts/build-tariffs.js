@@ -72,7 +72,7 @@ const EXTRA = {
   ],
   CL: [fl('12.5%')],
   CN: [
-    { name: 'Section 301', sub_category: 'Maritime cargo handling equipment', rate: '25%', product_category: 'All goods', status: 'threatened', effective_date: '2026-11-10', citation_url: '' },
+    { name: 'Section 301', sub_category: 'Maritime cargo handling equipment', rate: '25%', product_category: 'All goods', status: 'delayed', effective_date: '2026-11-10', citation_url: '' },
     fl('12.5%'),
     ec(),
   ],

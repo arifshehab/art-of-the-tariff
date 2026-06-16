@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Tariff, TariffStatus, TariffType } from '@/types/tariff';
-import { getMergedTariffTypes, groupOf, TARIFF_GROUPS, TariffGroup } from '@/lib/tariffs';
-import { ChevronDown, ExternalLink, X } from 'lucide-react';
+import { DEAL_KEY, getMergedTariffTypes, groupOf, matchesSelection, mergeCategories, selectionFor, TARIFF_GROUPS, TariffGroup, TariffSelection } from '@/lib/tariffs';
+import { ChevronDown, ExternalLink, MousePointerClick, X } from 'lucide-react';
 
 interface CountryPanelProps {
   tariff: Tariff | null;
+  selection?: TariffSelection | null;
   onClose: () => void;
+  onSelectFilter?: (selection: TariffSelection) => void;
 }
 
 const STATUS_CONFIG: Record<TariffStatus, { label: string; className: string }> = {
@@ -15,6 +17,7 @@ const STATUS_CONFIG: Record<TariffStatus, { label: string; className: string }> 
   confirmed:   { label: 'Confirmed',   className: 'bg-red-500/20 text-red-400 border border-red-500/30' },
   paused:      { label: 'Paused',      className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
   threatened:  { label: 'Threatened',  className: 'bg-violet-500/20 text-violet-400 border border-violet-500/30' },
+  delayed:     { label: 'Delayed',     className: 'bg-blue-500/20 text-blue-400 border border-blue-500/30' },
   none:        { label: 'None',        className: 'bg-slate-500/20 text-slate-400 border border-slate-500/30' },
 };
 
@@ -32,10 +35,15 @@ function detailHeading(tt: TariffType, group: GroupName): string {
   return tt.sub_category ?? tt.product_category;
 }
 
-function TariffDetail({ tt, group }: { tt: TariffType; group: GroupName }) {
+function TariffDetail({ tt, group, onSelect, highlighted, innerRef }: { tt: TariffType; group: GroupName; onSelect?: () => void; highlighted?: boolean; innerRef?: (el: HTMLDivElement | null) => void }) {
   const showAppliesTo = group === 'Others' || !!tt.sub_category;
   return (
-    <div className="space-y-3 py-3">
+    <div
+      ref={innerRef}
+      className={`space-y-3 py-3 -mx-2 px-2 rounded-lg transition-colors ${onSelect ? 'cursor-pointer hover:bg-white/5' : ''} ${highlighted ? 'bg-white/10 ring-1 ring-white/20' : ''}`}
+      onClick={onSelect}
+      title={onSelect ? 'Click to visualise this tariff on the map' : undefined}
+    >
       <div className="flex items-baseline justify-between">
         <div>
           <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">
@@ -66,7 +74,8 @@ function TariffDetail({ tt, group }: { tt: TariffType; group: GroupName }) {
           href={tt.citation_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors"
         >
           <ExternalLink size={12} />
           View source
@@ -76,22 +85,45 @@ function TariffDetail({ tt, group }: { tt: TariffType; group: GroupName }) {
   );
 }
 
-export default function CountryPanel({ tariff, onClose }: CountryPanelProps) {
-  const isVisible = tariff !== null;
+export default function CountryPanel({ tariff, selection, onClose, onSelectFilter }: CountryPanelProps) {
   const [expanded, setExpanded] = useState<Record<GroupName, boolean>>({
     'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false,
   });
 
-  // Collapse all groups whenever a different country is selected.
-  useEffect(() => {
-    setExpanded({ 'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false });
-  }, [tariff?.country_code]);
+  // Tracks the currently-highlighted row's element (null when none renders).
+  const highlightElRef = useRef<HTMLDivElement | null>(null);
+  const setHighlightEl = useCallback((el: HTMLDivElement | null) => {
+    highlightElRef.current = el;
+  }, []);
 
-  const visibleTypes = tariff ? getMergedTariffTypes(tariff) : [];
+  // When a country opens: if a tariff filter is active, expand its group so the
+  // matching tariff is visible; otherwise collapse all groups.
+  useEffect(() => {
+    const base = { 'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false };
+    if (selection && selection.group !== 'Deal') base[selection.group] = true;
+    setExpanded(base);
+  }, [tariff?.country_code, selection]);
+
+  // Auto-scroll to the highlighted row after render. Runs on every country/filter
+  // change; does nothing if no matching row exists (ref is null).
+  useEffect(() => {
+    if (!selection) return;
+    const id = requestAnimationFrame(() => {
+      highlightElRef.current?.scrollIntoView({ block: 'nearest' });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [tariff?.country_code, selection]);
+
+  const visibleTypes = tariff ? mergeCategories(getMergedTariffTypes(tariff)) : [];
   const grouped: Record<GroupName, TariffType[]> = {
     'Section 122': [], 'Section 232': [], 'Section 301': [], 'Others': [],
   };
   for (const tt of visibleTypes) grouped[groupOf(tt)].push(tt);
+
+  // Sort entries alphabetically within each group by their displayed label.
+  const sortKey = (tt: TariffType) =>
+    (groupOf(tt) === 'Others' ? tt.name : tt.sub_category ?? tt.product_category).toLowerCase();
+  for (const g of GROUPS) grouped[g].sort((a, b) => sortKey(a).localeCompare(sortKey(b)));
 
   const toggle = (g: GroupName) =>
     setExpanded(prev => ({ ...prev, [g]: !prev[g] }));
@@ -105,46 +137,52 @@ export default function CountryPanel({ tariff, onClose }: CountryPanelProps) {
     });
 
   return (
-    <div
-      className={`
-        absolute top-4 right-4 w-80 z-10
-        bg-[#0f172a]/95 backdrop-blur-sm
-        border border-white/10 rounded-xl
-        shadow-2xl overflow-hidden
-        transition-all duration-300 ease-out
-        ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}
-      `}
-    >
-      {tariff && (
+    <div className="flex flex-col md:flex-1 md:min-h-0">
+      {!tariff ? (
+        <div className="flex flex-col items-center justify-center text-center px-8 py-16 md:py-0 md:flex-1">
+          <MousePointerClick size={28} className="text-slate-600 mb-3" />
+          <p className="text-sm font-medium text-slate-300">No country selected</p>
+          <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+            Click a country on the map to view its tariffs and trade deals.
+          </p>
+        </div>
+      ) : (
         <>
           {/* Header */}
-          <div className="flex items-start justify-between p-5 border-b border-white/10">
+          <div className="flex items-start justify-between px-4 py-3 border-b border-white/10 flex-shrink-0">
             <div>
               <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Selected Country</p>
-              <h2 className="text-xl font-semibold text-white">{tariff.country}</h2>
+              <div className="flex items-center gap-2.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://flagcdn.com/${tariff.country_code.toLowerCase()}.svg`}
+                  alt=""
+                  className="w-6 h-auto rounded-sm flex-shrink-0 ring-1 ring-white/10"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
+                <h2 className="text-xl font-semibold text-white">{tariff.country}</h2>
+              </div>
             </div>
-            <button
-              onClick={onClose}
-              className="mt-1 p-1 rounded-lg text-slate-500 hover:text-white hover:bg-white/10 transition-colors"
-            >
-              <X size={16} />
-            </button>
-          </div>
-
-          {/* Content */}
-          <div className="max-h-[70vh] overflow-y-auto">
-
-            {/* Expand / collapse all */}
-            {nonEmptyGroups.length > 0 && (
-              <div className="flex justify-end px-5 pt-3">
+            <div className="flex flex-col items-end gap-1.5">
+              <button
+                onClick={onClose}
+                className="mt-1 p-1 rounded-lg text-slate-500 hover:text-white hover:bg-white/10 transition-colors"
+              >
+                <X size={16} />
+              </button>
+              {nonEmptyGroups.length > 0 && (
                 <button
                   onClick={() => setAll(!allExpanded)}
-                  className="text-xs text-slate-500 hover:text-white transition-colors"
+                  className="text-xs text-slate-500 hover:text-white transition-colors whitespace-nowrap"
                 >
                   {allExpanded ? 'Collapse all' : 'Expand all'}
                 </button>
-              </div>
-            )}
+              )}
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="md:flex-1 md:overflow-y-auto">
 
             {/* Tariff groups */}
             <div className="divide-y divide-white/10">
@@ -176,9 +214,19 @@ export default function CountryPanel({ tariff, onClose }: CountryPanelProps) {
                     </button>
                     {isOpen && !isEmpty && (
                       <div className="px-5 pb-2 divide-y divide-white/5">
-                        {items.map((tt, i) => (
-                          <TariffDetail key={i} tt={tt} group={g} />
-                        ))}
+                        {items.map((tt, i) => {
+                          const isHighlighted = !!selection && matchesSelection(tt, selection);
+                          return (
+                            <TariffDetail
+                              key={i}
+                              tt={tt}
+                              group={g}
+                              highlighted={isHighlighted}
+                              innerRef={isHighlighted ? setHighlightEl : undefined}
+                              onSelect={onSelectFilter ? () => onSelectFilter(selectionFor(tt)) : undefined}
+                            />
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -188,27 +236,38 @@ export default function CountryPanel({ tariff, onClose }: CountryPanelProps) {
 
             {/* Deals */}
             {tariff.deals.length > 0 && (
-              <div className="border-t border-white/10 p-5 space-y-3">
+              <div className="border-t border-white/10 p-5 space-y-2">
                 <p className="text-xs text-slate-500 uppercase tracking-widest">Deals</p>
-                {tariff.deals.map((deal, i) => (
-                  <div key={i} className="space-y-1">
-                    <p className="text-sm font-medium text-white">{deal.name}</p>
-                    {deal.announcement_date && (
-                      <p className="text-xs text-slate-500">Announced {deal.announcement_date}</p>
-                    )}
-                    {deal.citation_url && (
-                      <a
-                        href={deal.citation_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-white transition-colors"
-                      >
-                        <ExternalLink size={11} />
-                        View source
-                      </a>
-                    )}
-                  </div>
-                ))}
+                {tariff.deals.map((deal, i) => {
+                  const onSelect = onSelectFilter ? () => onSelectFilter({ group: 'Deal', key: DEAL_KEY }) : undefined;
+                  const highlighted = selection?.group === 'Deal';
+                  return (
+                    <div
+                      key={i}
+                      ref={highlighted && i === 0 ? setHighlightEl : undefined}
+                      onClick={onSelect}
+                      title={onSelect ? 'Click to visualise deals on the map' : undefined}
+                      className={`space-y-1 -mx-2 px-2 py-2 rounded-lg transition-colors ${onSelect ? 'cursor-pointer hover:bg-white/5' : ''} ${highlighted ? 'bg-white/10 ring-1 ring-white/20' : ''}`}
+                    >
+                      <p className="text-sm font-medium text-white">{deal.name}</p>
+                      {deal.announcement_date && (
+                        <p className="text-xs text-slate-500">Announced {deal.announcement_date}</p>
+                      )}
+                      {deal.citation_url && (
+                        <a
+                          href={deal.citation_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-white transition-colors"
+                        >
+                          <ExternalLink size={11} />
+                          View source
+                        </a>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

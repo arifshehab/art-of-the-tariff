@@ -4,22 +4,38 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Tariff } from '@/types/tariff';
-import { NO_DATA } from '@/lib/tariffs';
+import { NO_DATA, TariffSelection, rateForSelection } from '@/lib/tariffs';
 
 interface TariffMapProps {
   tariffs: Tariff[];
   countryColors: Record<string, string>;
+  selection: TariffSelection | null;
   onCountrySelect: (tariff: Tariff | null) => void;
   selectedCountry: string | null;
 }
 
-export default function TariffMap({ tariffs, countryColors, onCountrySelect, selectedCountry }: TariffMapProps) {
+interface HoverTooltip {
+  name: string;
+  rate: string | null;
+  x: number;
+  y: number;
+}
+
+export default function TariffMap({ tariffs, countryColors, selection, onCountrySelect, selectedCountry }: TariffMapProps) {
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [tooltip, setTooltip] = useState<HoverTooltip | null>(null);
 
   const countryByCode: Record<string, Tariff> = {};
   for (const t of tariffs) countryByCode[t.country_code] = t;
+
+  // Latest selection for use inside the (once-bound) map event handlers.
+  const selectionRef = useRef(selection);
+  selectionRef.current = selection;
+
+  // Feature id of the currently-selected country (for the feature-state border).
+  const selectedIdRef = useRef<string | number | null>(null);
 
   const buildColorExpression = useCallback(() => {
     const expr: (string | string[])[] = ['match', ['get', 'iso_3166_1']];
@@ -55,12 +71,18 @@ export default function TariffMap({ tariffs, countryColors, onCountrySelect, sel
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
 
     map.on('load', () => {
+      // Single shared vector source for every country layer.
+      map.addSource('countries', {
+        type: 'vector',
+        url: 'mapbox://mapbox.country-boundaries-v1',
+      });
+
       // Country fill layer
       map.addLayer({
         id: 'country-fills',
         slot: 'middle',
         type: 'fill',
-        source: { type: 'vector', url: 'mapbox://mapbox.country-boundaries-v1' },
+        source: 'countries',
         'source-layer': 'country_boundaries',
         filter: ['==', ['get', 'disputed'], 'false'],
         paint: {
@@ -74,10 +96,10 @@ export default function TariffMap({ tariffs, countryColors, onCountrySelect, sel
         id: 'country-borders',
         slot: 'middle',
         type: 'line',
-        source: { type: 'vector', url: 'mapbox://mapbox.country-boundaries-v1' },
+        source: 'countries',
         'source-layer': 'country_boundaries',
         paint: {
-          'line-color': '#0f172a',
+          'line-color': '#000',
           'line-width': 0.5,
         },
       });
@@ -87,7 +109,7 @@ export default function TariffMap({ tariffs, countryColors, onCountrySelect, sel
         id: 'country-hover',
         slot: 'top',
         type: 'fill',
-        source: { type: 'vector', url: 'mapbox://mapbox.country-boundaries-v1' },
+        source: 'countries',
         'source-layer': 'country_boundaries',
         paint: {
           'fill-color': '#ffffff',
@@ -100,42 +122,125 @@ export default function TariffMap({ tariffs, countryColors, onCountrySelect, sel
         },
       });
 
+      // Hover border highlight
+      map.addLayer({
+        id: 'country-hover-border',
+        slot: 'top',
+        type: 'line',
+        source: 'countries',
+        'source-layer': 'country_boundaries',
+        paint: {
+          'line-color': '#0a0f1e',
+          'line-width': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            1.5,
+            0,
+          ],
+        },
+      });
+
+      // Selected-country border highlight (driven by feature-state for speed)
+      map.addLayer({
+        id: 'country-selected-border',
+        slot: 'top',
+        type: 'line',
+        source: 'countries',
+        'source-layer': 'country_boundaries',
+        paint: {
+          'line-color': '#0a0f1e',
+          'line-width': [
+            'case',
+            ['boolean', ['feature-state', 'selected'], false],
+            2,
+            0,
+          ],
+        },
+      });
+
       setMapLoaded(true);
     });
 
     // Hover state
     let hoveredId: string | number | null = null;
+    let lastCursor = '';
+    const clearHover = () => {
+      if (lastCursor !== '') {
+        map.getCanvas().style.cursor = '';
+        lastCursor = '';
+      }
+      if (hoveredId !== null) {
+        map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: false });
+        hoveredId = null;
+      }
+      setTooltip(null);
+    };
+
     map.on('mousemove', 'country-fills', (e) => {
       if (!e.features?.length) return;
-      const code = e.features[0].properties?.iso_3166_1;
-      map.getCanvas().style.cursor = countryByCode[code] ? 'pointer' : '';
-      if (hoveredId !== null) {
-        map.setFeatureState({ source: 'country-fills', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: false });
+      const props = e.features[0].properties ?? {};
+      const code = props.iso_3166_1;
+      if (code === 'US') { clearHover(); return; } // the US itself is not interactive
+
+      const country = countryByCode[code];
+      const cursor = country ? 'pointer' : '';
+      if (cursor !== lastCursor) {
+        map.getCanvas().style.cursor = cursor;
+        lastCursor = cursor;
       }
-      hoveredId = e.features[0].id ?? null;
+
+      // Tooltip: country name + rate (when a tariff is selected).
+      const sel = selectionRef.current;
+      setTooltip({
+        name: country?.country ?? props.name_en ?? code,
+        rate: country && sel ? rateForSelection(country, sel) : null,
+        x: e.point.x,
+        y: e.point.y,
+      });
+
+      const id = e.features[0].id ?? null;
+      if (id === hoveredId) return;
       if (hoveredId !== null) {
-        map.setFeatureState({ source: 'country-fills', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: true });
+        map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: false });
+      }
+      hoveredId = id;
+      if (hoveredId !== null) {
+        map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: true });
       }
     });
 
-    map.on('mouseleave', 'country-fills', () => {
-      map.getCanvas().style.cursor = '';
-      if (hoveredId !== null) {
-        map.setFeatureState({ source: 'country-fills', sourceLayer: 'country_boundaries', id: hoveredId }, { hover: false });
+    map.on('mouseleave', 'country-fills', clearHover);
+
+    // Selected-country border via feature-state (instant; no tile re-filter).
+    const applySelected = (id: string | number | null) => {
+      if (selectedIdRef.current !== null && selectedIdRef.current !== id) {
+        map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: selectedIdRef.current }, { selected: false });
       }
-      hoveredId = null;
-    });
+      selectedIdRef.current = id;
+      if (id !== null) {
+        map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id }, { selected: true });
+      }
+    };
+    const clearSelected = () => {
+      if (selectedIdRef.current !== null) {
+        map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: selectedIdRef.current }, { selected: false });
+        selectedIdRef.current = null;
+      }
+    };
 
     // Click
     map.on('click', 'country-fills', (e) => {
-      const code = e.features?.[0]?.properties?.iso_3166_1;
-      if (!code) return;
-      onCountrySelect(countryByCode[code] ?? null);
+      const f = e.features?.[0];
+      const code = f?.properties?.iso_3166_1;
+      const country = code ? countryByCode[code] : undefined;
+      if (!country) { clearSelected(); onCountrySelect(null); return; }
+      applySelected(f?.id ?? null);
+      onCountrySelect(country);
     });
 
     map.on('click', (e) => {
       const features = map.queryRenderedFeatures(e.point, { layers: ['country-fills'] });
-      if (!features.length) onCountrySelect(null);
+      if (!features.length) { clearSelected(); onCountrySelect(null); }
     });
 
     return () => {
@@ -150,10 +255,39 @@ export default function TariffMap({ tariffs, countryColors, onCountrySelect, sel
     map.setPaintProperty('country-fills', 'fill-color', buildColorExpression() as mapboxgl.Expression);
   }, [countryColors, mapLoaded, buildColorExpression]);
 
+  // Clear the selected-border feature-state when the selection is cleared
+  // externally (e.g. closing the panel). Selecting is handled in the click handler.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapLoaded || selectedCountry !== null) return;
+    if (selectedIdRef.current !== null) {
+      map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: selectedIdRef.current }, { selected: false });
+      selectedIdRef.current = null;
+    }
+  }, [selectedCountry, mapLoaded]);
+
   return (
-    <div
-      ref={mapContainerRef}
-      className="w-full h-full"
-    />
+    <div className="relative w-full h-full">
+      <div ref={mapContainerRef} className="w-full h-full" />
+      {tooltip && (() => {
+        const ch = mapContainerRef.current?.clientHeight ?? 0;
+        const flip = ch > 0 && tooltip.y > ch - 70;
+        return (
+        <div
+          className="absolute z-20 pointer-events-none bg-[#0f172a] border border-white/10 rounded-md px-2.5 py-1.5"
+          style={{
+            left: tooltip.x + 12,
+            top: flip ? tooltip.y - 12 : tooltip.y + 12,
+            transform: flip ? 'translateY(-100%)' : undefined,
+          }}
+        >
+          <p className="text-xs font-medium text-white whitespace-nowrap">{tooltip.name}</p>
+          {tooltip.rate && (
+            <p className="text-[11px] text-slate-400 whitespace-nowrap">{tooltip.rate}</p>
+          )}
+        </div>
+        );
+      })()}
+    </div>
   );
 }
