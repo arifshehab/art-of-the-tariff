@@ -3,9 +3,9 @@
 import { useMemo, useRef, useState, useEffect } from 'react';
 import { Tariff } from '@/types/tariff';
 import { TariffSelection, rateForSelection } from '@/lib/tariffs';
-import importsData from '@/data/us-imports.json';
+import importsData from '@/data/top_countries_by_imports.json';
 
-const MIN_VALUE_BUSD = 1; // countries below this are omitted
+const MIN_total_imports = 3000000000; // countries below this are omitted
 
 /** Pick a readable text color (dark or light) for a given hex background. */
 function textOn(hex: string): string {
@@ -32,7 +32,7 @@ interface HoverTooltip {
   y: number;
 }
 
-type RegionKey = 'na' | 'la' | 'eu' | 'af' | 'me' | 'as' | 'oc';
+type RegionKey = 'na' | 'sa' | 'eu' | 'af' | 'me' | 'as' | 'oc';
 
 interface RegionConfig {
   label: string;
@@ -46,7 +46,7 @@ interface RegionConfig {
 // on a single global scale; blank space absorbs the remainder.
 const REGIONS: Record<RegionKey, RegionConfig> = {
   na: { label: 'North America', box: [0, 4, 34, 71],   fill: '#0C447C', fill2: '#185FA5', text: '#E6F1FB' },
-  la: { label: 'Latin America', box: [0, 79, 16, 21],  fill: '#712B13', fill2: '#993C1D', text: '#FAECE7' },
+  sa: { label: 'South America', box: [0, 79, 16, 21],  fill: '#712B13', fill2: '#993C1D', text: '#FAECE7' },
   eu: { label: 'Europe',        box: [36, 4, 24, 76],  fill: '#3C3489', fill2: '#534AB7', text: '#EEEDFE' },
   af: { label: 'Africa',        box: [36, 86, 8, 9],   fill: '#633806', fill2: '#854F0B', text: '#FAEEDA' },
   me: { label: 'Middle East',   box: [46, 86, 13, 14], fill: '#72243E', fill2: '#993556', text: '#FBEAF0' },
@@ -64,9 +64,9 @@ const BASE_H = 720;
 
 interface ImportCountry {
   code: string;
-  name: string;
+  country_name: string;
   region: string;
-  value_busd: number;
+  total_imports: number;
 }
 
 interface LaidOutRect {
@@ -82,7 +82,7 @@ interface LaidOutRect {
 function layoutTreemap(items: ImportCountry[], X: number, Y: number, W: number, H: number, out: LaidOutRect[], minArea = 0) {
   if (items.length === 0) return;
   const A = W * H;
-  const vals = items.map(i => i.value_busd);
+  const vals = items.map(i => i.total_imports);
 
   // Cells stay proportional to value, except any whose proportional area would be
   // below minArea are floored to minArea; the rest share the remaining area.
@@ -159,6 +159,7 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
   const [vp, setVp] = useState({ w: 0, h: 0 });                   // viewport size (mobile fit)
   const [isMobile, setIsMobile] = useState(false);
   const [zoom, setZoom] = useState(1);
+  const [desktopZoom, setDesktopZoom] = useState(1);
   const [tooltip, setTooltip] = useState<HoverTooltip | null>(null);
 
   // Mobile detection.
@@ -200,6 +201,7 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
   const zoomRef = useRef(zoom); zoomRef.current = zoom;
   const fitRef = useRef(fitScale); fitRef.current = fitScale;
   const isMobileRef = useRef(isMobile); isMobileRef.current = isMobile;
+  const desktopZoomRef = useRef(desktopZoom); desktopZoomRef.current = desktopZoom;
 
   // Pinch-to-zoom (two fingers); one finger pans via native scroll.
   useEffect(() => {
@@ -221,10 +223,15 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
     const onEnd = (e: TouchEvent) => { if (e.touches.length < 2) startDist = 0; };
     // Trackpad pinch (and ctrl+scroll) fire a wheel event with ctrlKey set.
     const onWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey || !isMobileRef.current) return;
+      if (!e.ctrlKey) return;
       e.preventDefault();
-      const next = Math.min(Math.max(zoomRef.current * Math.exp(-e.deltaY * 0.01), fitRef.current), 1);
-      setZoom(next);
+      if (isMobileRef.current) {
+        const next = Math.min(Math.max(zoomRef.current * Math.exp(-e.deltaY * 0.01), fitRef.current), 1);
+        setZoom(next);
+      } else {
+        const next = Math.min(Math.max(desktopZoomRef.current * Math.exp(-e.deltaY * 0.01), 1), 3);
+        setDesktopZoom(next);
+      }
     };
     el.addEventListener('touchstart', onStart, { passive: false });
     el.addEventListener('touchmove', onMove, { passive: false });
@@ -250,33 +257,39 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
   const regions = useMemo(() => {
     const grouped: Record<string, ImportCountry[]> = {};
     for (const c of importsData.countries as ImportCountry[]) {
-      if (c.value_busd < MIN_VALUE_BUSD) continue;
+      if (c.total_imports < MIN_total_imports) continue;
       (grouped[c.region] ??= []).push(c);
     }
     return (Object.keys(REGIONS) as RegionKey[]).map(key => {
       const cfg = REGIONS[key];
-      const items = (grouped[key] ?? []).sort((a, b) => b.value_busd - a.value_busd);
+      const items = (grouped[key] ?? []).sort((a, b) => b.total_imports - a.total_imports);
       const pxW = (cfg.box[2] / 100) * layoutW;
       const pxH = (cfg.box[3] / 100) * layoutH;
       const rects: LaidOutRect[] = [];
       // No min-area floor on mobile — cells stay proportional; zoom reveals labels.
-      layoutTreemap(items, 0, 0, pxW, pxH, rects, isMobile ? 0 : MIN_CELL_AREA);
+      layoutTreemap(items, 0, 0, pxW, pxH, rects, 0);
       return { key, cfg, rects, pxW, pxH };
     });
   }, [layoutW, layoutH, isMobile]);
 
-  const renderScale = isMobile ? zoom : 1;
+  const renderScale = isMobile ? zoom : desktopZoom;
 
   return (
     <div
       ref={viewportRef}
-      className="w-full h-full bg-[#0a0f1e] overflow-auto md:overflow-hidden p-4 md:p-6"
+      className="w-full h-full bg-[#0a0f1e] overflow-auto p-4 md:p-6"
       style={isMobile ? { touchAction: 'pan-x pan-y' } : undefined}
     >
       <div
         ref={containerRef}
-        className={isMobile ? 'relative' : 'relative w-full h-full'}
-        style={isMobile ? { width: BASE_W * zoom, height: BASE_H * zoom } : undefined}
+        className={isMobile || desktopZoom > 1 ? 'relative' : 'relative w-full h-full'}
+        style={
+          isMobile
+            ? { width: BASE_W * zoom, height: BASE_H * zoom }
+            : desktopZoom > 1
+            ? { width: measured.w * desktopZoom, height: measured.h * desktopZoom }
+            : undefined
+        }
       >
         {regions.map(({ key, cfg, rects, pxW, pxH }) => {
           const [bx, by, bw, bh] = cfg.box;
@@ -303,9 +316,10 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
                 // A name may wrap to a 2nd line only if it has 2+ words.
                 // Space available is the box minus its padding (12px x, 8px y for the
                 // padded tiers; 6px x, 4px y for the bare code tier).
-                const amountText = `$${country.value_busd}B`;
+                const amountText = `$${Math.round(country.total_imports/1000000000)}B`;
                 const NAME_CH = 6.4, CODE_CH = 7, AMT_CH = 6, NAME_LH = 14, CODE_LH = 14, AMT_LH = 13;
-                const words = country.name.split(' ');
+                const displayName = country.country_name.split('(')[0].trim();
+                const words = displayName.split(' ');
                 const isMultiWord = words.length >= 2;
                 const longestWord = Math.max(...words.map(w => w.length));
 
@@ -314,7 +328,7 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
                 const amtW = amountText.length * AMT_CH;
                 const codeW = country.code.length * CODE_CH;
 
-                const oneLine = availW >= country.name.length * NAME_CH;
+                const oneLine = availW >= displayName.length * NAME_CH;
                 const nameFitsWidth = oneLine || (isMultiWord && availW >= longestWord * NAME_CH);
                 const nameLines = oneLine ? 1 : 2;
 
@@ -343,7 +357,7 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
                     onMouseMove={isMobile ? undefined : (e) => {
                       const r = containerRef.current?.getBoundingClientRect();
                       setTooltip({
-                        name: country.name,
+                        name: displayName,
                         rate: selection ? rate : amountText,
                         x: e.clientX - (r?.left ?? 0),
                         y: e.clientY - (r?.top ?? 0),
@@ -365,7 +379,7 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
                   >
                     {fitsNameAmount ? (
                       <>
-                        <div className={`text-[12px] font-medium leading-tight ${isMultiWord ? 'whitespace-normal' : 'whitespace-nowrap'}`}>{country.name}</div>
+                        <div className={`text-[12px] font-medium leading-tight ${isMultiWord ? 'whitespace-normal' : 'whitespace-nowrap'}`}>{displayName}</div>
                         <div className="text-[10px] opacity-75 leading-tight">{amountText}</div>
                       </>
                     ) : fitsCodeAmount ? (
@@ -373,7 +387,7 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
                         <div className="text-[12px] font-medium leading-tight">{country.code}</div>
                         <div className="text-[10px] opacity-75 leading-tight">{amountText}</div>
                       </>
-                    ) : (fitsCode || !isMobile) ? (
+                    ) : fitsCode ? (
                       <div className="text-[10px] font-medium leading-none">{country.code}</div>
                     ) : null}
                   </button>
@@ -386,11 +400,15 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
         {!isMobile && tooltip && (
           <div
             className="absolute z-20 pointer-events-none bg-[#0f172a] border border-white/10 rounded-md px-2.5 py-1.5"
-            style={{
-              left: tooltip.x + 12,
-              top: tooltip.y > measured.h - 70 ? tooltip.y - 12 : tooltip.y + 12,
-              transform: tooltip.y > measured.h - 70 ? 'translateY(-100%)' : undefined,
-            }}
+            style={(() => {
+              const onRight = tooltip.x > measured.w * 0.6;
+              const onBottom = tooltip.y > measured.h - 70;
+              return {
+                left: onRight ? tooltip.x - 12 : tooltip.x + 12,
+                top: onBottom ? tooltip.y - 12 : tooltip.y + 12,
+                transform: [onRight && 'translateX(-100%)', onBottom && 'translateY(-100%)'].filter(Boolean).join(' ') || undefined,
+              };
+            })()}
           >
             <p className="text-xs font-medium text-white whitespace-nowrap">{tooltip.name}</p>
             {tooltip.rate && (

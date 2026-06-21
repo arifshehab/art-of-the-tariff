@@ -1,0 +1,1392 @@
+{
+  "last_updated": "2024-01-01",
+  "source": "https://www.census.gov/foreign-trade/reference/products/index.html",
+  "countries": [
+    {
+      "country_name": "Mexico",
+      "code": "MX",
+      "region": "na",
+      "total_imports": 489351557523
+    },
+    {
+      "country_name": "China",
+      "code": "CN",
+      "region": "as",
+      "total_imports": 419594576206
+    },
+    {
+      "country_name": "Canada",
+      "code": "CA",
+      "region": "na",
+      "total_imports": 392351171314
+    },
+    {
+      "country_name": "Germany (Federal Republic of Germany)",
+      "code": "DE",
+      "region": "eu",
+      "total_imports": 149899400959
+    },
+    {
+      "country_name": "Japan",
+      "code": "JP",
+      "region": "as",
+      "total_imports": 143594793014
+    },
+    {
+      "country_name": "Vietnam",
+      "code": "VN",
+      "region": "as",
+      "total_imports": 139275271003
+    },
+    {
+      "country_name": "South Korea (Republic of Korea)",
+      "code": "KR",
+      "region": "as",
+      "total_imports": 128337686302
+    },
+    {
+      "country_name": "Taiwan",
+      "code": "TW",
+      "region": "as",
+      "total_imports": 112806321623
+    },
+    {
+      "country_name": "Ireland",
+      "code": "IE",
+      "region": "eu",
+      "total_imports": 92208399352
+    },
+    {
+      "country_name": "India",
+      "code": "IN",
+      "region": "as",
+      "total_imports": 86254306967
+    },
+    {
+      "country_name": "Italy",
+      "code": "IT",
+      "region": "eu",
+      "total_imports": 71719566333
+    },
+    {
+      "country_name": "United Kingdom",
+      "code": "GB",
+      "region": "eu",
+      "total_imports": 62365877417
+    },
+    {
+      "country_name": "Thailand",
+      "code": "TH",
+      "region": "as",
+      "total_imports": 62173458635
+    },
+    {
+      "country_name": "Switzerland",
+      "code": "CH",
+      "region": "eu",
+      "total_imports": 57467557468
+    },
+    {
+      "country_name": "France",
+      "code": "FR",
+      "region": "eu",
+      "total_imports": 55645871936
+    },
+    {
+      "country_name": "Malaysia",
+      "code": "MY",
+      "region": "as",
+      "total_imports": 49426719852
+    },
+    {
+      "country_name": "Brazil",
+      "code": "BR",
+      "region": "sa",
+      "total_imports": 39964607537
+    },
+    {
+      "country_name": "Singapore",
+      "code": "SG",
+      "region": "as",
+      "total_imports": 37662646919
+    },
+    {
+      "country_name": "Netherlands",
+      "code": "NL",
+      "region": "eu",
+      "total_imports": 29202065730
+    },
+    {
+      "country_name": "Indonesia",
+      "code": "ID",
+      "region": "as",
+      "total_imports": 27571731505
+    },
+    {
+      "country_name": "Belgium",
+      "code": "BE",
+      "region": "eu",
+      "total_imports": 25068586113
+    },
+    {
+      "country_name": "Israel",
+      "code": "IL",
+      "region": "me",
+      "total_imports": 21660926322
+    },
+    {
+      "country_name": "Spain",
+      "code": "ES",
+      "region": "eu",
+      "total_imports": 20304780507
+    },
+    {
+      "country_name": "Colombia",
+      "code": "CO",
+      "region": "sa",
+      "total_imports": 17552687779
+    },
+    {
+      "country_name": "Sweden",
+      "code": "SE",
+      "region": "eu",
+      "total_imports": 17346217606
+    },
+    {
+      "country_name": "Austria",
+      "code": "AT",
+      "region": "eu",
+      "total_imports": 16972586499
+    },
+    {
+      "country_name": "Chile",
+      "code": "CL",
+      "region": "sa",
+      "total_imports": 15989854918
+    },
+    {
+      "country_name": "Turkey",
+      "code": "TR",
+      "region": "eu",
+      "total_imports": 15931925959
+    },
+    {
+      "country_name": "Australia",
+      "code": "AU",
+      "region": "oc",
+      "total_imports": 15431611956
+    },
+    {
+      "country_name": "South Africa",
+      "code": "ZA",
+      "region": "af",
+      "total_imports": 14427042339
+    },
+    {
+      "country_name": "Philippines",
+      "code": "PH",
+      "region": "as",
+      "total_imports": 13415580336
+    },
+    {
+      "country_name": "Poland",
+      "code": "PL",
+      "region": "eu",
+      "total_imports": 12845914477
+    },
+    {
+      "country_name": "Cambodia",
+      "code": "KH",
+      "region": "as",
+      "total_imports": 12660132491
+    },
+    {
+      "country_name": "Saudi Arabia",
+      "code": "SA",
+      "region": "me",
+      "total_imports": 12308522990
+    },
+    {
+      "country_name": "Hungary",
+      "code": "HU",
+      "region": "eu",
+      "total_imports": 12082718152
+    },
+    {
+      "country_name": "Costa Rica",
+      "code": "CR",
+      "region": "na",
+      "total_imports": 10411176561
+    },
+    {
+      "country_name": "Denmark, except Greenland",
+      "code": "DK",
+      "region": "eu",
+      "total_imports": 9457181893
+    },
+    {
+      "country_name": "Peru",
+      "code": "PE",
+      "region": "sa",
+      "total_imports": 9448076874
+    },
+    {
+      "country_name": "Ecuador",
+      "code": "EC",
+      "region": "sa",
+      "total_imports": 8366169244
+    },
+    {
+      "country_name": "Bangladesh",
+      "code": "BD",
+      "region": "as",
+      "total_imports": 8344694026
+    },
+    {
+      "country_name": "Slovakia",
+      "code": "SK",
+      "region": "eu",
+      "total_imports": 8076518587
+    },
+    {
+      "country_name": "Finland",
+      "code": "FI",
+      "region": "eu",
+      "total_imports": 8029082355
+    },
+    {
+      "country_name": "Iraq",
+      "code": "IQ",
+      "region": "me",
+      "total_imports": 7568701717
+    },
+    {
+      "country_name": "Argentina",
+      "code": "AR",
+      "region": "sa",
+      "total_imports": 7475005584
+    },
+    {
+      "country_name": "Czech Republic",
+      "code": "CZ",
+      "region": "eu",
+      "total_imports": 7405659151
+    },
+    {
+      "country_name": "Dominican Republic",
+      "code": "DO",
+      "region": "na",
+      "total_imports": 7163303467
+    },
+    {
+      "country_name": "Portugal",
+      "code": "PT",
+      "region": "eu",
+      "total_imports": 6466962472
+    },
+    {
+      "country_name": "Slovenia",
+      "code": "SI",
+      "region": "eu",
+      "total_imports": 6241696952
+    },
+    {
+      "country_name": "Nigeria",
+      "code": "NG",
+      "region": "af",
+      "total_imports": 6083391964
+    },
+    {
+      "country_name": "Norway",
+      "code": "NO",
+      "region": "eu",
+      "total_imports": 6023302128
+    },
+    {
+      "country_name": "United Arab Emirates",
+      "code": "AE",
+      "region": "me",
+      "total_imports": 5871800732
+    },
+    {
+      "country_name": "Venezuela",
+      "code": "VE",
+      "region": "sa",
+      "total_imports": 5668349920
+    },
+    {
+      "country_name": "Honduras",
+      "code": "HN",
+      "region": "na",
+      "total_imports": 5450670333
+    },
+    {
+      "country_name": "New Zealand",
+      "code": "NZ",
+      "region": "oc",
+      "total_imports": 5350603341
+    },
+    {
+      "country_name": "Guyana",
+      "code": "GY",
+      "region": "sa",
+      "total_imports": 5147213665
+    },
+    {
+      "country_name": "Pakistan",
+      "code": "PK",
+      "region": "as",
+      "total_imports": 5052125436
+    },
+    {
+      "country_name": "Guatemala",
+      "code": "GT",
+      "region": "na",
+      "total_imports": 4962858452
+    },
+    {
+      "country_name": "Nicaragua",
+      "code": "NI",
+      "region": "na",
+      "total_imports": 4598592973
+    },
+    {
+      "country_name": "Romania",
+      "code": "RO",
+      "region": "eu",
+      "total_imports": 3487206060
+    },
+    {
+      "country_name": "Jordan",
+      "code": "JO",
+      "region": "me",
+      "total_imports": 3306379177
+    },
+    {
+      "country_name": "Trinidad and Tobago",
+      "code": "TT",
+      "region": "na",
+      "total_imports": 3194667883
+    },
+    {
+      "country_name": "Hong Kong",
+      "code": "HK",
+      "region": "as",
+      "total_imports": 3130409655
+    },
+    {
+      "country_name": "Sri Lanka",
+      "code": "LK",
+      "region": "as",
+      "total_imports": 3095574124
+    },
+    {
+      "country_name": "Russia",
+      "code": "RU",
+      "region": "eu",
+      "total_imports": 2917908568
+    },
+    {
+      "country_name": "Algeria",
+      "code": "DZ",
+      "region": "af",
+      "total_imports": 2685465928
+    },
+    {
+      "country_name": "Libya",
+      "code": "LY",
+      "region": "af",
+      "total_imports": 2541329241
+    },
+    {
+      "country_name": "Egypt",
+      "code": "EG",
+      "region": "af",
+      "total_imports": 2507595786
+    },
+    {
+      "country_name": "Kazakhstan",
+      "code": "KZ",
+      "region": "as",
+      "total_imports": 2290144255
+    },
+    {
+      "country_name": "Greece",
+      "code": "GR",
+      "region": "eu",
+      "total_imports": 2142209501
+    },
+    {
+      "country_name": "El Salvador",
+      "code": "SV",
+      "region": "na",
+      "total_imports": 2109247904
+    },
+    {
+      "country_name": "Lithuania",
+      "code": "LT",
+      "region": "eu",
+      "total_imports": 1986916663
+    },
+    {
+      "country_name": "Angola",
+      "code": "AO",
+      "region": "af",
+      "total_imports": 1662167957
+    },
+    {
+      "country_name": "Kuwait",
+      "code": "KW",
+      "region": "me",
+      "total_imports": 1660419456
+    },
+    {
+      "country_name": "Morocco",
+      "code": "MA",
+      "region": "af",
+      "total_imports": 1655552695
+    },
+    {
+      "country_name": "Qatar",
+      "code": "QA",
+      "region": "me",
+      "total_imports": 1425224707
+    },
+    {
+      "country_name": "Bulgaria",
+      "code": "BG",
+      "region": "eu",
+      "total_imports": 1424998236
+    },
+    {
+      "country_name": "Ghana",
+      "code": "GH",
+      "region": "af",
+      "total_imports": 1233901564
+    },
+    {
+      "country_name": "Oman",
+      "code": "OM",
+      "region": "me",
+      "total_imports": 1200478014
+    },
+    {
+      "country_name": "Uruguay",
+      "code": "UY",
+      "region": "sa",
+      "total_imports": 1199549930
+    },
+    {
+      "country_name": "Ukraine",
+      "code": "UA",
+      "region": "eu",
+      "total_imports": 1135611419
+    },
+    {
+      "country_name": "Tunisia",
+      "code": "TN",
+      "region": "af",
+      "total_imports": 1115501215
+    },
+    {
+      "country_name": "Bahrain",
+      "code": "BH",
+      "region": "me",
+      "total_imports": 1091142772
+    },
+    {
+      "country_name": "Iceland",
+      "code": "IS",
+      "region": "eu",
+      "total_imports": 1062685856
+    },
+    {
+      "country_name": "Estonia",
+      "code": "EE",
+      "region": "eu",
+      "total_imports": 1044267441
+    },
+    {
+      "country_name": "Cote d'Ivoire",
+      "code": "CI",
+      "region": "af",
+      "total_imports": 1009788374
+    },
+    {
+      "country_name": "Croatia",
+      "code": "HR",
+      "region": "eu",
+      "total_imports": 983498831
+    },
+    {
+      "country_name": "Bahamas",
+      "code": "BS",
+      "region": "na",
+      "total_imports": 815392805
+    },
+    {
+      "country_name": "Laos (Lao People's Democratic Republic)",
+      "code": "LA",
+      "region": "as",
+      "total_imports": 805809416
+    },
+    {
+      "country_name": "Serbia",
+      "code": "RS",
+      "region": "eu",
+      "total_imports": 774645662
+    },
+    {
+      "country_name": "Madagascar",
+      "code": "MG",
+      "region": "af",
+      "total_imports": 727121365
+    },
+    {
+      "country_name": "Kenya",
+      "code": "KE",
+      "region": "af",
+      "total_imports": 701755871
+    },
+    {
+      "country_name": "Burma (Myanmar)",
+      "code": "MM",
+      "region": "as",
+      "total_imports": 667550609
+    },
+    {
+      "country_name": "Haiti",
+      "code": "HT",
+      "region": "na",
+      "total_imports": 617119528
+    },
+    {
+      "country_name": "Latvia",
+      "code": "LV",
+      "region": "eu",
+      "total_imports": 610748111
+    },
+    {
+      "country_name": "Luxembourg",
+      "code": "LU",
+      "region": "eu",
+      "total_imports": 561111704
+    },
+    {
+      "country_name": "Botswana",
+      "code": "BW",
+      "region": "af",
+      "total_imports": 494898404
+    },
+    {
+      "country_name": "Bolivia",
+      "code": "BO",
+      "region": "sa",
+      "total_imports": 484995952
+    },
+    {
+      "country_name": "Ethiopia",
+      "code": "ET",
+      "region": "af",
+      "total_imports": 388591688
+    },
+    {
+      "country_name": "Panama",
+      "code": "PA",
+      "region": "na",
+      "total_imports": 381198059
+    },
+    {
+      "country_name": "Paraguay",
+      "code": "PY",
+      "region": "sa",
+      "total_imports": 342632629
+    },
+    {
+      "country_name": "Jamaica",
+      "code": "JM",
+      "region": "na",
+      "total_imports": 339788352
+    },
+    {
+      "country_name": "Congo, Democratic Republic of the Congo (formerly Za",
+      "code": "CD",
+      "region": "af",
+      "total_imports": 321925869
+    },
+    {
+      "country_name": "Namibia",
+      "code": "NA",
+      "region": "af",
+      "total_imports": 303576996
+    },
+    {
+      "country_name": "Lesotho",
+      "code": "LS",
+      "region": "af",
+      "total_imports": 257699666
+    },
+    {
+      "country_name": "Fiji",
+      "code": "FJ",
+      "region": "oc",
+      "total_imports": 252869525
+    },
+    {
+      "country_name": "Lebanon",
+      "code": "LB",
+      "region": "me",
+      "total_imports": 251831419
+    },
+    {
+      "country_name": "Faroe Islands",
+      "code": "FO",
+      "region": "eu",
+      "total_imports": 248858910
+    },
+    {
+      "country_name": "Liechtenstein",
+      "code": "LI",
+      "region": "eu",
+      "total_imports": 235679383
+    },
+    {
+      "country_name": "Brunei",
+      "code": "BN",
+      "region": "as",
+      "total_imports": 230680267
+    },
+    {
+      "country_name": "Mauritius",
+      "code": "MU",
+      "region": "af",
+      "total_imports": 229190723
+    },
+    {
+      "country_name": "Cameroon",
+      "code": "CM",
+      "region": "af",
+      "total_imports": 213060101
+    },
+    {
+      "country_name": "Mozambique",
+      "code": "MZ",
+      "region": "af",
+      "total_imports": 212309306
+    },
+    {
+      "country_name": "Senegal",
+      "code": "SN",
+      "region": "af",
+      "total_imports": 202033560
+    },
+    {
+      "country_name": "Gabon",
+      "code": "GA",
+      "region": "af",
+      "total_imports": 198661592
+    },
+    {
+      "country_name": "Malta",
+      "code": "MT",
+      "region": "eu",
+      "total_imports": 194784891
+    },
+    {
+      "country_name": "Tanzania (United Republic of Tanzania)",
+      "code": "TZ",
+      "region": "af",
+      "total_imports": 194590714
+    },
+    {
+      "country_name": "Zambia",
+      "code": "ZM",
+      "region": "af",
+      "total_imports": 174085306
+    },
+    {
+      "country_name": "Bosnia and Herzegovina",
+      "code": "BA",
+      "region": "eu",
+      "total_imports": 173057277
+    },
+    {
+      "country_name": "North Macedonia",
+      "code": "MK",
+      "region": "eu",
+      "total_imports": 168877353
+    },
+    {
+      "country_name": "Georgia",
+      "code": "GE",
+      "region": "as",
+      "total_imports": 160915364
+    },
+    {
+      "country_name": "Uganda",
+      "code": "UG",
+      "region": "af",
+      "total_imports": 129336921
+    },
+    {
+      "country_name": "Albania",
+      "code": "AL",
+      "region": "eu",
+      "total_imports": 127037506
+    },
+    {
+      "country_name": "Armenia",
+      "code": "AM",
+      "region": "as",
+      "total_imports": 125410329
+    },
+    {
+      "country_name": "Equatorial Guinea",
+      "code": "GQ",
+      "region": "af",
+      "total_imports": 123121001
+    },
+    {
+      "country_name": "Moldova (Republic of Moldova)",
+      "code": "MD",
+      "region": "eu",
+      "total_imports": 122643958
+    },
+    {
+      "country_name": "Nepal",
+      "code": "NP",
+      "region": "as",
+      "total_imports": 117489012
+    },
+    {
+      "country_name": "Azerbaijan",
+      "code": "AZ",
+      "region": "as",
+      "total_imports": 92204941
+    },
+    {
+      "country_name": "Togo",
+      "code": "TG",
+      "region": "af",
+      "total_imports": 89696898
+    },
+    {
+      "country_name": "Suriname",
+      "code": "SR",
+      "region": "sa",
+      "total_imports": 86127773
+    },
+    {
+      "country_name": "Macao",
+      "code": "MO",
+      "region": "as",
+      "total_imports": 81603119
+    },
+    {
+      "country_name": "Chad",
+      "code": "TD",
+      "region": "af",
+      "total_imports": 80600190
+    },
+    {
+      "country_name": "Papua New Guinea",
+      "code": "PG",
+      "region": "oc",
+      "total_imports": 77212317
+    },
+    {
+      "country_name": "Belize",
+      "code": "BZ",
+      "region": "na",
+      "total_imports": 73512046
+    },
+    {
+      "country_name": "Liberia",
+      "code": "LR",
+      "region": "af",
+      "total_imports": 70945377
+    },
+    {
+      "country_name": "Zimbabwe",
+      "code": "ZW",
+      "region": "af",
+      "total_imports": 65888540
+    },
+    {
+      "country_name": "Congo, Republic of the Congo",
+      "code": "CG",
+      "region": "af",
+      "total_imports": 53977784
+    },
+    {
+      "country_name": "British Virgin Islands",
+      "code": "VG",
+      "region": "na",
+      "total_imports": 52698312
+    },
+    {
+      "country_name": "Cyprus",
+      "code": "CY",
+      "region": "eu",
+      "total_imports": 51275514
+    },
+    {
+      "country_name": "Benin",
+      "code": "BJ",
+      "region": "af",
+      "total_imports": 45537172
+    },
+    {
+      "country_name": "Reunion",
+      "code": "RE",
+      "region": "af",
+      "total_imports": 43807528
+    },
+    {
+      "country_name": "Monaco",
+      "code": "MC",
+      "region": "eu",
+      "total_imports": 39615025
+    },
+    {
+      "country_name": "Malawi",
+      "code": "MW",
+      "region": "af",
+      "total_imports": 39569010
+    },
+    {
+      "country_name": "Barbados",
+      "code": "BB",
+      "region": "na",
+      "total_imports": 39529682
+    },
+    {
+      "country_name": "Cayman Islands",
+      "code": "KY",
+      "region": "na",
+      "total_imports": 36514178
+    },
+    {
+      "country_name": "Uzbekistan",
+      "code": "UZ",
+      "region": "as",
+      "total_imports": 34690465
+    },
+    {
+      "country_name": "Kosovo",
+      "code": "XK",
+      "region": "eu",
+      "total_imports": 33992066
+    },
+    {
+      "country_name": "New Caledonia",
+      "code": "NC",
+      "region": "oc",
+      "total_imports": 33250403
+    },
+    {
+      "country_name": "French Polynesia",
+      "code": "PF",
+      "region": "oc",
+      "total_imports": 32956254
+    },
+    {
+      "country_name": "Greenland",
+      "code": "GL",
+      "region": "na",
+      "total_imports": 31746106
+    },
+    {
+      "country_name": "Rwanda",
+      "code": "RW",
+      "region": "af",
+      "total_imports": 29789274
+    },
+    {
+      "country_name": "Sierra Leone",
+      "code": "SL",
+      "region": "af",
+      "total_imports": 27510693
+    },
+    {
+      "country_name": "Mongolia",
+      "code": "MN",
+      "region": "as",
+      "total_imports": 23986284
+    },
+    {
+      "country_name": "Eswatini",
+      "code": "SZ",
+      "region": "af",
+      "total_imports": 22297265
+    },
+    {
+      "country_name": "San Marino",
+      "code": "SM",
+      "region": "eu",
+      "total_imports": 22295265
+    },
+    {
+      "country_name": "Falkland Islands (Islas Malvinas)",
+      "code": "FK",
+      "region": "sa",
+      "total_imports": 22215901
+    },
+    {
+      "country_name": "Afghanistan",
+      "code": "AF",
+      "region": "as",
+      "total_imports": 21819973
+    },
+    {
+      "country_name": "Curacao",
+      "code": "CW",
+      "region": "na",
+      "total_imports": 21349104
+    },
+    {
+      "country_name": "Belarus",
+      "code": "BY",
+      "region": "eu",
+      "total_imports": 19504820
+    },
+    {
+      "country_name": "Marshall Islands",
+      "code": "MH",
+      "region": "oc",
+      "total_imports": 18419624
+    },
+    {
+      "country_name": "Kyrgyzstan",
+      "code": "KG",
+      "region": "as",
+      "total_imports": 16000840
+    },
+    {
+      "country_name": "Saint Kitts and Nevis",
+      "code": "KN",
+      "region": "na",
+      "total_imports": 14788294
+    },
+    {
+      "country_name": "Antigua and Barbuda",
+      "code": "AG",
+      "region": "na",
+      "total_imports": 13825722
+    },
+    {
+      "country_name": "Vanuatu",
+      "code": "VU",
+      "region": "oc",
+      "total_imports": 13661742
+    },
+    {
+      "country_name": "Sudan",
+      "code": "SD",
+      "region": "af",
+      "total_imports": 13117099
+    },
+    {
+      "country_name": "Grenada",
+      "code": "GD",
+      "region": "na",
+      "total_imports": 12997257
+    },
+    {
+      "country_name": "Montenegro",
+      "code": "ME",
+      "region": "eu",
+      "total_imports": 12621328
+    },
+    {
+      "country_name": "Turkmenistan",
+      "code": "TM",
+      "region": "as",
+      "total_imports": 11461914
+    },
+    {
+      "country_name": "Syria (Syrian Arab Republic)",
+      "code": "SY",
+      "region": "me",
+      "total_imports": 9896773
+    },
+    {
+      "country_name": "Saint Helena",
+      "code": "SH",
+      "region": "af",
+      "total_imports": 9741350
+    },
+    {
+      "country_name": "Yemen (Republic of Yemen)",
+      "code": "YE",
+      "region": "me",
+      "total_imports": 8732058
+    },
+    {
+      "country_name": "Seychelles",
+      "code": "SC",
+      "region": "af",
+      "total_imports": 7148556
+    },
+    {
+      "country_name": "Iran",
+      "code": "IR",
+      "region": "me",
+      "total_imports": 6200498
+    },
+    {
+      "country_name": "Saint Vincent and the Grenadines",
+      "code": "VC",
+      "region": "na",
+      "total_imports": 5966011
+    },
+    {
+      "country_name": "Timor-Leste",
+      "code": "TL",
+      "region": "as",
+      "total_imports": 5834738
+    },
+    {
+      "country_name": "West Bank administered by Israel",
+      "code": "PS",
+      "region": "me",
+      "total_imports": 5585929
+    },
+    {
+      "country_name": "Guinea",
+      "code": "GN",
+      "region": "af",
+      "total_imports": 5584979
+    },
+    {
+      "country_name": "Samoa (Western Samoa)",
+      "code": "WS",
+      "region": "oc",
+      "total_imports": 5516357
+    },
+    {
+      "country_name": "Saint Lucia",
+      "code": "LC",
+      "region": "na",
+      "total_imports": 5159211
+    },
+    {
+      "country_name": "Montserrat",
+      "code": "MS",
+      "region": "na",
+      "total_imports": 5092051
+    },
+    {
+      "country_name": "Turks and Caicos Islands",
+      "code": "TC",
+      "region": "na",
+      "total_imports": 4993683
+    },
+    {
+      "country_name": "Cuba",
+      "code": "CU",
+      "region": "na",
+      "total_imports": 4835751
+    },
+    {
+      "country_name": "Mali",
+      "code": "ML",
+      "region": "af",
+      "total_imports": 4808065
+    },
+    {
+      "country_name": "Niger",
+      "code": "NE",
+      "region": "af",
+      "total_imports": 4417602
+    },
+    {
+      "country_name": "Tajikistan",
+      "code": "TJ",
+      "region": "as",
+      "total_imports": 4348677
+    },
+    {
+      "country_name": "Burkina Faso",
+      "code": "BF",
+      "region": "af",
+      "total_imports": 4347200
+    },
+    {
+      "country_name": "Niue",
+      "code": "NU",
+      "region": "oc",
+      "total_imports": 4243989
+    },
+    {
+      "country_name": "Maldives",
+      "code": "MV",
+      "region": "as",
+      "total_imports": 3870003
+    },
+    {
+      "country_name": "Cabo Verde",
+      "code": "CV",
+      "region": "af",
+      "total_imports": 3765353
+    },
+    {
+      "country_name": "Burundi",
+      "code": "BI",
+      "region": "af",
+      "total_imports": 3721138
+    },
+    {
+      "country_name": "Andorra",
+      "code": "AD",
+      "region": "eu",
+      "total_imports": 3292795
+    },
+    {
+      "country_name": "Bhutan",
+      "code": "BT",
+      "region": "as",
+      "total_imports": 3198524
+    },
+    {
+      "country_name": "Bermuda",
+      "code": "BM",
+      "region": "na",
+      "total_imports": 2895982
+    },
+    {
+      "country_name": "Mauritania",
+      "code": "MR",
+      "region": "af",
+      "total_imports": 2670634
+    },
+    {
+      "country_name": "Sint Maarten",
+      "code": "SX",
+      "region": "na",
+      "total_imports": 2550464
+    },
+    {
+      "country_name": "Aruba",
+      "code": "AW",
+      "region": "na",
+      "total_imports": 2508573
+    },
+    {
+      "country_name": "Somalia",
+      "code": "SO",
+      "region": "af",
+      "total_imports": 2422635
+    },
+    {
+      "country_name": "Tonga",
+      "code": "TO",
+      "region": "oc",
+      "total_imports": 2361178
+    },
+    {
+      "country_name": "Nauru",
+      "code": "NR",
+      "region": "oc",
+      "total_imports": 2201715
+    },
+    {
+      "country_name": "Micronesia, Federated States of",
+      "code": "FM",
+      "region": "oc",
+      "total_imports": 1929983
+    },
+    {
+      "country_name": "Gambia",
+      "code": "GM",
+      "region": "af",
+      "total_imports": 1911973
+    },
+    {
+      "country_name": "French Guiana",
+      "code": "GF",
+      "region": "sa",
+      "total_imports": 1788314
+    },
+    {
+      "country_name": "Guadeloupe",
+      "code": "GP",
+      "region": "na",
+      "total_imports": 1780919
+    },
+    {
+      "country_name": "Comoros",
+      "code": "KM",
+      "region": "af",
+      "total_imports": 1736043
+    },
+    {
+      "country_name": "Mayotte",
+      "code": "YT",
+      "region": "af",
+      "total_imports": 1705897
+    },
+    {
+      "country_name": "Djibouti",
+      "code": "DJ",
+      "region": "af",
+      "total_imports": 1622746
+    },
+    {
+      "country_name": "Christmas Island (in the Indian Ocean)",
+      "code": "CX",
+      "region": "oc",
+      "total_imports": 1554974
+    },
+    {
+      "country_name": "Dominica",
+      "code": "DM",
+      "region": "na",
+      "total_imports": 1526687
+    },
+    {
+      "country_name": "Palau",
+      "code": "PW",
+      "region": "oc",
+      "total_imports": 1416696
+    },
+    {
+      "country_name": "Martinique",
+      "code": "MQ",
+      "region": "na",
+      "total_imports": 1294847
+    },
+    {
+      "country_name": "Central African Republic",
+      "code": "CF",
+      "region": "af",
+      "total_imports": 1294756
+    },
+    {
+      "country_name": "Solomon Islands",
+      "code": "SB",
+      "region": "oc",
+      "total_imports": 1179930
+    },
+    {
+      "country_name": "Anguilla",
+      "code": "AI",
+      "region": "na",
+      "total_imports": 919678
+    },
+    {
+      "country_name": "South Sudan",
+      "code": "SS",
+      "region": "af",
+      "total_imports": 799325
+    },
+    {
+      "country_name": "Kiribati",
+      "code": "KI",
+      "region": "oc",
+      "total_imports": 736703
+    },
+    {
+      "country_name": "Eritrea",
+      "code": "ER",
+      "region": "af",
+      "total_imports": 703039
+    },
+    {
+      "country_name": "Cocos (Keeling) Islands",
+      "code": "CC",
+      "region": "oc",
+      "total_imports": 641358
+    },
+    {
+      "country_name": "Sao Tome and Principe",
+      "code": "ST",
+      "region": "af",
+      "total_imports": 520976
+    },
+    {
+      "country_name": "British Indian Ocean Territory",
+      "code": "IO",
+      "region": "as",
+      "total_imports": 456040
+    },
+    {
+      "country_name": "Cook Islands",
+      "code": "CK",
+      "region": "oc",
+      "total_imports": 251835
+    },
+    {
+      "country_name": "Gibraltar",
+      "code": "GI",
+      "region": "eu",
+      "total_imports": 212107
+    },
+    {
+      "country_name": "Tuvalu",
+      "code": "TV",
+      "region": "oc",
+      "total_imports": 204550
+    },
+    {
+      "country_name": "Holy See (Vatican City)",
+      "code": "VA",
+      "region": "eu",
+      "total_imports": 150121
+    },
+    {
+      "country_name": "Guinea-Bissau",
+      "code": "GW",
+      "region": "af",
+      "total_imports": 112164
+    },
+    {
+      "country_name": "Gaza Strip administered by Israel",
+      "code": "PS",
+      "region": "me",
+      "total_imports": 42673
+    },
+    {
+      "country_name": "Svalbard and Jan Mayen",
+      "code": "SJ",
+      "region": "eu",
+      "total_imports": 40588
+    },
+    {
+      "country_name": "French Southern and Antarctic Lands",
+      "code": "TF",
+      "region": "af",
+      "total_imports": 24566
+    },
+    {
+      "country_name": "Wallis and Futuna",
+      "code": "WF",
+      "region": "oc",
+      "total_imports": 23491
+    },
+    {
+      "country_name": "Tokelau",
+      "code": "TK",
+      "region": "oc",
+      "total_imports": 8869
+    },
+    {
+      "country_name": "Pitcairn Islands",
+      "code": "PN",
+      "region": "oc",
+      "total_imports": 5787
+    },
+    {
+      "country_name": "Saint Pierre and Miquelon",
+      "code": "PM",
+      "region": "na",
+      "total_imports": 5464
+    },
+    {
+      "country_name": "North Korea (Democratic People's Republic of Korea)",
+      "code": "KP",
+      "region": "as",
+      "total_imports": 0
+    }
+  ]
+}
