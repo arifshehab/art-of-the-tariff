@@ -6,6 +6,7 @@ import { Tariff, TariffData } from '@/types/tariff';
 import { TariffSelection, getCountryColors, getFilterOptions, statusForSelection } from '@/lib/tariffs';
 import CountryPanel from '@/components/CountryPanel';
 import Legend from '@/components/Legend';
+import Header from '@/components/Header';
 
 const TariffMap = dynamic(() => import('@/components/TariffMap'), { ssr: false });
 const TradeTreemap = dynamic(() => import('@/components/TradeTreemap'), { ssr: false });
@@ -18,6 +19,7 @@ export default function Home() {
   const [selection, setSelection] = useState<TariffSelection | null>(null);
   const [view, setView] = useState<ViewMode>('map');
   const mapSectionRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/tariffs')
@@ -45,14 +47,8 @@ export default function Home() {
     [tariffData, selection],
   );
 
-  const lastUpdated = tariffData
-    ? new Date(tariffData.last_updated).toLocaleDateString('en-US', {
-        month: 'long', day: 'numeric', year: 'numeric'
-      })
-    : null;
-
   const scrollToMap = () => {
-    mapSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    toggleRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleCountrySelect = (tariff: Tariff | null) =>
@@ -61,26 +57,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0f1e] overflow-x-hidden" style={{ fontFamily: "'Cera Pro', 'Trebuchet MS', sans-serif" }}>
 
-      {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4 border-b border-white/5">
-        <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-          <span className="text-white font-semibold text-sm tracking-tight">US Tariff Tracker</span>
-        </div>
-        <div className="flex items-center gap-4">
-          {lastUpdated && (
-            <span className="text-xs text-slate-500 hidden sm:block">Updated {lastUpdated}</span>
-          )}
-          <a
-            href={tariffData?.source_url ?? '#'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-slate-500 hover:text-white transition-colors border border-white/10 hover:border-white/20 rounded-lg px-3 py-1.5"
-          >
-            Source ↗
-          </a>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="flex flex-col items-center text-center px-6 pt-24 pb-16">
@@ -101,25 +78,27 @@ export default function Home() {
         </button>
       </section>
 
-      {/* View toggle (mobile: above the visualisation) */}
+      {/* View toggle (above the visualisation) */}
       {tariffData && (
-        <div className="md:hidden mx-auto w-[92vw] mb-3 flex bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
-          <button
-            onClick={() => setView('map')}
-            className={`flex-1 px-4 py-2 text-xs font-medium transition-colors ${
-              view === 'map' ? 'bg-white/10 text-white' : 'text-slate-500'
-            }`}
-          >
-            World map
-          </button>
-          <button
-            onClick={() => setView('trade')}
-            className={`flex-1 px-4 py-2 text-xs font-medium transition-colors ${
-              view === 'trade' ? 'bg-white/10 text-white' : 'text-slate-500'
-            }`}
-          >
-            By Trade Volume
-          </button>
+        <div ref={toggleRef} className="mx-auto w-[92vw] md:w-[75vw] mb-0 flex">
+          <div className="flex w-full md:w-auto bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setView('map')}
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium transition-colors ${
+                view === 'map' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
+              }`}
+            >
+              World map
+            </button>
+            <button
+              onClick={() => setView('trade')}
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium transition-colors ${
+                view === 'trade' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
+              }`}
+            >
+              By import volume
+            </button>
+          </div>
         </div>
       )}
 
@@ -153,28 +132,6 @@ export default function Home() {
           {!tariffData && (
             <div className="absolute inset-0 flex items-center justify-center bg-[#0f172a]">
               <div className="text-slate-500 text-sm animate-pulse">Loading map…</div>
-            </div>
-          )}
-
-          {/* View toggle (desktop: overlay on the map) */}
-          {tariffData && (
-            <div className="hidden md:flex absolute top-4 left-4 z-10 bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
-              <button
-                onClick={() => setView('map')}
-                className={`px-4 py-2 text-xs font-medium transition-colors ${
-                  view === 'map' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
-                }`}
-              >
-                World map
-              </button>
-              <button
-                onClick={() => setView('trade')}
-                className={`px-4 py-2 text-xs font-medium transition-colors ${
-                  view === 'trade' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
-                }`}
-              >
-                By Trade Volume
-              </button>
             </div>
           )}
 

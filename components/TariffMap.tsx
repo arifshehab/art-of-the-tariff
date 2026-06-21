@@ -6,6 +6,22 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { Tariff } from '@/types/tariff';
 import { NO_DATA, TariffSelection, rateForSelection } from '@/lib/tariffs';
 
+// Inhabited-world extent (drops Antarctica and the empty far north). The initial
+// view "covers" this — it fills the viewport without showing anything beyond it.
+const WORLD_W = -168, WORLD_E = 179, WORLD_S = -55, WORLD_N = 72;
+
+function coverCamera(width: number, height: number): { center: [number, number]; zoom: number } | null {
+  if (!width || !height) return null;
+  const mercY = (lat: number) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
+  const lngSpan = WORLD_E - WORLD_W;
+  const mercSpan = mercY(WORLD_N) - mercY(WORLD_S);
+  const zLng = Math.log2(width / ((lngSpan / 360) * 512));
+  const zLat = Math.log2(height / ((mercSpan / (2 * Math.PI)) * 512));
+  const midMerc = (mercY(WORLD_N) + mercY(WORLD_S)) / 2;
+  const lat = (2 * Math.atan(Math.exp(midMerc)) - Math.PI / 2) * (180 / Math.PI);
+  return { center: [(WORLD_W + WORLD_E) / 2, lat], zoom: Math.max(zLng, zLat) };
+}
+
 interface TariffMapProps {
   tariffs: Tariff[];
   countryColors: Record<string, string>;
@@ -56,8 +72,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/standard',
       center: [15, 20],
-      zoom: 1.5,
-      minZoom: 1,
+      zoom: 1,
       maxZoom: 6,
       projection: 'mercator',
       attributionControl: false,
@@ -69,6 +84,19 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
     mapRef.current = map;
 
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
+
+    // Initial view: cover the inhabited world (fills the viewport, crops the
+    // overflow axis so no empty poles show). Min zoom locks to this; panning
+    // afterwards is unrestricted.
+    const fitWorld = (jump: boolean) => {
+      const c = map.getContainer();
+      const cam = coverCamera(c.clientWidth, c.clientHeight);
+      if (!cam) return;
+      map.setMinZoom(cam.zoom);
+      if (jump) map.jumpTo(cam);
+    };
+    fitWorld(true);
+    map.on('resize', () => fitWorld(false));
 
     map.on('load', () => {
       // Single shared vector source for every country layer.
