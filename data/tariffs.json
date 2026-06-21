@@ -13,6 +13,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -52,6 +61,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "30%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -91,6 +109,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -264,6 +291,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -342,6 +378,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "20%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -459,6 +504,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -525,6 +579,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -540,6 +603,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "30%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -555,6 +627,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -588,6 +669,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "10%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -603,6 +693,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "25%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -684,6 +783,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -759,6 +867,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "19%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -780,6 +897,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -828,6 +954,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "35%",
+          "product_category": "Non-USMCA exempt goods",
+          "status": "expired",
+          "effective_date": "2025-08-01",
+          "citation_url": "https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-amends-duties-to-address-the-flow-of-illicit-drugs-across-our-northern-border/",
+          "sub_category": "Fentanyl"
         }
       ],
       "deals": []
@@ -858,6 +993,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -924,6 +1068,24 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "10%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-11-10",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/11/modifying-duties-addressing-the-synthetic-opioid-supply-chain-in-the-peoples-republic-of-china/",
+          "sub_category": "Reciprocal"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "10%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-11-10",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/11/modifying-duties-addressing-the-synthetic-opioid-supply-chain-in-the-peoples-republic-of-china/",
+          "sub_category": "Fentanyl"
         }
       ],
       "deals": []
@@ -978,6 +1140,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -1017,6 +1188,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -1098,6 +1278,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1200,6 +1389,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1287,6 +1485,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1374,6 +1581,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1458,6 +1674,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1533,6 +1758,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -1629,6 +1863,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1680,6 +1923,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -1761,6 +2013,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -1856,6 +2117,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2003,6 +2273,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2024,6 +2303,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2105,6 +2393,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2225,6 +2522,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2369,6 +2675,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2390,6 +2705,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2423,6 +2747,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "25%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2462,6 +2795,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "19%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2507,6 +2849,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "35%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2588,6 +2939,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2618,6 +2978,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2699,6 +3068,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2720,6 +3098,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2816,6 +3203,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -2846,6 +3242,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2870,6 +3275,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "25%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -2969,6 +3383,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "40%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3050,6 +3473,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3086,6 +3518,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3125,6 +3566,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "30%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3148,6 +3598,15 @@
           "status": "implemented",
           "effective_date": "2026-07-31",
           "citation_url": "https://www.whitehouse.gov/presidential-actions/2026/04/adjusting-imports-of-pharmaceuticals-and-pharmaceutical-ingredients-into-the-united-states/"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3235,6 +3694,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3322,6 +3790,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3343,6 +3820,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3358,6 +3844,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3391,6 +3886,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "19%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3508,6 +4012,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3559,6 +4072,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3600,6 +4122,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "25%",
+          "product_category": "Non-USMCA exempt goods",
+          "status": "expired",
+          "effective_date": "2025-03-04",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/02/progress-on-the-situation-at-our-southern-border/",
+          "sub_category": "Fentanyl"
         }
       ],
       "deals": []
@@ -3630,6 +4161,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "25%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3714,6 +4254,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3729,6 +4278,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "40%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3744,6 +4302,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3759,6 +4326,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3855,6 +4431,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -3885,6 +4470,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3918,6 +4512,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "18%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3957,6 +4560,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -3987,6 +4599,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4026,6 +4647,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -4074,6 +4704,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "19%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4125,6 +4764,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -4188,6 +4836,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "19%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4275,6 +4932,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4362,6 +5028,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4473,6 +5148,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4670,6 +5354,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "35%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -4814,6 +5507,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4901,6 +5603,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -4961,6 +5672,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "30%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5042,6 +5762,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5152,6 +5881,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5182,6 +5920,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "20%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5308,6 +6055,15 @@
           "status": "implemented",
           "effective_date": "2025-11-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5355,6 +6111,15 @@
           "status": "implemented",
           "effective_date": "2026-07-31",
           "citation_url": "https://www.whitehouse.gov/presidential-actions/2026/04/adjusting-imports-of-pharmaceuticals-and-pharmaceutical-ingredients-into-the-united-states/"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "39%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5376,6 +6141,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "41%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5433,6 +6207,15 @@
           "status": "implemented",
           "effective_date": "2026-05-01",
           "citation_url": ""
+        },
+        {
+          "name": "IEEPA",
+          "rate": "20%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5502,6 +6285,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "19%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5595,6 +6387,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5610,6 +6411,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "25%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5642,6 +6452,15 @@
           "status": "threatened",
           "effective_date": "2025-02-21",
           "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/02/defending-american-companies-and-innovators-from-overseas-extortion-and-unfair-fines-and-penalties/"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5687,6 +6506,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5814,6 +6642,15 @@
           "status": "implemented",
           "effective_date": "2025-06-16",
           "citation_url": "https://www.whitehouse.gov/presidential-actions/2026/04/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states/"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "10%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5874,6 +6711,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5913,6 +6759,15 @@
           "status": "threatened",
           "effective_date": "2026-06-02",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Forced%20Labor%20Import%20Ban%20301%20-%20FINAL.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -5955,6 +6810,15 @@
           "status": "threatened",
           "effective_date": "2026-03-11",
           "citation_url": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/USTR%20301%20FRN%20Industrial%20Excess%20Capacity%203-11-26.pdf"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "20%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": [
@@ -5991,6 +6855,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []
@@ -6006,6 +6879,15 @@
           "status": "implemented",
           "effective_date": "2026-02-24",
           "citation_url": "https://www.federalregister.gov/d/2026-03824"
+        },
+        {
+          "name": "IEEPA",
+          "rate": "15%",
+          "product_category": "All goods",
+          "status": "expired",
+          "effective_date": "2025-08-07",
+          "citation_url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+          "sub_category": "Reciprocal"
         }
       ],
       "deals": []

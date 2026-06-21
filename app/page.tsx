@@ -62,7 +62,7 @@ export default function Home() {
       {/* Hero */}
       <section className="flex flex-col items-center text-center px-6 pt-24 pb-16">
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-5 max-w-3xl">
-          Art of the Tariff
+          Tariff Visualiser
         </h1>
         <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-xl mb-10">
           Real-time tracking of U.S. tariff actions and rates, by country.

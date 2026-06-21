@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState, useEffect } from 'react';
 import { Tariff } from '@/types/tariff';
 import { TariffSelection, rateForSelection } from '@/lib/tariffs';
-import importsData from '@/data/top_countries_by_imports.json';
+import importsData from '@/data/total_imports.json';
 
 const MIN_total_imports = 3000000000; // countries below this are omitted
 
@@ -36,23 +36,92 @@ type RegionKey = 'na' | 'sa' | 'eu' | 'af' | 'me' | 'as' | 'oc';
 
 interface RegionConfig {
   label: string;
-  box: [number, number, number, number]; // x, y, w, h in % — areas scaled to value share
   fill: string;
   fill2: string;
   text: string;
 }
 
-// Region boxes are sized so that area is proportional to import value
-// on a single global scale; blank space absorbs the remainder.
 const REGIONS: Record<RegionKey, RegionConfig> = {
-  na: { label: 'North America', box: [0, 4, 34, 71],   fill: '#0C447C', fill2: '#185FA5', text: '#E6F1FB' },
-  sa: { label: 'South America', box: [0, 79, 16, 21],  fill: '#712B13', fill2: '#993C1D', text: '#FAECE7' },
-  eu: { label: 'Europe',        box: [36, 4, 24, 76],  fill: '#3C3489', fill2: '#534AB7', text: '#EEEDFE' },
-  af: { label: 'Africa',        box: [36, 86, 8, 9],   fill: '#633806', fill2: '#854F0B', text: '#FAEEDA' },
-  me: { label: 'Middle East',   box: [46, 86, 13, 14], fill: '#72243E', fill2: '#993556', text: '#FBEAF0' },
-  as: { label: 'Asia',          box: [62, 4, 38, 90],  fill: '#085041', fill2: '#0F6E56', text: '#E1F5EE' },
-  oc: { label: 'Oceania',       box: [62, 97, 15, 3],  fill: '#444441', fill2: '#5F5E5A', text: '#F1EFE8' },
+  na: { label: 'North America', fill: '#0C447C', fill2: '#185FA5', text: '#E6F1FB' },
+  sa: { label: 'South America', fill: '#712B13', fill2: '#993C1D', text: '#FAECE7' },
+  eu: { label: 'Europe',        fill: '#3C3489', fill2: '#534AB7', text: '#EEEDFE' },
+  af: { label: 'Africa',        fill: '#633806', fill2: '#854F0B', text: '#FAEEDA' },
+  me: { label: 'Middle East',   fill: '#72243E', fill2: '#993556', text: '#FBEAF0' },
+  as: { label: 'Asia',          fill: '#085041', fill2: '#0F6E56', text: '#E1F5EE' },
+  oc: { label: 'Oceania',       fill: '#444441', fill2: '#5F5E5A', text: '#F1EFE8' },
 };
+
+const REGION_SHORT: Partial<Record<RegionKey, string>> = {
+  na: 'N. America',
+  sa: 'S. America',
+};
+
+// uppercase + tracking-widest at 10px ≈ 8px per character
+const LABEL_CH_PX = 8;
+
+function regionLabel(key: RegionKey, availPx: number): string {
+  const full = REGIONS[key].label;
+  if (full.length * LABEL_CH_PX <= availPx) return full;
+  const short = REGION_SHORT[key];
+  if (short && short.length * LABEL_CH_PX <= availPx) return short;
+  const fallback = key.toUpperCase();
+  if (fallback.length * LABEL_CH_PX <= availPx) return fallback;
+  return '';
+}
+
+/**
+ * Three-column layout with 1% gaps:
+ *   col1: NA (top) / SA (bottom)
+ *   col2: EU (top) / AF+ME (bottom, split horizontally)
+ *   col3: AS (top) / OC (bottom)
+ * Column widths and all height/width splits are proportional to import totals.
+ */
+function computeRegionBoxes(t: Record<string, number>): Record<string, [number, number, number, number]> {
+  const COL_GAP = 2;  // horizontal gap between columns (%)
+  const ROW_GAP = 5;  // vertical gap between top/bottom rows within a column (%)
+  const TOP = 5;      // top margin for first-row labels (%)
+
+  const na = t.na ?? 0, sa = t.sa ?? 0;
+  const eu = t.eu ?? 0, af = t.af ?? 0, me = t.me ?? 0;
+  const as = t.as ?? 0, oc = t.oc ?? 0;
+
+  const c1 = na + sa, c2 = eu + af + me, c3 = as + oc;
+  const total = c1 + c2 + c3 || 1;
+  const availW = 100 - 2 * COL_GAP;
+  const availH = 100 - TOP - ROW_GAP;
+
+  const w1 = availW * c1 / total;
+  const w2 = availW * c2 / total;
+  const w3 = availW * c3 / total;
+  const x1 = 0, x2 = w1 + COL_GAP, x3 = w1 + COL_GAP + w2 + COL_GAP;
+
+  const naH = c1 ? availH * na / c1 : availH / 2;
+  const saH = availH - naH;
+
+  const euH = c2 ? availH * eu / c2 : availH / 2;
+  const afmeH = availH - euH;
+  const afW = (af + me) ? w2 * af / (af + me) : w2 / 2;
+  const meW = w2 - afW;
+
+  // OC is half the column width, so heights are solved to keep pixel areas proportional:
+  // w3*asH / as = (w3/2)*ocH / oc  →  asH + ocH = availH
+  const ocH = c3 ? availH * 2 * oc / (as + 2 * oc) : availH / 2;
+  const asH = availH - ocH;
+
+  const rowY1 = TOP + naH + ROW_GAP;
+  const rowY2 = TOP + euH + ROW_GAP;
+  const rowY3 = TOP + asH + ROW_GAP;
+
+  return {
+    na: [x1, TOP,   w1,  naH],
+    sa: [x1, rowY1, w1,  saH],
+    eu: [x2, TOP,   w2,  euH],
+    af: [x2, rowY2, afW, afmeH],
+    me: [x2 + afW,  rowY2, meW, afmeH],
+    as: [x3, TOP,   w3,   asH],
+    oc: [x3, rowY3, w3/2, ocH],
+  };
+}
 
 // Minimum cell area (px²) — about enough to fit a 2-letter country code.
 const MIN_CELL_AREA = 22 * 20;
@@ -159,7 +228,6 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
   const [vp, setVp] = useState({ w: 0, h: 0 });                   // viewport size (mobile fit)
   const [isMobile, setIsMobile] = useState(false);
   const [zoom, setZoom] = useState(1);
-  const [desktopZoom, setDesktopZoom] = useState(1);
   const [tooltip, setTooltip] = useState<HoverTooltip | null>(null);
 
   // Mobile detection.
@@ -201,7 +269,6 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
   const zoomRef = useRef(zoom); zoomRef.current = zoom;
   const fitRef = useRef(fitScale); fitRef.current = fitScale;
   const isMobileRef = useRef(isMobile); isMobileRef.current = isMobile;
-  const desktopZoomRef = useRef(desktopZoom); desktopZoomRef.current = desktopZoom;
 
   // Pinch-to-zoom (two fingers); one finger pans via native scroll.
   useEffect(() => {
@@ -223,15 +290,11 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
     const onEnd = (e: TouchEvent) => { if (e.touches.length < 2) startDist = 0; };
     // Trackpad pinch (and ctrl+scroll) fire a wheel event with ctrlKey set.
     const onWheel = (e: WheelEvent) => {
+      if (!isMobileRef.current) return;
       if (!e.ctrlKey) return;
       e.preventDefault();
-      if (isMobileRef.current) {
-        const next = Math.min(Math.max(zoomRef.current * Math.exp(-e.deltaY * 0.01), fitRef.current), 1);
-        setZoom(next);
-      } else {
-        const next = Math.min(Math.max(desktopZoomRef.current * Math.exp(-e.deltaY * 0.01), 1), 3);
-        setDesktopZoom(next);
-      }
+      const next = Math.min(Math.max(zoomRef.current * Math.exp(-e.deltaY * 0.01), fitRef.current), 1);
+      setZoom(next);
     };
     el.addEventListener('touchstart', onStart, { passive: false });
     el.addEventListener('touchmove', onMove, { passive: false });
@@ -260,19 +323,24 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
       if (c.total_imports < MIN_total_imports) continue;
       (grouped[c.region] ??= []).push(c);
     }
+    const totals: Record<string, number> = {};
+    for (const key of Object.keys(REGIONS)) {
+      totals[key] = (grouped[key] ?? []).reduce((s, c) => s + c.total_imports, 0);
+    }
+    const boxes = computeRegionBoxes(totals);
     return (Object.keys(REGIONS) as RegionKey[]).map(key => {
       const cfg = REGIONS[key];
+      const box = boxes[key] ?? [0, 0, 0, 0] as [number, number, number, number];
       const items = (grouped[key] ?? []).sort((a, b) => b.total_imports - a.total_imports);
-      const pxW = (cfg.box[2] / 100) * layoutW;
-      const pxH = (cfg.box[3] / 100) * layoutH;
+      const pxW = (box[2] / 100) * layoutW;
+      const pxH = (box[3] / 100) * layoutH;
       const rects: LaidOutRect[] = [];
-      // No min-area floor on mobile — cells stay proportional; zoom reveals labels.
       layoutTreemap(items, 0, 0, pxW, pxH, rects, 0);
-      return { key, cfg, rects, pxW, pxH };
+      return { key, cfg, box, rects, pxW, pxH };
     });
   }, [layoutW, layoutH, isMobile]);
 
-  const renderScale = isMobile ? zoom : desktopZoom;
+  const renderScale = isMobile ? zoom : 1;
 
   return (
     <div
@@ -282,26 +350,29 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
     >
       <div
         ref={containerRef}
-        className={isMobile || desktopZoom > 1 ? 'relative' : 'relative w-full h-full'}
+        className={isMobile ? 'relative' : 'relative w-full h-full'}
         style={
           isMobile
             ? { width: BASE_W * zoom, height: BASE_H * zoom }
-            : desktopZoom > 1
-            ? { width: measured.w * desktopZoom, height: measured.h * desktopZoom }
             : undefined
         }
       >
-        {regions.map(({ key, cfg, rects, pxW, pxH }) => {
-          const [bx, by, bw, bh] = cfg.box;
+        {regions.map(({ key, cfg, box, rects, pxW, pxH }) => {
+          const [bx, by, bw, bh] = box;
           return (
             <div key={key}>
               {/* Region label */}
-              <span
-                className="absolute text-[10px] uppercase tracking-widest text-slate-500 whitespace-nowrap"
-                style={{ left: `${bx}%`, top: `${by}%`, transform: 'translateY(-130%)' }}
-              >
-                {cfg.label}
-              </span>
+              {(() => {
+                const label = regionLabel(key, (bw / 100) * layoutW * renderScale);
+                return label ? (
+                  <span
+                    className="absolute text-[10px] uppercase tracking-widest text-slate-500 whitespace-nowrap"
+                    style={{ left: `${bx}%`, top: `${by}%`, transform: 'translateY(-105%)' }}
+                  >
+                    {label}
+                  </span>
+                ) : null;
+              })()}
 
               {rects.map(({ country, x, y, w, h }, idx) => {
                 // rects are region-px; rendered px also factor in the mobile zoom.

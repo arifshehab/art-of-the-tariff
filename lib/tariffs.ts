@@ -1,14 +1,14 @@
 import { Tariff, TariffType } from '@/types/tariff';
 import globalTariffData from '@/data/globaltariff.json';
 
-export type TariffGroup = 'Section 122' | 'Section 232' | 'Section 301' | 'Others';
+export type TariffGroup = 'Section 122' | 'Section 232' | 'Section 301' | 'IEEPA' | 'Others';
 
-export const TARIFF_GROUPS: TariffGroup[] = ['Section 122', 'Section 232', 'Section 301', 'Others'];
+export const TARIFF_GROUPS: TariffGroup[] = ['Section 122', 'Section 232', 'Section 301', 'IEEPA', 'Others'];
 
 // Filter categories include the tariff groups plus the non-tariff "Deal" view.
 export type FilterGroup = TariffGroup | 'Deal';
 
-export const FILTER_GROUPS: FilterGroup[] = ['Section 122', 'Section 232', 'Section 301', 'Others', 'Deal'];
+export const FILTER_GROUPS: FilterGroup[] = ['Section 122', 'Section 232', 'Section 301', 'IEEPA', 'Others', 'Deal'];
 
 export interface TariffSelection {
   group: FilterGroup;
@@ -21,6 +21,7 @@ export const STATUS_SCALES: Record<string, [string, string]> = {
   implemented: ['#e9f5db', '#27500A'],
   confirmed:   ['#e9f5db', '#27500A'],
   delayed:     ['#e3f2fd', '#0d47a1'],
+  expired:     ['#fecaca', '#7f1d1d'],
 };
 
 /** Rates at or above this map to the darkest end of the scales. */
@@ -39,7 +40,7 @@ function lerpColor(a: string, b: string, t: number): string {
 }
 
 export function groupOf(tt: TariffType): TariffGroup {
-  if (tt.name === 'Section 122' || tt.name === 'Section 232' || tt.name === 'Section 301') {
+  if (tt.name === 'Section 122' || tt.name === 'Section 232' || tt.name === 'Section 301' || tt.name === 'IEEPA') {
     return tt.name;
   }
   return 'Others';
@@ -116,27 +117,34 @@ export function getVisibleTariffTypes(tariff: Tariff): TariffType[] {
   return tariff.tariff_types.filter(t => !isStaleThreatened(t));
 }
 
-/** Worldwide Section 232 product tariffs, stale-filtered. */
-export function getGlobalS232(): TariffType[] {
-  return (globalTariffData.tariff_types as TariffType[]).filter(t => !isStaleThreatened(t));
+/** Global tariffs for a given group name, stale-filtered. */
+export function getGlobalTariffs(name: TariffGroup): TariffType[] {
+  return (globalTariffData.tariff_types as TariffType[]).filter(t => t.name === name && !isStaleThreatened(t));
 }
 
 /**
- * Panel data for a country: its own tariffs plus the worldwide Section 232
- * product rates, except where the country has its own (exempted) rate
- * for that product.
+ * Panel data for a country: its own tariffs plus worldwide Section 232 product
+ * rates and the global IEEPA baseline, except where the country has its own
+ * rate for that category.
  */
 export function getMergedTariffTypes(tariff: Tariff): TariffType[] {
   const own = getVisibleTariffTypes(tariff);
   const ownS232Products = new Set(
     own.filter(t => t.name === 'Section 232').map(t => t.product_category),
   );
-  const globals = getGlobalS232().filter(g => !ownS232Products.has(g.product_category));
-  return [...own, ...globals];
+  const globals = getGlobalTariffs('Section 232').filter(g => !ownS232Products.has(g.product_category));
+  const hasOwnIEEPA = own.some(t => t.name === 'IEEPA');
+  const globalIEEPA = hasOwnIEEPA ? [] : getGlobalTariffs('IEEPA');
+  return [...own, ...globals, ...globalIEEPA];
 }
 
 /** Selection key for a Section 301 entry. */
 function s301Key(tt: TariffType): string {
+  return tt.sub_category ?? 'General';
+}
+
+/** Selection key for an IEEPA entry. */
+function ieepaKey(tt: TariffType): string {
   return tt.sub_category ?? 'General';
 }
 
@@ -189,7 +197,8 @@ export function matchesSelection(tt: TariffType, selection: TariffSelection): bo
     case 'Section 122': return true;
     case 'Section 232': return canonicalCategory(tt.product_category) === selection.key;
     case 'Section 301': return s301Key(tt) === selection.key;
-    case 'Others': return true; // Others is a single combined filter
+    case 'IEEPA': return ieepaKey(tt) === selection.key;
+    case 'Others': return true;
   }
 }
 
@@ -207,6 +216,7 @@ export function selectionFor(tt: TariffType): TariffSelection {
     group === 'Section 122' ? 'All goods'
     : group === 'Section 232' ? canonicalCategory(tt.product_category)
     : group === 'Section 301' ? s301Key(tt)
+    : group === 'IEEPA' ? ieepaKey(tt)
     : OTHERS_KEY;
   return { group, key };
 }
@@ -214,12 +224,14 @@ export function selectionFor(tt: TariffType): TariffSelection {
 /** The selectable tariffs under each filter category, stale rule applied. */
 export function getFilterOptions(tariffs: Tariff[]): Record<FilterGroup, FilterOption[]> {
   const s301 = new Set<string>();
+  const ieepa = new Set<string>(getGlobalTariffs('IEEPA').map(t => ieepaKey(t)));
   let hasOthers = false;
   let hasDeals = false;
   for (const country of tariffs) {
     if (country.deals.length > 0) hasDeals = true;
     for (const tt of getVisibleTariffTypes(country)) {
       if (tt.name === 'Section 301') s301.add(s301Key(tt));
+      else if (groupOf(tt) === 'IEEPA') ieepa.add(ieepaKey(tt));
       else if (groupOf(tt) === 'Others') hasOthers = true;
     }
   }
@@ -228,13 +240,14 @@ export function getFilterOptions(tariffs: Tariff[]): Record<FilterGroup, FilterO
     'Section 232': (() => {
       const seen = new Set<string>();
       const out: FilterOption[] = [];
-      for (const g of getGlobalS232()) {
+      for (const g of getGlobalTariffs('Section 232')) {
         const key = canonicalCategory(g.product_category);
         if (!seen.has(key)) { seen.add(key); out.push({ key, label: key }); }
       }
       return out.sort((a, b) => a.label.localeCompare(b.label));
     })(),
     'Section 301': [...s301].sort().map(k => ({ key: k, label: k })),
+    'IEEPA': [...ieepa].sort().map(k => ({ key: k, label: k })),
     'Others': hasOthers ? [{ key: OTHERS_KEY, label: 'All other tariffs' }] : [],
     'Deal': hasDeals ? [{ key: DEAL_KEY, label: 'All deals' }] : [],
   };
@@ -246,7 +259,11 @@ export function rateForSelection(country: Tariff, selection: TariffSelection): s
   const match = highestRate(getVisibleTariffTypes(country).filter(t => matchesSelection(t, selection)));
   if (match) return match.rate;
   if (selection.group === 'Section 232') {
-    const gm = highestRate(getGlobalS232().filter(g => canonicalCategory(g.product_category) === selection.key));
+    const gm = highestRate(getGlobalTariffs('Section 232').filter(g => canonicalCategory(g.product_category) === selection.key));
+    if (gm) return gm.rate;
+  }
+  if (selection.group === 'IEEPA') {
+    const gm = highestRate(getGlobalTariffs('IEEPA').filter(g => ieepaKey(g) === selection.key && !g.exempted_country?.includes(country.country_code)));
     if (gm) return gm.rate;
   }
   return null;
@@ -256,7 +273,11 @@ export function rateForSelection(country: Tariff, selection: TariffSelection): s
 export function statusForSelection(tariffs: Tariff[], selection: TariffSelection | null): string {
   if (!selection) return 'implemented';
   if (selection.group === 'Section 232') {
-    const gm = getGlobalS232().find(g => canonicalCategory(g.product_category) === selection.key);
+    const gm = getGlobalTariffs('Section 232').find(g => canonicalCategory(g.product_category) === selection.key);
+    if (gm) return gm.status;
+  }
+  if (selection.group === 'IEEPA') {
+    const gm = getGlobalTariffs('IEEPA')[0];
     if (gm) return gm.status;
   }
   for (const c of tariffs) {
@@ -283,19 +304,27 @@ export function getCountryColors(
     return colors;
   }
 
-  // For Section 232, countries without their own (exempted) rate fall back to
-  // the worldwide product rate.
+  // Countries without their own rate fall back to the worldwide baseline.
   let baseColor: string | null = null;
   if (selection.group === 'Section 232') {
     const gm = highestRate(
-      getGlobalS232().filter(g => canonicalCategory(g.product_category) === selection.key),
+      getGlobalTariffs('Section 232').filter(g => canonicalCategory(g.product_category) === selection.key),
     );
     baseColor = gm ? rateColor(gm.status, gm.rate) : null;
+  }
+  let ieepaExempted: Set<string> | null = null;
+  if (selection.group === 'IEEPA') {
+    const gm = highestRate(getGlobalTariffs('IEEPA').filter(g => ieepaKey(g) === selection.key));
+    baseColor = gm ? rateColor(gm.status, gm.rate) : null;
+    ieepaExempted = new Set(gm?.exempted_country ?? []);
   }
 
   for (const c of tariffs) {
     const match = highestRate(getVisibleTariffTypes(c).filter(t => matchesSelection(t, selection)));
     if (match) colors[c.country_code] = rateColor(match.status, match.rate);
+    else if (baseColor && ieepaExempted) {
+      if (!ieepaExempted.has(c.country_code)) colors[c.country_code] = baseColor;
+    }
     else if (baseColor) colors[c.country_code] = baseColor;
   }
   return colors;

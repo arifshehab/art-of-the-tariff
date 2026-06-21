@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Tariff, TariffStatus, TariffType } from '@/types/tariff';
 import { DEAL_KEY, getMergedTariffTypes, groupOf, matchesSelection, mergeCategories, selectionFor, TARIFF_GROUPS, TariffGroup, TariffSelection } from '@/lib/tariffs';
 import { ChevronDown, ExternalLink, MousePointerClick, X } from 'lucide-react';
+import totalImportsData from '@/data/total_imports.json';
 
 interface CountryPanelProps {
   tariff: Tariff | null;
@@ -15,7 +16,7 @@ interface CountryPanelProps {
 const STATUS_CONFIG: Record<TariffStatus, { label: string; className: string }> = {
   implemented: { label: 'Implemented', className: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' },
   confirmed:   { label: 'Confirmed',   className: 'bg-red-500/20 text-red-400 border border-red-500/30' },
-  paused:      { label: 'Paused',      className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
+  expired:      { label: 'Expired',      className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
   threatened:  { label: 'Threatened',  className: 'bg-violet-500/20 text-violet-400 border border-violet-500/30' },
   delayed:     { label: 'Delayed',     className: 'bg-blue-500/20 text-blue-400 border border-blue-500/30' },
   none:        { label: 'None',        className: 'bg-slate-500/20 text-slate-400 border border-slate-500/30' },
@@ -85,9 +86,19 @@ function TariffDetail({ tt, group, onSelect, highlighted, innerRef }: { tt: Tari
   );
 }
 
+const totalImportsMap: Record<string, number> = Object.fromEntries(
+  (totalImportsData.countries as { code: string; total_imports: number }[]).map(c => [c.code, c.total_imports])
+);
+
+const totalImportsYear = new Date(totalImportsData.last_updated).getFullYear();
+
+function formatBillions(value: number): string {
+  return (value / 1e9).toFixed(1);
+}
+
 export default function CountryPanel({ tariff, selection, onClose, onSelectFilter }: CountryPanelProps) {
   const [expanded, setExpanded] = useState<Record<GroupName, boolean>>({
-    'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false,
+    'Section 122': false, 'Section 232': false, 'Section 301': false, 'IEEPA': false, 'Others': false,
   });
 
   // Tracks the currently-highlighted row's element (null when none renders).
@@ -99,7 +110,7 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
   // When a country opens: if a tariff filter is active, expand its group so the
   // matching tariff is visible; otherwise collapse all groups.
   useEffect(() => {
-    const base = { 'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false };
+    const base = { 'Section 122': false, 'Section 232': false, 'Section 301': false, 'IEEPA': false, 'Others': false };
     if (selection && selection.group !== 'Deal') base[selection.group] = true;
     setExpanded(base);
   }, [tariff?.country_code, selection]);
@@ -116,7 +127,7 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
 
   const visibleTypes = tariff ? mergeCategories(getMergedTariffTypes(tariff)) : [];
   const grouped: Record<GroupName, TariffType[]> = {
-    'Section 122': [], 'Section 232': [], 'Section 301': [], 'Others': [],
+    'Section 122': [], 'Section 232': [], 'Section 301': [], 'IEEPA': [], 'Others': [],
   };
   for (const tt of visibleTypes) grouped[groupOf(tt)].push(tt);
 
@@ -133,7 +144,7 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
 
   const setAll = (open: boolean) =>
     setExpanded({
-      'Section 122': open, 'Section 232': open, 'Section 301': open, 'Others': open,
+      'Section 122': open, 'Section 232': open, 'Section 301': open, 'IEEPA': open, 'Others': open,
     });
 
   return (
@@ -151,8 +162,7 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
           {/* Header */}
           <div className="flex items-start justify-between px-4 py-3 border-b border-white/10 flex-shrink-0">
             <div>
-              <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Selected Country</p>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 mb-1">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`https://flagcdn.com/${tariff.country_code.toLowerCase()}.svg`}
@@ -162,6 +172,11 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
                 />
                 <h2 className="text-xl font-semibold text-white">{tariff.country}</h2>
               </div>
+              {totalImportsMap[tariff.country_code] != null && (
+                <p className="text-xs text-slate-400">
+                  Total Exports to US ({totalImportsYear}): <span className="text-white font-medium">${formatBillions(totalImportsMap[tariff.country_code])}B</span>
+                </p>
+              )}
             </div>
             <div className="flex flex-col items-end gap-1.5">
               <button

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Tariff } from '@/types/tariff';
@@ -43,8 +43,11 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
   const [mapLoaded, setMapLoaded] = useState(false);
   const [tooltip, setTooltip] = useState<HoverTooltip | null>(null);
 
-  const countryByCode: Record<string, Tariff> = {};
-  for (const t of tariffs) countryByCode[t.country_code] = t;
+  const countryByCode = useMemo(() => {
+    const m: Record<string, Tariff> = {};
+    for (const t of tariffs) m[t.country_code] = t;
+    return m;
+  }, [tariffs]);
 
   // Latest selection for use inside the (once-bound) map event handlers.
   const selectionRef = useRef(selection);
@@ -53,14 +56,23 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
   // Feature id of the currently-selected country (for the feature-state border).
   const selectedIdRef = useRef<string | number | null>(null);
 
-  const buildColorExpression = useCallback(() => {
-    const expr: (string | string[])[] = ['match', ['get', 'iso_3166_1']];
-    for (const [code, color] of Object.entries(countryColors)) {
-      expr.push(code, color);
+  // Latest colours, read by the once-bound map handlers and the apply helper.
+  const colorsRef = useRef(countryColors);
+  colorsRef.current = countryColors;
+
+  // Push per-country colours via feature-state. Because the source promotes
+  // iso_3166_1 to the feature id, state is keyed by country code and stays
+  // applied across tiles as they load — no expression recompile, no re-filter.
+  const applyColors = useCallback(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    for (const [code, color] of Object.entries(colorsRef.current)) {
+      map.setFeatureState(
+        { source: 'countries', sourceLayer: 'country_boundaries', id: code },
+        { color },
+      );
     }
-    expr.push(NO_DATA);
-    return expr;
-  }, [countryColors]);
+  }, []);
 
   // Init map
   useEffect(() => {
@@ -103,6 +115,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
       map.addSource('countries', {
         type: 'vector',
         url: 'mapbox://mapbox.country-boundaries-v1',
+        promoteId: { country_boundaries: 'iso_3166_1' },
       });
 
       // Country fill layer
@@ -114,7 +127,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         'source-layer': 'country_boundaries',
         filter: ['==', ['get', 'disputed'], 'false'],
         paint: {
-          'fill-color': buildColorExpression() as mapboxgl.Expression,
+          'fill-color': ['coalesce', ['feature-state', 'color'], NO_DATA] as unknown as mapboxgl.Expression,
           'fill-opacity': 1,
         },
       });
@@ -186,6 +199,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         },
       });
 
+      applyColors();
       setMapLoaded(true);
     });
 
@@ -276,12 +290,11 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
     };
   }, []);
 
-  // Update fill colors when the selection changes
+  // Recolor when the selection changes — cheap feature-state updates only.
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapLoaded) return;
-    map.setPaintProperty('country-fills', 'fill-color', buildColorExpression() as mapboxgl.Expression);
-  }, [countryColors, mapLoaded, buildColorExpression]);
+    if (!mapLoaded) return;
+    applyColors();
+  }, [countryColors, mapLoaded, applyColors]);
 
   // Clear the selected-border feature-state when the selection is cleared
   // externally (e.g. closing the panel). Selecting is handled in the click handler.

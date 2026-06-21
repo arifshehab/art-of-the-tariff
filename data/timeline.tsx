@@ -34,16 +34,74 @@ export const OVERALL: TimelineSeries = {
 };
 
 export const STEPS: TimelineStep[] = [
-  { date: 'Jan 2025', at: '2025-01-20', title: 'Inauguration of the "Tariff Man"', 
+  {
+    date: "Jan 2025",
+    at: "2025-01-20",
+    title: "Inauguration of the Tariff Man",
     body: (
-      <> Having dubbed himself the "Tariff Man" on his campaign trail, Trump promptly issued the "America First Trade Policy" Executive Order on the day of his inauguration, ordering agencies to investigate trade deficits, unfair trade practices, et al, and explore a global supplemental tariff.</>),
+      <>
+        {" "}
+        Having dubbed himself the "Tariff Man", Trump took office with the
+        stated goal of imposing broad tariffs on America's trading partners. He
+        promptly issued the "America First Trade Policy"{" "}
+        <a href="https://www.whitehouse.gov/presidential-actions/2025/01/america-first-trade-policy/" className="text-blue-400 underline">
+          Executive Order{" "}
+        </a>
+        on his inauguration day, ordering agencies to investigate trade
+        deficits, unfair trade practices, et al, and explore a global
+        supplemental tariff.
+      </>
+    ),
     quote: (
-      <> I will immediately begin the overhaul of our trade system to protect American workers and families.  Instead of taxing our citizens to enrich other countries, we will tariff and tax foreign countries to enrich our citizens.</>),},
-  { date: 'Apr 2025', at: '2025-04-23', title: 'The China shock', body: 'A wave of measures sends China’s effective rate spiking to roughly 117% — briefly an order of magnitude above everyone else.' },
-  { date: 'Jul 2025', at: '2025-07-02', title: 'A high plateau', body: 'China settles around 41%, while Japan, South Korea and the EU climb into the teens as new duties stack across sectors.' },
-  { date: 'Oct 2025', at: '2025-10-01', title: 'The pack catches up', body: 'India (~35%) and Brazil (~29%) push higher behind China. The gap between the most- and least-exposed economies is at its widest.' },
-  { date: 'Jan 2026', at: '2026-01-07', title: 'De-escalation begins', body: 'Deals and rollbacks start to bite — China eases toward 33%, and the steepest rates begin to retreat.' },
-  { date: 'Apr 2026', at: '2026-04-01', title: 'Broad declines', body: 'Rates fall across the board: China near 20%, with most other partners back into single digits.' },
-  { date: 'Jul 2026', at: '2026-07-01', title: 'Settling down', body: 'The picture stabilises — China around 19%, the rest clustered between 6% and 13%.' },
-  { date: 'Oct 2026', at: '2026-10-07', title: 'A new equilibrium', body: 'Rates hold well above where they began: the overall average near 8.5%, roughly triple its January-2025 level.' },
+      <>
+        {" "}
+        I will immediately begin the overhaul of our trade system to protect
+        American workers and families. Instead of taxing our citizens to enrich
+        other countries, we will tariff and tax foreign countries to enrich our
+        citizens.
+      </>
+    ),
+  },
+  {
+    date: "Apr 2025",
+    at: "2025-04-23",
+    title: "The China shock",
+    body: "A wave of measures sends China’s effective rate spiking to roughly 117% — briefly an order of magnitude above everyone else.",
+  },
+  {
+    date: "Jul 2025",
+    at: "2025-07-02",
+    title: "A high plateau",
+    body: "China settles around 41%, while Japan, South Korea and the EU climb into the teens as new duties stack across sectors.",
+  },
+  {
+    date: "Oct 2025",
+    at: "2025-10-01",
+    title: "The pack catches up",
+    body: "India (~35%) and Brazil (~29%) push higher behind China. The gap between the most- and least-exposed economies is at its widest.",
+  },
+  {
+    date: "Jan 2026",
+    at: "2026-01-07",
+    title: "De-escalation begins",
+    body: "Deals and rollbacks start to bite — China eases toward 33%, and the steepest rates begin to retreat.",
+  },
+  {
+    date: "Apr 2026",
+    at: "2026-04-01",
+    title: "Broad declines",
+    body: "Rates fall across the board: China near 20%, with most other partners back into single digits.",
+  },
+  {
+    date: "Jul 2026",
+    at: "2026-07-01",
+    title: "Settling down",
+    body: "The picture stabilises — China around 19%, the rest clustered between 6% and 13%.",
+  },
+  {
+    date: "Oct 2026",
+    at: "2026-10-07",
+    title: "A new equilibrium",
+    body: "Rates hold well above where they began: the overall average near 8.5%, roughly triple its January-2025 level.",
+  },
 ];

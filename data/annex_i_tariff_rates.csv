@@ -1,0 +1,96 @@
+Country/Territory,ISO Code,Tariff Rate (%)
+Afghanistan,AF,15
+Algeria,DZ,30
+Angola,AO,15
+Austria,AT,15
+Bangladesh,BD,20
+Belgium,BE,15
+Bolivia,BO,15
+Bosnia and Herzegovina,BA,30
+Botswana,BW,15
+Brazil,BR,10
+Brunei,BN,25
+Bulgaria,BG,15
+Cambodia,KH,19
+Cameroon,CM,15
+Chad,TD,15
+Costa Rica,CR,15
+Croatia,HR,15
+Cyprus,CY,15
+Czech Republic,CZ,15
+Côte d'Ivoire,CI,15
+Democratic Republic of the Congo,CD,15
+Denmark,DK,15
+Ecuador,EC,15
+Equatorial Guinea,GQ,15
+Estonia,EE,15
+Falkland Islands,FK,10
+Fiji,FJ,15
+Finland,FI,15
+France,FR,15
+Germany,DE,15
+Ghana,GH,15
+Greece,GR,15
+Guyana,GY,15
+Hungary,HU,15
+Iceland,IS,15
+India,IN,25
+Indonesia,ID,19
+Iraq,IQ,35
+Ireland,IE,15
+Israel,IL,15
+Italy,IT,15
+Japan,JP,15
+Jordan,JO,15
+Kazakhstan,KZ,25
+Laos,LA,40
+Latvia,LV,15
+Lesotho,LS,15
+Libya,LY,30
+Liechtenstein,LI,15
+Lithuania,LT,15
+Luxembourg,LU,15
+Madagascar,MG,15
+Malawi,MW,15
+Malaysia,MY,19
+Malta,MT,15
+Mauritius,MU,15
+Moldova,MD,25
+Mozambique,MZ,15
+Myanmar,MM,40
+Namibia,NA,15
+Nauru,NR,15
+Netherlands,NL,15
+New Zealand,NZ,15
+Nicaragua,NI,18
+Nigeria,NG,15
+North Macedonia,MK,15
+Norway,NO,15
+Pakistan,PK,19
+Papua New Guinea,PG,15
+Philippines,PH,19
+Poland,PL,15
+Portugal,PT,15
+Romania,RO,15
+Serbia,RS,35
+Slovakia,SK,15
+Slovenia,SI,15
+South Africa,ZA,30
+South Korea,KR,15
+Spain,ES,15
+Sri Lanka,LK,20
+Sweden,SE,15
+Switzerland,CH,39
+Syria,SY,41
+Taiwan,TW,20
+Thailand,TH,19
+Trinidad and Tobago,TT,15
+Tunisia,TN,25
+Turkey,TR,15
+Uganda,UG,15
+United Kingdom,GB,10
+Vanuatu,VU,15
+Venezuela,VE,15
+Vietnam,VN,20
+Zambia,ZM,15
+Zimbabwe,ZW,15
