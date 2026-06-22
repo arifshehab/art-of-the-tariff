@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import { Tariff, TariffData } from '@/types/tariff';
 import { TariffSelection, getCountryColors, getFilterOptions, statusForSelection } from '@/lib/tariffs';
 import CountryPanel from '@/components/CountryPanel';
+import CountrySearch from '@/components/CountrySearch';
+import TreemapSizing, { SIZING_TOTAL } from '@/components/TreemapSizing';
 import Legend from '@/components/Legend';
 import Header from '@/components/Header';
 
@@ -18,6 +20,7 @@ export default function Home() {
   const [selectedCountryCode, setSelectedCountryCode] = useState<string | null>(null);
   const [selection, setSelection] = useState<TariffSelection | null>(null);
   const [view, setView] = useState<ViewMode>('map');
+  const [sizingSector, setSizingSector] = useState<string>(SIZING_TOTAL);
   const mapSectionRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLDivElement>(null);
 
@@ -80,10 +83,12 @@ export default function Home() {
 
       {/* View toggle (above the visualisation) */}
       {tariffData && (
-        <div ref={toggleRef} className="mx-auto w-[92vw] md:w-[75vw] mb-0 flex">
-          <div className="flex w-full md:w-auto bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
+        <div ref={toggleRef} className="relative z-30 mx-auto w-[92vw] md:w-[75vw] mb-0 flex flex-wrap items-center gap-y-2">
+          <div className={`flex w-full md:w-auto bg-[#0f172a] border border-white/10 overflow-hidden ${
+            view === 'trade' ? 'rounded-l-lg md:rounded-r-none rounded-r-lg' : 'rounded-lg'
+          }`}>
             <button
-              onClick={() => setView('map')}
+              onClick={() => { setView('map'); setSizingSector(SIZING_TOTAL); }}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium transition-colors ${
                 view === 'map' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
               }`}
@@ -96,9 +101,12 @@ export default function Home() {
                 view === 'trade' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'
               }`}
             >
-              By import volume
+              By import value
             </button>
           </div>
+          {view === 'trade' && (
+            <TreemapSizing value={sizingSector} onChange={setSizingSector} />
+          )}
         </div>
       )}
 
@@ -126,6 +134,7 @@ export default function Home() {
               selection={selection}
               onCountrySelect={handleCountrySelect}
               selectedCountry={selectedCountryCode}
+              sector={sizingSector}
             />
           )}
 
@@ -141,9 +150,16 @@ export default function Home() {
             Mobile scrolls as one column (filter below the panel); desktop pins the
             filter at the bottom with the panel scrolling internally. */}
         <div className="w-full md:w-80 flex-1 md:flex-none min-h-0 md:h-full bg-[#0f172a] border-t md:border-t-0 md:border-l border-white/10 flex flex-col overflow-y-auto md:overflow-hidden">
+          {tariffData && (
+            <CountrySearch
+              tariffs={tariffData.tariffs}
+              onSelect={handleCountrySelect}
+            />
+          )}
           <CountryPanel
             tariff={selectedTariff}
             selection={selection}
+            sector={sizingSector}
             onClose={() => setSelectedCountryCode(null)}
             onSelectFilter={setSelection}
           />

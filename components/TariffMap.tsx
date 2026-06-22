@@ -296,14 +296,22 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
     applyColors();
   }, [countryColors, mapLoaded, applyColors]);
 
-  // Clear the selected-border feature-state when the selection is cleared
-  // externally (e.g. closing the panel). Selecting is handled in the click handler.
+  // Sync the selected-border feature-state with the selectedCountry prop. This
+  // covers selections made outside the map (search, treemap) and clearing it
+  // (closing the panel). The promoted feature id equals the country code. The
+  // click handler also calls applySelected for instant feedback; this keeps the
+  // ref in step either way.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !mapLoaded || selectedCountry !== null) return;
-    if (selectedIdRef.current !== null) {
-      map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: selectedIdRef.current }, { selected: false });
-      selectedIdRef.current = null;
+    if (!map || !mapLoaded) return;
+    const prev = selectedIdRef.current;
+    if (prev === selectedCountry) return;
+    if (prev !== null) {
+      map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: prev }, { selected: false });
+    }
+    selectedIdRef.current = selectedCountry;
+    if (selectedCountry !== null) {
+      map.setFeatureState({ source: 'countries', sourceLayer: 'country_boundaries', id: selectedCountry }, { selected: true });
     }
   }, [selectedCountry, mapLoaded]);
 

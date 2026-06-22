@@ -3,9 +3,12 @@
 import { useMemo, useRef, useState, useEffect } from 'react';
 import { Tariff } from '@/types/tariff';
 import { TariffSelection, rateForSelection } from '@/lib/tariffs';
-import importsData from '@/data/total_imports.json';
+import importsData from '@/data/imports_by_country_gtap.json';
 
-const MIN_total_imports = 3000000000; // countries below this are omitted
+// Per sector, render only the largest N countries (by the selected sector's value),
+// dropping any with no imports. This adapts across sectors whose magnitudes vary by
+// orders of magnitude — a fixed dollar floor would over- or under-fill the map.
+const TOP_N = 65;
 
 /** Pick a readable text color (dark or light) for a given hex background. */
 function textOn(hex: string): string {
@@ -23,6 +26,7 @@ interface TradeTreemapProps {
   selection: TariffSelection | null;
   onCountrySelect: (tariff: Tariff | null) => void;
   selectedCountry: string | null;
+  sector: string; // dataset key to size cells by (e.g. 'total_imports')
 }
 
 interface HoverTooltip {
@@ -135,8 +139,15 @@ interface ImportCountry {
   code: string;
   country_name: string;
   region: string;
-  total_imports: number;
+  value: number; // imports for the selected sector
 }
+
+// Raw dataset row: meta fields plus one numeric column per sector key.
+type ImportRow = {
+  code: string;
+  country_name: string;
+  region: string;
+} & Record<string, number | string>;
 
 interface LaidOutRect {
   country: ImportCountry;
@@ -151,7 +162,7 @@ interface LaidOutRect {
 function layoutTreemap(items: ImportCountry[], X: number, Y: number, W: number, H: number, out: LaidOutRect[], minArea = 0) {
   if (items.length === 0) return;
   const A = W * H;
-  const vals = items.map(i => i.total_imports);
+  const vals = items.map(i => i.value);
 
   // Cells stay proportional to value, except any whose proportional area would be
   // below minArea are floored to minArea; the rest share the remaining area.
@@ -221,7 +232,7 @@ function layoutTreemap(items: ImportCountry[], X: number, Y: number, W: number, 
   if (row.length) place();
 }
 
-export default function TradeTreemap({ tariffs, countryColors, selection, onCountrySelect, selectedCountry }: TradeTreemapProps) {
+export default function TradeTreemap({ tariffs, countryColors, selection, onCountrySelect, selectedCountry, sector }: TradeTreemapProps) {
   const viewportRef = useRef<HTMLDivElement>(null); // outer scroll / pinch area
   const containerRef = useRef<HTMLDivElement>(null); // inner positioned canvas
   const [measured, setMeasured] = useState({ w: 1200, h: 700 }); // desktop canvas size
@@ -318,27 +329,36 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
   const layoutH = isMobile ? BASE_H : measured.h;
 
   const regions = useMemo(() => {
+    // Top-N by the selected sector's value, dropping countries below 0.5% of the
+    // largest value for that sector (filters the long tail, scales per sector).
+    const all = (importsData.countries as ImportRow[])
+      .map(c => ({ code: c.code, country_name: c.country_name, region: c.region, value: Number(c[sector] ?? 0) }));
+    const maxValue = all.reduce((m, c) => Math.max(m, c.value), 0);
+    const minValue = maxValue * 0.005;
+    const ranked: ImportCountry[] = all
+      .filter(c => c.value >= minValue && c.value > 0)
+      .sort((a, b) => b.value - a.value)
+      .slice(0, TOP_N);
+
     const grouped: Record<string, ImportCountry[]> = {};
-    for (const c of importsData.countries as ImportCountry[]) {
-      if (c.total_imports < MIN_total_imports) continue;
-      (grouped[c.region] ??= []).push(c);
-    }
+    for (const c of ranked) (grouped[c.region] ??= []).push(c);
+
     const totals: Record<string, number> = {};
     for (const key of Object.keys(REGIONS)) {
-      totals[key] = (grouped[key] ?? []).reduce((s, c) => s + c.total_imports, 0);
+      totals[key] = (grouped[key] ?? []).reduce((s, c) => s + c.value, 0);
     }
     const boxes = computeRegionBoxes(totals);
     return (Object.keys(REGIONS) as RegionKey[]).map(key => {
       const cfg = REGIONS[key];
       const box = boxes[key] ?? [0, 0, 0, 0] as [number, number, number, number];
-      const items = (grouped[key] ?? []).sort((a, b) => b.total_imports - a.total_imports);
+      const items = (grouped[key] ?? []).sort((a, b) => b.value - a.value);
       const pxW = (box[2] / 100) * layoutW;
       const pxH = (box[3] / 100) * layoutH;
       const rects: LaidOutRect[] = [];
       layoutTreemap(items, 0, 0, pxW, pxH, rects, 0);
       return { key, cfg, box, rects, pxW, pxH };
     });
-  }, [layoutW, layoutH, isMobile]);
+  }, [layoutW, layoutH, isMobile, sector]);
 
   const renderScale = isMobile ? zoom : 1;
 
@@ -361,9 +381,9 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
           const [bx, by, bw, bh] = box;
           return (
             <div key={key}>
-              {/* Region label */}
+              {/* Region label (hidden when the region has no countries shown) */}
               {(() => {
-                const label = regionLabel(key, (bw / 100) * layoutW * renderScale);
+                const label = rects.length > 0 ? regionLabel(key, (bw / 100) * layoutW * renderScale) : '';
                 return label ? (
                   <span
                     className="absolute text-[10px] uppercase tracking-widest text-slate-500 whitespace-nowrap"
@@ -387,7 +407,10 @@ export default function TradeTreemap({ tariffs, countryColors, selection, onCoun
                 // A name may wrap to a 2nd line only if it has 2+ words.
                 // Space available is the box minus its padding (12px x, 8px y for the
                 // padded tiers; 6px x, 4px y for the bare code tier).
-                const amountText = `$${Math.round(country.total_imports/1000000000)}B`;
+                // Sectors span orders of magnitude — show $B for large values, $M otherwise.
+                const amountText = country.value >= 1e9
+                  ? `$${Math.round(country.value / 1e9)}B`
+                  : country.value >= 1e6 ? `$${Math.round(country.value / 1e6)}M` : `$${Math.round(country.value / 1e3)}K`;
                 const NAME_CH = 6.4, CODE_CH = 7, AMT_CH = 6, NAME_LH = 14, CODE_LH = 14, AMT_LH = 13;
                 const displayName = country.country_name.split('(')[0].trim();
                 const words = displayName.split(' ');

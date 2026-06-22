@@ -8,6 +8,8 @@ const SOURCE_URL = 'https://www.tradecomplianceresourcehub.com/2026/06/03/trump-
 const NAV = [
   { label: 'Map', href: '/' },
   //{ label: 'Timeline', href: '/timeline' },
+  //{ label: 'Country', href: '/country' },
+  //{ label: 'Scenario', href: '/scenario' },
   { label: 'Source', href: SOURCE_URL, external: true },
 ];
 

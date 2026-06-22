@@ -4,13 +4,14 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Tariff, TariffStatus, TariffType } from '@/types/tariff';
 import { DEAL_KEY, getMergedTariffTypes, groupOf, matchesSelection, mergeCategories, selectionFor, TARIFF_GROUPS, TariffGroup, TariffSelection } from '@/lib/tariffs';
 import { ChevronDown, ExternalLink, MousePointerClick, X } from 'lucide-react';
-import totalImportsData from '@/data/total_imports.json';
+import importsData from '@/data/imports_by_country_gtap.json';
 
 interface CountryPanelProps {
   tariff: Tariff | null;
   selection?: TariffSelection | null;
+  sector: string; // dataset key for the exports figure shown in the header
   onClose: () => void;
-  onSelectFilter?: (selection: TariffSelection) => void;
+  onSelectFilter?: (selection: TariffSelection | null) => void;
 }
 
 const STATUS_CONFIG: Record<TariffStatus, { label: string; className: string }> = {
@@ -86,17 +87,29 @@ function TariffDetail({ tt, group, onSelect, highlighted, innerRef }: { tt: Tari
   );
 }
 
-const totalImportsMap: Record<string, number> = Object.fromEntries(
-  (totalImportsData.countries as { code: string; total_imports: number }[]).map(c => [c.code, c.total_imports])
+type ImportRow = { code: string } & Record<string, number | string>;
+
+const importsByCode: Record<string, ImportRow> = Object.fromEntries(
+  (importsData.countries as ImportRow[]).map(c => [c.code, c])
 );
 
-const totalImportsYear = new Date(totalImportsData.last_updated).getFullYear();
+const importsYear = new Date(importsData.last_updated).getFullYear();
 
-function formatBillions(value: number): string {
-  return (value / 1e9).toFixed(1);
+// Exports figure: $B / $M / $K depending on magnitude (sectors span orders of magnitude).
+function formatExports(value: number): string {
+  if (value >= 1e9) return `$${(value / 1e9).toFixed(1)}B`;
+  if (value >= 1e6) return `$${(value / 1e6).toFixed(1)}M`;
+  if (value >= 1e3) return `$${(value / 1e3).toFixed(1)}K`;
+  return `$${Math.round(value)}`;
 }
 
-export default function CountryPanel({ tariff, selection, onClose, onSelectFilter }: CountryPanelProps) {
+// Header prefix for the exports line: "Total" for all sectors, else the 3-letter
+// sector code ("pfb (Plant-Based Fibers)" → "pfb").
+function exportsLabel(sector: string): string {
+  return sector === 'total_imports' ? 'Total' : sector.split(' ')[0];
+}
+
+export default function CountryPanel({ tariff, selection, sector, onClose, onSelectFilter }: CountryPanelProps) {
   const [expanded, setExpanded] = useState<Record<GroupName, boolean>>({
     'Section 122': false, 'Section 232': false, 'Section 301': false, 'IEEPA': false, 'Others': false,
   });
@@ -140,7 +153,8 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
     setExpanded(prev => ({ ...prev, [g]: !prev[g] }));
 
   const nonEmptyGroups = GROUPS.filter(g => grouped[g].length > 0);
-  const allExpanded = nonEmptyGroups.length > 0 && nonEmptyGroups.every(g => expanded[g]);
+  // "Collapse all" as soon as any section is open; "Expand all" only when none are.
+  const anyExpanded = nonEmptyGroups.some(g => expanded[g]);
 
   const setAll = (open: boolean) =>
     setExpanded({
@@ -154,7 +168,7 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
           <MousePointerClick size={28} className="text-slate-600 mb-3" />
           <p className="text-sm font-medium text-slate-300">No country selected</p>
           <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-            Click a country on the map to view its tariffs and trade deals.
+            Search for a country or click on a country on the map to view its tariffs and trade deals.
           </p>
         </div>
       ) : (
@@ -172,9 +186,9 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
                 />
                 <h2 className="text-xl font-semibold text-white">{tariff.country}</h2>
               </div>
-              {totalImportsMap[tariff.country_code] != null && (
+              {importsByCode[tariff.country_code]?.[sector] != null && (
                 <p className="text-xs text-slate-400">
-                  Total Exports to US ({totalImportsYear}): <span className="text-white font-medium">${formatBillions(totalImportsMap[tariff.country_code])}B</span>
+                  {exportsLabel(sector)} Exports to US ({importsYear}): <span className="text-white font-medium">{formatExports(Number(importsByCode[tariff.country_code][sector]))}</span>
                 </p>
               )}
             </div>
@@ -187,10 +201,10 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
               </button>
               {nonEmptyGroups.length > 0 && (
                 <button
-                  onClick={() => setAll(!allExpanded)}
+                  onClick={() => setAll(!anyExpanded)}
                   className="text-xs text-slate-500 hover:text-white transition-colors whitespace-nowrap"
                 >
-                  {allExpanded ? 'Collapse all' : 'Expand all'}
+                  {anyExpanded ? 'Collapse all' : 'Expand all'}
                 </button>
               )}
             </div>
@@ -238,7 +252,7 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
                               group={g}
                               highlighted={isHighlighted}
                               innerRef={isHighlighted ? setHighlightEl : undefined}
-                              onSelect={onSelectFilter ? () => onSelectFilter(selectionFor(tt)) : undefined}
+                              onSelect={onSelectFilter ? () => onSelectFilter(isHighlighted ? null : selectionFor(tt)) : undefined}
                             />
                           );
                         })}
@@ -254,8 +268,8 @@ export default function CountryPanel({ tariff, selection, onClose, onSelectFilte
               <div className="border-t border-white/10 p-5 space-y-2">
                 <p className="text-xs text-slate-500 uppercase tracking-widest">Deals</p>
                 {tariff.deals.map((deal, i) => {
-                  const onSelect = onSelectFilter ? () => onSelectFilter({ group: 'Deal', key: DEAL_KEY }) : undefined;
                   const highlighted = selection?.group === 'Deal';
+                  const onSelect = onSelectFilter ? () => onSelectFilter(highlighted ? null : { group: 'Deal', key: DEAL_KEY }) : undefined;
                   return (
                     <div
                       key={i}
