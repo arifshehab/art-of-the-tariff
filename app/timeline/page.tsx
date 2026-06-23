@@ -75,10 +75,7 @@ export default function TimelinePage() {
   });
 
   return (
-    <div
-      className="min-h-screen bg-[#0a0f1e] text-slate-200"
-      style={{ fontFamily: "'Cera Pro', 'Trebuchet MS', sans-serif" }}
-    >
+    <div className="min-h-screen bg-[#0a0f1e] text-slate-200">
       <Header />
 
       {/* Intro (placeholder) */}
