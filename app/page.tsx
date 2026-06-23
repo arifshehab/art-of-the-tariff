@@ -224,7 +224,7 @@ export default function Home() {
           </p>
           <p>
             And while he has remained steadfast in his support for tariffs, the implementation has been highly erratic. A churn of outlandish
-            threats, legal challenges, and last-minute deals has peppered the tariff regime. Since the first tariff announcements in early 2025, the US&apos;
+            threats, legal challenges, and last-minute deals has peppered his administration's tariff regime. Since the first tariff announcements in early 2025, the US&apos;
             tariff rates have been revised more than forty times.
           </p>
           <p>
@@ -238,18 +238,18 @@ export default function Home() {
         <div className="grid gap-8 md:grid-cols-3">
           <FeatureColumn
             title="Timeline"
-            description="Replay the policy as it unfolded. Scrub through every revision since 2025 and watch rates shift, country by country."
-            href="/timeline"
+            description="Replay the policy as it unfolded. Scroll through each revision since 2025 and watch rates shift, country by country."
+            //href="/timeline"
             gradient="linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)"
           />
           <FeatureColumn
             title="Country"
-            description="Drill into any trading partner to see its current rate, the sectors affected, and how it has been targeted over time."
+            description="Drill into any trading partner to see its effective tariff rate and how it has been targeted over time, broken down by sector and tariff authority."
             gradient="linear-gradient(135deg, #155e75 0%, #0f172a 100%)"
           />
           <FeatureColumn
             title="Scenario"
-            description="Explore what-ifs. Adjust assumptions and see how a change in policy ripples across trade flows and rates."
+            description="Explore what-ifs. Adjust assumptions and visualise the impact of potential changes to the tariff regime."
             gradient="linear-gradient(135deg, #5b21b6 0%, #0f172a 100%)"
           />
         </div>
