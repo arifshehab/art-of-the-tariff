@@ -15,12 +15,9 @@ interface CountryPanelProps {
 }
 
 const STATUS_CONFIG: Record<TariffStatus, { label: string; className: string }> = {
-  implemented: { label: 'Implemented', className: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' },
-  confirmed:   { label: 'Confirmed',   className: 'bg-red-500/20 text-red-400 border border-red-500/30' },
-  expired:      { label: 'Expired',      className: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
-  threatened:  { label: 'Threatened',  className: 'bg-violet-500/20 text-violet-400 border border-violet-500/30' },
-  delayed:     { label: 'Delayed',     className: 'bg-blue-500/20 text-blue-400 border border-blue-500/30' },
-  none:        { label: 'None',        className: 'bg-slate-500/20 text-slate-400 border border-slate-500/30' },
+  active:   { label: 'Active',   className: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' },
+  upcoming: { label: 'Upcoming', className: 'bg-blue-500/20 text-blue-400 border border-blue-500/30' },
+  expired:  { label: 'Expired',  className: 'bg-red-500/20 text-red-400 border border-red-500/30' },
 };
 
 const GROUPS = TARIFF_GROUPS;
@@ -66,7 +63,7 @@ function TariffDetail({ tt, group, onSelect, highlighted, innerRef }: { tt: Tari
       {tt.effective_date && (
         <div>
           <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">
-            {tt.status === 'threatened' ? 'Proposed Date' : 'Effective Date'}
+            {tt.status === 'upcoming' ? 'Proposed Date' : 'Effective Date'}
           </p>
           <p className="text-sm text-slate-300">{tt.effective_date === 'TBD' ? 'To be determined' : tt.effective_date}</p>
         </div>
@@ -111,7 +108,7 @@ function exportsLabel(sector: string): string {
 
 export default function CountryPanel({ tariff, selection, sector, onClose, onSelectFilter }: CountryPanelProps) {
   const [expanded, setExpanded] = useState<Record<GroupName, boolean>>({
-    'Section 122': false, 'Section 232': false, 'Section 301': false, 'IEEPA': false, 'Others': false,
+    'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false,
   });
 
   // Tracks the currently-highlighted row's element (null when none renders).
@@ -123,7 +120,7 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
   // When a country opens: if a tariff filter is active, expand its group so the
   // matching tariff is visible; otherwise collapse all groups.
   useEffect(() => {
-    const base = { 'Section 122': false, 'Section 232': false, 'Section 301': false, 'IEEPA': false, 'Others': false };
+    const base = { 'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false };
     if (selection && selection.group !== 'Deal') base[selection.group] = true;
     setExpanded(base);
   }, [tariff?.country_code, selection]);
@@ -140,7 +137,7 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
 
   const visibleTypes = tariff ? mergeCategories(getMergedTariffTypes(tariff)) : [];
   const grouped: Record<GroupName, TariffType[]> = {
-    'Section 122': [], 'Section 232': [], 'Section 301': [], 'IEEPA': [], 'Others': [],
+    'Section 122': [], 'Section 232': [], 'Section 301': [], 'Others': [],
   };
   for (const tt of visibleTypes) grouped[groupOf(tt)].push(tt);
 
@@ -158,7 +155,7 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
 
   const setAll = (open: boolean) =>
     setExpanded({
-      'Section 122': open, 'Section 232': open, 'Section 301': open, 'IEEPA': open, 'Others': open,
+      'Section 122': open, 'Section 232': open, 'Section 301': open, 'Others': open,
     });
 
   return (
@@ -168,7 +165,7 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
           <MousePointerClick size={28} className="text-slate-600 mb-3" />
           <p className="text-sm font-medium text-slate-300">No country selected</p>
           <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-            Search for a country or click on a country on the map to view its tariffs and trade deals.
+            Search for a country or click it on the map to view its tariffs and trade deals.
           </p>
         </div>
       ) : (

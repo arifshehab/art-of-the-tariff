@@ -4,30 +4,42 @@ import { useState } from 'react';
 import { ChevronRight, ChevronLeft, Filter, X } from 'lucide-react';
 import {
   FILTER_GROUPS, FilterGroup, TariffSelection, FilterOption,
-  STATUS_SCALES, MAX_SCALE_RATE, rateColor,
+  STATUS_SCALES, MAX_SCALE_RATE, PURPLE, rateColor,
 } from '@/lib/tariffs';
 
 interface LegendProps {
   options: Record<FilterGroup, FilterOption[]>;
   selection: TariffSelection | null;
   scaleStatus: string;
+  hasNumeric: boolean;
+  hasTBD: boolean;
   onSelect: (selection: TariffSelection | null) => void;
 }
 
-function RateScale({ status }: { status: string }) {
-  const [light, dark] = STATUS_SCALES[status] ?? STATUS_SCALES.implemented;
+function RateScale({ status, hasNumeric, hasTBD }: { status: string; hasNumeric: boolean; hasTBD: boolean }) {
+  const [light, dark] = STATUS_SCALES[status] ?? STATUS_SCALES.active;
   const label = status.charAt(0).toUpperCase() + status.slice(1);
   return (
     <div className="mt-3">
-      <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">{label} rate</p>
-      <span
-        className="block h-2.5 rounded-sm"
-        style={{ background: `linear-gradient(to right, #ffffff, ${light}, ${dark})` }}
-      />
-      <div className="flex justify-between text-[10px] text-slate-600 mt-1">
-        <span>0% / TBD</span>
-        <span>{MAX_SCALE_RATE}%+</span>
-      </div>
+      {hasNumeric && (
+        <>
+          <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">{label} rate</p>
+          <span
+            className="block h-2.5 rounded-sm"
+            style={{ background: `linear-gradient(to right, #ffffff, ${light}, ${dark})` }}
+          />
+          <div className="flex justify-between text-[10px] text-slate-600 mt-1">
+            <span>0%</span>
+            <span>{MAX_SCALE_RATE}%+</span>
+          </div>
+        </>
+      )}
+      {hasTBD && (
+        <div className={`flex items-center gap-2 text-[10px] text-slate-500 ${hasNumeric ? 'mt-2' : ''}`}>
+          <span className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: PURPLE }} />
+          TBD / unspecified
+        </div>
+      )}
     </div>
   );
 }
@@ -38,19 +50,19 @@ function DealKey() {
       <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">Deal type</p>
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: rateColor('implemented', '20%') }} />
-          Agreement
+          <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: rateColor('active', '20%') }} />
+          Active
         </span>
         <span className="flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: rateColor('threatened', '20%') }} />
-          Framework
+          <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: rateColor('upcoming', '20%') }} />
+          Pending
         </span>
       </div>
     </div>
   );
 }
 
-export default function Legend({ options, selection, scaleStatus, onSelect }: LegendProps) {
+export default function Legend({ options, selection, scaleStatus, hasNumeric, hasTBD, onSelect }: LegendProps) {
   const [picking, setPicking] = useState(false);
   const [activeCategory, setActiveCategory] = useState<FilterGroup | null>(null);
 
@@ -89,7 +101,7 @@ export default function Legend({ options, selection, scaleStatus, onSelect }: Le
                 <X size={14} />
               </button>
             </div>
-            {selection.group === 'Deal' ? <DealKey /> : <RateScale status={scaleStatus} />}
+            {selection.group === 'Deal' ? <DealKey /> : <RateScale status={scaleStatus} hasNumeric={hasNumeric} hasTBD={hasTBD} />}
           </>
         ) : (
           <button

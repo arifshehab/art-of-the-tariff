@@ -1,0 +1,1585 @@
+{
+  "last_updated": "2026-06-29",
+  "source_url": "https://www.tradecomplianceresourcehub.com/2026/06/03/trump-2-0-tariff-tracker/",
+  "tariffs": [
+    {
+      "country": "Algeria",
+      "country_code": "DZ",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Angola",
+      "country_code": "AO",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Argentina",
+      "country_code": "AR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "country_code": "AU",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Austria (EU)",
+      "country_code": "AT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Bahrain",
+      "country_code": "BH",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Bangladesh",
+      "country_code": "BD",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Belgium (EU)",
+      "country_code": "BE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Brazil",
+      "country_code": "BR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "unreasonable_policies",
+          "rate": "0.25",
+          "status": "upcoming",
+          "effective_date": "2026-06-01",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/04/2026-11158/notice-of-determination-and-request-for-comments-concerning-action-pursuant-to-section-301-brazils"
+        },
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Bulgaria (EU)",
+      "country_code": "BG",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Cambodia",
+      "country_code": "KH",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Canada",
+      "country_code": "CA",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Chile",
+      "country_code": "CL",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "China",
+      "country_code": "CN",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "maritime_cargo_handling_equipment",
+          "rate": "0.25",
+          "status": "upcoming",
+          "effective_date": "2026-11-10",
+          "citation_url": "https://www.federalregister.gov/documents/2025/11/13/2025-19873/notice-of-modification-of-section-301-action-chinas-targeting-of-the-maritime-logistics-and"
+        },
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Colombia",
+      "country_code": "CO",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Costa Rica",
+      "country_code": "CR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Croatia (EU)",
+      "country_code": "HR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Cyprus (EU)",
+      "country_code": "CY",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Czech Republic (EU)",
+      "country_code": "CZ",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Denmark (EU)",
+      "country_code": "DK",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Dominican Republic",
+      "country_code": "DO",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Ecuador",
+      "country_code": "EC",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Egypt",
+      "country_code": "EG",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "El Salvador",
+      "country_code": "SV",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Estonia (EU)",
+      "country_code": "EE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Finland (EU)",
+      "country_code": "FI",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "France (EU)",
+      "country_code": "FR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Germany",
+      "country_code": "DE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "pharmaceutical_pricing",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-06-18",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/24/2026-12671/initiation-of-section-301-investigation-hearing-and-request-for-public-comments-germanys-persistent"
+        }
+      ]
+    },
+    {
+      "country": "Germany (EU)",
+      "country_code": "DE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Greece (EU)",
+      "country_code": "GR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Guatemala",
+      "country_code": "GT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Guyana",
+      "country_code": "GY",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Honduras",
+      "country_code": "HN",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Hong Kong",
+      "country_code": "HK",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Hungary (EU)",
+      "country_code": "HU",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "India",
+      "country_code": "IN",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Indonesia",
+      "country_code": "ID",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Iraq",
+      "country_code": "IQ",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Ireland (EU)",
+      "country_code": "IE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Israel",
+      "country_code": "IL",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Italy (EU)",
+      "country_code": "IT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Japan",
+      "country_code": "JP",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Jordan",
+      "country_code": "JO",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Kazakhstan",
+      "country_code": "KZ",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Kuwait",
+      "country_code": "KW",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Latvia (EU)",
+      "country_code": "LV",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Libya",
+      "country_code": "LY",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Lithuania (EU)",
+      "country_code": "LT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Luxembourg (EU)",
+      "country_code": "LU",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Malaysia",
+      "country_code": "MY",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Malta (EU)",
+      "country_code": "MT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Mexico",
+      "country_code": "MX",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Morocco",
+      "country_code": "MA",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Netherlands (EU)",
+      "country_code": "NL",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "New Zealand",
+      "country_code": "NZ",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Nicaragua",
+      "country_code": "NI",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "labor_rights_human_rights_and_fundamental_freedoms_and_the_rule_of_law",
+          "rate": "0",
+          "status": "active",
+          "effective_date": "2026-01-01",
+          "citation_url": "https://www.federalregister.gov/documents/2025/12/29/2025-23892/notice-of-implementation-of-action-nicaraguas-acts-policies-and-practices-related-to-labor-rights",
+          "comment": "All goods (CAFTA-DR originating); rises to 10% in 2027, 15% from 2028"
+        },
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Nigeria",
+      "country_code": "NG",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Norway",
+      "country_code": "NO",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Oman",
+      "country_code": "OM",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Pakistan",
+      "country_code": "PK",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Peru",
+      "country_code": "PE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Philippines",
+      "country_code": "PH",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Poland (EU)",
+      "country_code": "PL",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Portugal (EU)",
+      "country_code": "PT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Qatar",
+      "country_code": "QA",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Romania (EU)",
+      "country_code": "RO",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Russia",
+      "country_code": "RU",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Saudi Arabia",
+      "country_code": "SA",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Singapore",
+      "country_code": "SG",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Slovakia (EU)",
+      "country_code": "SK",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Slovenia (EU)",
+      "country_code": "SI",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "South Africa",
+      "country_code": "ZA",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "South Korea",
+      "country_code": "KR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Spain (EU)",
+      "country_code": "ES",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Sri Lanka",
+      "country_code": "LK",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Sweden (EU)",
+      "country_code": "SE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Switzerland",
+      "country_code": "CH",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Taiwan",
+      "country_code": "TW",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "Thailand",
+      "country_code": "TH",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    },
+    {
+      "country": "The Bahamas",
+      "country_code": "BS",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Trinidad and Tobago",
+      "country_code": "TT",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Türkiye",
+      "country_code": "TR",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "United Arab Emirates",
+      "country_code": "AE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "United Kingdom",
+      "country_code": "GB",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.1",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Uruguay",
+      "country_code": "UY",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Venezuela",
+      "country_code": "VE",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        }
+      ]
+    },
+    {
+      "country": "Vietnam",
+      "country_code": "VN",
+      "tariff_types": [
+        {
+          "authority": "s301",
+          "name": "intellectual_property",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-05-29",
+          "citation_url": "https://www.federalregister.gov/d/2026-11043"
+        },
+        {
+          "authority": "s301",
+          "name": "forced_labour",
+          "rate": "0.125",
+          "status": "upcoming",
+          "effective_date": "2026-06-02",
+          "citation_url": "https://www.federalregister.gov/documents/2026/06/05/2026-11296/notice-of-determinations-and-request-for-comments-concerning-actions-in-section-301-investigations"
+        },
+        {
+          "authority": "s301",
+          "name": "excess_capacity",
+          "rate": "TBD",
+          "status": "upcoming",
+          "effective_date": "2026-03-11",
+          "citation_url": "https://www.federalregister.gov/documents/2026/03/17/2026-05214/initiation-of-section-301-investigations-acts-policies-and-practices-of-certain-economies-relating"
+        }
+      ]
+    }
+  ]
+}

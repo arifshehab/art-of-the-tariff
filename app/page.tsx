@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Tariff, TariffData } from '@/types/tariff';
-import { TariffSelection, getCountryColors, getFilterOptions, statusForSelection } from '@/lib/tariffs';
+import { TariffSelection, getCountryColors, getFilterOptions, statusForSelection, selectionRateKinds } from '@/lib/tariffs';
 import CountryPanel from '@/components/CountryPanel';
 import CountrySearch from '@/components/CountrySearch';
 import TreemapSizing, { SIZING_TOTAL } from '@/components/TreemapSizing';
@@ -48,6 +48,11 @@ export default function Home() {
 
   const scaleStatus = useMemo(
     () => statusForSelection(tariffData?.tariffs ?? [], selection),
+    [tariffData, selection],
+  );
+
+  const rateKinds = useMemo(
+    () => selectionRateKinds(tariffData?.tariffs ?? [], selection),
     [tariffData, selection],
   );
 
@@ -205,6 +210,8 @@ export default function Home() {
               options={filterOptions}
               selection={selection}
               scaleStatus={scaleStatus}
+              hasNumeric={rateKinds.hasNumeric}
+              hasTBD={rateKinds.hasTBD}
               onSelect={setSelection}
             />
           )}

@@ -118,6 +118,15 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         promoteId: { country_boundaries: 'iso_3166_1' },
       });
 
+      // The source ships overlapping features per geopolitical worldview. Pin to
+      // the US worldview so each country renders once and Taiwan is its own
+      // feature (TW) rather than being absorbed into China's boundary.
+      const worldview = [
+        'any',
+        ['==', 'all', ['get', 'worldview']],
+        ['in', 'US', ['get', 'worldview']],
+      ] as unknown as mapboxgl.Expression;
+
       // Country fill layer
       map.addLayer({
         id: 'country-fills',
@@ -125,7 +134,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         type: 'fill',
         source: 'countries',
         'source-layer': 'country_boundaries',
-        filter: ['==', ['get', 'disputed'], 'false'],
+        filter: ['all', ['==', ['get', 'disputed'], 'false'], worldview] as unknown as mapboxgl.Expression,
         paint: {
           'fill-color': ['coalesce', ['feature-state', 'color'], NO_DATA] as unknown as mapboxgl.Expression,
           'fill-opacity': 1,
@@ -139,27 +148,10 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         type: 'line',
         source: 'countries',
         'source-layer': 'country_boundaries',
+        filter: worldview,
         paint: {
           'line-color': '#000',
           'line-width': 0.5,
-        },
-      });
-
-      // Hover highlight layer
-      map.addLayer({
-        id: 'country-hover',
-        slot: 'top',
-        type: 'fill',
-        source: 'countries',
-        'source-layer': 'country_boundaries',
-        paint: {
-          'fill-color': '#ffffff',
-          'fill-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.15,
-            0,
-          ],
         },
       });
 
@@ -170,6 +162,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         type: 'line',
         source: 'countries',
         'source-layer': 'country_boundaries',
+        filter: worldview,
         paint: {
           'line-color': '#0a0f1e',
           'line-width': [
@@ -188,6 +181,7 @@ export default function TariffMap({ tariffs, countryColors, selection, onCountry
         type: 'line',
         source: 'countries',
         'source-layer': 'country_boundaries',
+        filter: worldview,
         paint: {
           'line-color': '#0a0f1e',
           'line-width': [

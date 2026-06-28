@@ -1,4 +1,4 @@
-export type TariffStatus = 'implemented' | 'threatened' | 'delayed' | 'confirmed' | 'expired' | 'none';
+export type TariffStatus = 'active' | 'upcoming' | 'expired';
 
 export interface TariffType {
   name: string;
@@ -8,13 +8,16 @@ export interface TariffType {
   status: TariffStatus;
   effective_date: string;
   citation_url: string;
-  exempted_country?: string[];
+  comment?: string;
 }
+
+export type DealStatus = 'active' | 'pending';
 
 export interface Deal {
   name: string;
   announcement_date: string;
   citation_url: string;
+  status: DealStatus;
 }
 
 export interface Tariff {
