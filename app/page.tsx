@@ -244,19 +244,19 @@ export default function Home() {
       <section className="mx-auto w-[92vw] md:w-[75vw] pb-32">
         <div className="grid gap-8 md:grid-cols-3">
           <FeatureColumn
-            title="Timeline"
-            description="Replay the policy as it unfolded. Scroll through each revision since 2025 and watch rates shift, country by country."
+            title="Replay over time [upcoming feature]"
+            description="Scroll through each revision since 2025 and watch rates shift, country by country."
             //href="/timeline"
             gradient="linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)"
           />
           <FeatureColumn
-            title="Country"
-            description="Drill into any trading partner to see its effective tariff rate and how it has been targeted over time, broken down by sector and tariff authority."
+            title="Deep Dive by Country [upcoming feature]"
+            description="Choose any trading partner to see its effective tariff rate and how it has been targeted over time, broken down by sector and tariff authority."
             gradient="linear-gradient(135deg, #155e75 0%, #0f172a 100%)"
           />
           <FeatureColumn
-            title="Scenario"
-            description="Explore what-ifs. Adjust assumptions and visualise the impact of potential changes to the tariff regime."
+            title="Explore Scenarios [upcoming feature]"
+            description="Adjust assumptions and visualise the impact of potential changes to the tariff regime."
             gradient="linear-gradient(135deg, #5b21b6 0%, #0f172a 100%)"
           />
         </div>
