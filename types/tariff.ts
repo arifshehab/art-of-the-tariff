@@ -1,10 +1,16 @@
 export type TariffStatus = 'active' | 'upcoming' | 'expired';
 
+// Mirrors the raw source shape (statutory_tariffs_*.json / upcoming_301_tariffs.json):
+// { authority, name, rate, status, effective_date, citation_url, comment? }.
+// `authority` is the section code ("s122" | "s232" | "s301"); `name` is the
+// product/theme code within that authority (e.g. "steel", "forced_labour").
+// Display labels and grouping are derived from these two fields on demand
+// (see groupOf / categoryKey / tariffLabel in lib/tariffs.ts) rather than
+// stored as separate product_category/sub_category fields.
 export interface TariffType {
+  authority: string;
   name: string;
-  sub_category?: string;
   rate: string;
-  product_category: string;
   status: TariffStatus;
   effective_date: string;
   citation_url: string;

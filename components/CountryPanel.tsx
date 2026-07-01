@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Tariff, TariffStatus, TariffType } from '@/types/tariff';
-import { DEAL_KEY, getMergedTariffTypes, groupOf, matchesSelection, mergeCategories, selectionFor, TARIFF_GROUPS, TariffGroup, TariffSelection } from '@/lib/tariffs';
+import { categoryKey, DEAL_KEY, getMergedTariffTypes, groupOf, matchesSelection, mergeCategories, selectionFor, tariffLabel, TARIFF_GROUPS, TariffGroup, TariffSelection } from '@/lib/tariffs';
 import { ChevronDown, ExternalLink, MousePointerClick, X } from 'lucide-react';
 import importsData from '@/data/imports_by_country_gtap.json';
 
@@ -24,18 +24,17 @@ const GROUPS = TARIFF_GROUPS;
 type GroupName = TariffGroup;
 
 function detailHeading(tt: TariffType, group: GroupName): string {
-  if (group === 'Others') {
-    // "Additional (dairy and lumber)" + product_category "Dairy and lumber" → just "Additional";
-    // keep the full name when the parenthetical isn't the product (e.g. "Additional (DSTs)").
-    const m = tt.name.match(/^Additional \((.+)\)$/);
-    if (m && m[1].toLowerCase() === tt.product_category.toLowerCase()) return 'Additional';
-    return tt.name;
-  }
-  return tt.sub_category ?? tt.product_category;
+  if (group === 'Others') return prettifyOthersName(tt.name);
+  return tariffLabel(group, categoryKey(tt));
+}
+
+// "Others" entries aren't backed by a code dictionary (there's no fixed set of
+// them) — their raw `name` is already a short freeform label, so just clean it up.
+function prettifyOthersName(name: string): string {
+  return name.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
 function TariffDetail({ tt, group, onSelect, highlighted, innerRef }: { tt: TariffType; group: GroupName; onSelect?: () => void; highlighted?: boolean; innerRef?: (el: HTMLDivElement | null) => void }) {
-  const showAppliesTo = group === 'Others' || !!tt.sub_category;
   return (
     <div
       ref={innerRef}
@@ -45,21 +44,19 @@ function TariffDetail({ tt, group, onSelect, highlighted, innerRef }: { tt: Tari
     >
       <div className="flex items-baseline justify-between">
         <div>
-          <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">
-            {detailHeading(tt, group)}
-          </p>
+          {/* "All goods" (Section 122's only category) is uninformative on its own
+              tariff type — the rate below is the only thing worth showing. */}
+          {detailHeading(tt, group) !== 'All goods' && (
+            <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">
+              {detailHeading(tt, group)}
+            </p>
+          )}
           <p className="text-2xl font-bold text-white">{tt.rate}</p>
         </div>
         <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-medium ${STATUS_CONFIG[tt.status].className}`}>
           {STATUS_CONFIG[tt.status].label}
         </span>
       </div>
-      {showAppliesTo && (
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Applies To</p>
-          <p className="text-sm text-slate-300">{tt.product_category}</p>
-        </div>
-      )}
       {tt.effective_date && (
         <div>
           <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">
@@ -117,16 +114,25 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
     highlightElRef.current = el;
   }, []);
 
-  // When a country opens: if a tariff filter is active, expand its group so the
-  // matching tariff is visible; otherwise collapse all groups.
+  // When a different country opens: if a tariff filter is active, expand its
+  // group so the matching tariff is visible; otherwise start fully collapsed.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const base = { 'Section 122': false, 'Section 232': false, 'Section 301': false, 'Others': false };
     if (selection && selection.group !== 'Deal') base[selection.group] = true;
     setExpanded(base);
-  }, [tariff?.country_code, selection]);
+  }, [tariff?.country_code]);
 
-  // Auto-scroll to the highlighted row after render. Runs on every country/filter
-  // change; does nothing if no matching row exists (ref is null).
+  // When a tariff is actively selected, make sure its group is expanded — but
+  // never collapse anything on deselect, so clearing a filter doesn't fold up
+  // whatever the user already had open.
+  useEffect(() => {
+    if (!selection || selection.group === 'Deal') return;
+    setExpanded(prev => ({ ...prev, [selection.group]: true }));
+  }, [selection]);
+
+  // Auto-scroll to the highlighted row on selection — never on deselect, since
+  // there's nothing to scroll to and the panel shouldn't jump.
   useEffect(() => {
     if (!selection) return;
     const id = requestAnimationFrame(() => {
@@ -142,8 +148,7 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
   for (const tt of visibleTypes) grouped[groupOf(tt)].push(tt);
 
   // Sort entries alphabetically within each group by their displayed label.
-  const sortKey = (tt: TariffType) =>
-    (groupOf(tt) === 'Others' ? tt.name : tt.sub_category ?? tt.product_category).toLowerCase();
+  const sortKey = (tt: TariffType) => detailHeading(tt, groupOf(tt)).toLowerCase();
   for (const g of GROUPS) grouped[g].sort((a, b) => sortKey(a).localeCompare(sortKey(b)));
 
   const toggle = (g: GroupName) =>
@@ -165,7 +170,7 @@ export default function CountryPanel({ tariff, selection, sector, onClose, onSel
           <MousePointerClick size={28} className="text-slate-600 mb-3" />
           <p className="text-sm font-medium text-slate-300">No country selected</p>
           <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-            Search for a country or click it on the map to view its tariffs and trade deals.
+            Search for a country or click on it to view its tariff rates and trade deals.
           </p>
         </div>
       ) : (

@@ -4,22 +4,25 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Tariff, TariffData } from '@/types/tariff';
-import { TariffSelection, getCountryColors, getFilterOptions, statusForSelection, selectionRateKinds } from '@/lib/tariffs';
+import { TariffSelection, QueueItem, DEFAULT_FILTER_QUEUE, pushFilterQueue, getCountryColors, getFilterOptions, statusForSelection, selectionRateKinds } from '@/lib/tariffs';
 import CountryPanel from '@/components/CountryPanel';
 import CountrySearch from '@/components/CountrySearch';
 import TreemapSizing, { SIZING_TOTAL } from '@/components/TreemapSizing';
 import Legend from '@/components/Legend';
+import FilterBar from '@/components/FilterBar';
 import Header from '@/components/Header';
 
 const TariffMap = dynamic(() => import('@/components/TariffMap'), { ssr: false });
 const TradeTreemap = dynamic(() => import('@/components/TradeTreemap'), { ssr: false });
+const CountryList = dynamic(() => import('@/components/CountryList'), { ssr: false });
 
-type ViewMode = 'map' | 'trade';
+type ViewMode = 'map' | 'trade' | 'list';
 
 export default function Home() {
   const [tariffData, setTariffData] = useState<TariffData | null>(null);
   const [selectedCountryCode, setSelectedCountryCode] = useState<string | null>(null);
   const [selection, setSelection] = useState<TariffSelection | null>(null);
+  const [filterQueue, setFilterQueue] = useState<QueueItem[]>(DEFAULT_FILTER_QUEUE);
   const [view, setView] = useState<ViewMode>('map');
   const [sizingSector, setSizingSector] = useState<string>(SIZING_TOTAL);
   const mapSectionRef = useRef<HTMLElement>(null);
@@ -62,6 +65,14 @@ export default function Home() {
 
   const handleCountrySelect = (tariff: Tariff | null) =>
     setSelectedCountryCode(tariff?.country_code ?? null);
+
+  // Single entry point for changing the active tariff filter, used by FilterBar
+  // (any view) and CountryPanel alike, so the pinned-pill queue and highlighted
+  // selection always agree no matter where the change came from.
+  const handleSelect = (next: TariffSelection | null) => {
+    setSelection(next);
+    if (next) setFilterQueue(q => pushFilterQueue(q, next.group, next.key));
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0f1e] overflow-x-hidden">
@@ -112,39 +123,36 @@ export default function Home() {
       {tariffData && (
         <div
           ref={toggleRef}
-          className="relative z-30 mx-auto w-[92vw] md:w-[75vw] mb-0 flex flex-wrap items-center gap-y-2"
+          className="relative z-30 mx-auto w-[92vw] md:w-[75vw] mb-0 flex flex-wrap items-center gap-x-3 gap-y-2"
         >
-          <div
-            className={`flex w-full md:w-auto bg-[#0f172a] border border-white/10 overflow-hidden ${
-              view === "trade"
-                ? "rounded-l-lg md:rounded-r-none rounded-r-lg"
-                : "rounded-lg"
-            }`}
-          >
+          {/* View tabs */}
+          <div className="flex bg-[#0f172a] border border-white/10 rounded-lg overflow-hidden">
             <button
-              onClick={() => {
-                setView("map");
-                setSizingSector(SIZING_TOTAL);
-              }}
-              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium transition-colors ${
-                view === "map"
-                  ? "bg-white/10 text-white"
-                  : "text-slate-500 hover:text-slate-300"
+              onClick={() => { setView("map"); setSizingSector(SIZING_TOTAL); }}
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium whitespace-nowrap transition-colors ${
+                view === "map" ? "bg-white/10 text-white" : "text-slate-500 hover:text-slate-300"
               }`}
             >
-              World map
+              Map view
+            </button>
+            <button
+              onClick={() => { setView("list"); setSizingSector(SIZING_TOTAL); }}
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium whitespace-nowrap transition-colors ${
+                view === "list" ? "bg-white/10 text-white" : "text-slate-500 hover:text-slate-300"
+              }`}
+            >
+              List view
             </button>
             <button
               onClick={() => setView("trade")}
-              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium transition-colors ${
-                view === "trade"
-                  ? "bg-white/10 text-white"
-                  : "text-slate-500 hover:text-slate-300"
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-medium whitespace-nowrap transition-colors ${
+                view === "trade" ? "bg-white/10 text-white" : "text-slate-500 hover:text-slate-300"
               }`}
             >
-              By import value
+              Imports view
             </button>
           </div>
+
           {view === "trade" && (
             <TreemapSizing value={sizingSector} onChange={setSizingSector} />
           )}
@@ -154,29 +162,69 @@ export default function Home() {
       {/* Map section: docked rail on desktop, stacked below the map on mobile */}
       <section
         ref={mapSectionRef}
-        className="relative mb-10 mx-auto rounded-2xl overflow-hidden border border-white/10 flex flex-col md:flex-row w-[92vw] md:w-[75vw] h-[90vh]"
+        className="relative mb-10 mx-auto rounded-2xl overflow-hidden border border-white/10 flex flex-col w-[92vw] md:w-[75vw] h-[90vh]"
       >
-        {/* Map area */}
+        {/* Canvas + rail row — FilterBar is per-view, not a shared strip */}
+        <div className="flex flex-col md:flex-row flex-1 min-h-0">
+
+        {/* Canvas area */}
         <div className="relative w-full h-[45vh] md:h-full md:flex-1 min-w-0">
+
+          {/* Map view: FilterBar overlays the map at the top */}
           {tariffData && view === "map" && (
-            <TariffMap
-              tariffs={tariffData.tariffs}
-              countryColors={countryColors}
-              selection={selection}
-              onCountrySelect={handleCountrySelect}
-              selectedCountry={selectedCountryCode}
-            />
+            <>
+              <TariffMap
+                tariffs={tariffData.tariffs}
+                countryColors={countryColors}
+                selection={selection}
+                onCountrySelect={handleCountrySelect}
+                selectedCountry={selectedCountryCode}
+              />
+              <div
+                className="absolute top-0 left-0 right-0 z-20 px-4 py-2.5"
+                style={{ background: 'linear-gradient(to bottom, rgba(10,15,30,0.75) 0%, rgba(10,15,30,0) 100%)' }}
+              >
+                <FilterBar options={filterOptions} selection={selection} onSelect={handleSelect} queue={filterQueue} />
+              </div>
+            </>
           )}
 
+          {/* Imports view: FilterBar is its own row above the treemap, not an overlay */}
           {tariffData && view === "trade" && (
-            <TradeTreemap
-              tariffs={tariffData.tariffs}
-              countryColors={countryColors}
-              selection={selection}
-              onCountrySelect={handleCountrySelect}
-              selectedCountry={selectedCountryCode}
-              sector={sizingSector}
-            />
+            <div className="absolute inset-0 flex flex-col">
+              <div className="flex-shrink-0 px-4 py-2.5 border-b border-white/10 bg-[#0f172a]">
+                <FilterBar options={filterOptions} selection={selection} onSelect={handleSelect} queue={filterQueue} />
+              </div>
+              <div className="relative flex-1 min-h-0">
+                <TradeTreemap
+                  tariffs={tariffData.tariffs}
+                  countryColors={countryColors}
+                  selection={selection}
+                  onCountrySelect={handleCountrySelect}
+                  selectedCountry={selectedCountryCode}
+                  sector={sizingSector}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* List view: FilterBar is its own row above the list, not extending to the rail */}
+          {tariffData && view === "list" && (
+            <div className="absolute inset-0 flex flex-col">
+              <div className="flex-shrink-0 px-4 py-2.5 border-b border-white/10 bg-[#0f172a]">
+                <FilterBar options={filterOptions} selection={selection} onSelect={handleSelect} queue={filterQueue} />
+              </div>
+              <div className="flex-1 min-h-0">
+                <CountryList
+                  tariffs={tariffData.tariffs}
+                  selection={selection}
+                  onCountrySelect={handleCountrySelect}
+                  selectedCountry={selectedCountryCode}
+                  sector={sizingSector}
+                  onSectorChange={setSizingSector}
+                />
+              </div>
+            </div>
           )}
 
           {!tariffData && (
@@ -188,34 +236,47 @@ export default function Home() {
           )}
         </div>
 
-        {/* Rail: docked right on desktop, stacked below the map on mobile.
-            Mobile scrolls as one column (filter below the panel); desktop pins the
-            filter at the bottom with the panel scrolling internally. */}
+        {/* Rail: docked right on desktop, stacked below the map on mobile. */}
         <div className="w-full md:w-80 flex-1 md:flex-none min-h-0 md:h-full bg-[#0f172a] border-t md:border-t-0 md:border-l border-white/10 flex flex-col overflow-y-auto md:overflow-hidden">
+          {/* Mobile only: legend sticks above the search bar and panel instead of scrolling away with them */}
+          {tariffData && (
+            <Legend
+              scaleStatus={scaleStatus}
+              hasNumeric={rateKinds.hasNumeric}
+              hasTBD={rateKinds.hasTBD}
+              isDeal={selection?.group === 'Deal'}
+              className="md:hidden sticky top-0 z-10 flex-shrink-0 border-b border-white/10 bg-[#0f172a] px-4 py-3"
+            />
+          )}
+
           {tariffData && (
             <CountrySearch
               tariffs={tariffData.tariffs}
               onSelect={handleCountrySelect}
             />
           )}
+
           <CountryPanel
             tariff={selectedTariff}
             selection={selection}
             sector={sizingSector}
             onClose={() => setSelectedCountryCode(null)}
-            onSelectFilter={setSelection}
+            onSelectFilter={handleSelect}
           />
+
+          {/* Desktop only: legend docked below the panel, as before */}
           {tariffData && (
             <Legend
-              options={filterOptions}
-              selection={selection}
               scaleStatus={scaleStatus}
               hasNumeric={rateKinds.hasNumeric}
               hasTBD={rateKinds.hasTBD}
-              onSelect={setSelection}
+              isDeal={selection?.group === 'Deal'}
+              className="hidden md:block flex-shrink-0 border-t border-white/10 px-4 py-3"
             />
           )}
         </div>
+
+        </div>{/* end canvas+rail row */}
       </section>
 
         </div>
@@ -225,13 +286,13 @@ export default function Home() {
       <section className="mx-auto w-[92vw] md:w-[75vw] pt-24 pb-24">
         <div className="space-y-5 text-slate-400 text-base sm:text-lg leading-relaxed">
           <p>
-            Having dubbed himself the &ldquo;Tariff Man,&rdquo; Donald Trump took
-            office with a stated goal of imposing broad-based tariffs on
-            America&apos;s trading partners.
+            Having dubbed himself the &ldquo;Tariff Man&rdquo;, Donald Trump took
+            office in January 2025 with a mandate to impose tariffs on
+            America's trading partners.
           </p>
           <p>
-            And while he has remained steadfast in his support for tariffs, the implementation has been highly erratic. A churn of outlandish
-            threats, legal challenges, and last-minute deals has peppered his administration's tariff regime. Since the first tariff announcements in early 2025, the US&apos;
+            And while he has remained steadfast in his support for tariffs, the implementation has been characteristically erratic. A slew of outlandish
+            threats, legal challenges, about-turns, and last-minute deals have peppered the Administration's tariff regime. Since the first tariff announcements in early 2025, the US&apos;
             tariff rates have been revised more than forty times.
           </p>
           <p>
@@ -244,18 +305,18 @@ export default function Home() {
       <section className="mx-auto w-[92vw] md:w-[75vw] pb-32">
         <div className="grid gap-8 md:grid-cols-3">
           <FeatureColumn
-            title="Replay over time [upcoming feature]"
+            title="Replay over time [Coming soon]"
             description="Scroll through each revision since 2025 and watch rates shift, country by country."
             //href="/timeline"
             gradient="linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)"
           />
           <FeatureColumn
-            title="Deep Dive by Country [upcoming feature]"
+            title="Explore by Country [Coming soon]"
             description="Choose any trading partner to see its effective tariff rate and how it has been targeted over time, broken down by sector and tariff authority."
             gradient="linear-gradient(135deg, #155e75 0%, #0f172a 100%)"
           />
           <FeatureColumn
-            title="Explore Scenarios [upcoming feature]"
+            title="Toggle Scenarios [Coming soon]"
             description="Adjust assumptions and visualise the impact of potential changes to the tariff regime."
             gradient="linear-gradient(135deg, #5b21b6 0%, #0f172a 100%)"
           />

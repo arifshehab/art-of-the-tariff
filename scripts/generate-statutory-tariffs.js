@@ -25,14 +25,15 @@ const zlib = require('zlib');
 // ---------------------------------------------------------------------------
 // Paths
 // ---------------------------------------------------------------------------
-const UPDATED_DIR =
-  'C:/Users/arif_/Documents/Claude/tariff-rate-tracker/data/statutory_rates/updated';
-const MASTER_PATH =
-  'C:/Users/arif_/Documents/Claude/tariff-rate-tracker/data/statutory_rates/updated/master_tariff_list.json';
-const CENSUS_PATH =
-  'C:/Users/arif_/Documents/Claude/Tariff Tracker/tariff-tracker/data/census_to_iso.json';
-const DEALS_XLSX_PATH =
-  'C:/Users/arif_/Documents/Claude/Tariff Tracker/tariff-tracker/data/trump_2.0_trade_deals.xlsx';
+// Paths are resolved relative to this script. The statutory-rate snapshots live
+// in the sibling tariff-rate-tracker project (../../../tariff-rate-tracker from
+// this scripts/ dir).
+const UPDATED_DIR = path.join(
+  __dirname, '..', '..', '..', 'tariff-rate-tracker', 'data', 'statutory_rates', 'updated',
+);
+const MASTER_PATH = path.join(UPDATED_DIR, 'master_tariff_list.json');
+const CENSUS_PATH = path.join(__dirname, '..', 'data', 'census_to_iso.json');
+const DEALS_CSV_PATH = path.join(__dirname, '..', 'data', 'trump_2.0_trade_deals.csv');
 
 // EU member states, by ISO-2 code (27 members). Used to append "(EU)" to the
 // country name. Source: existing data/tariffs.json EU-flagged rows.
@@ -193,6 +194,65 @@ function readDealsXlsx(p) {
   return records;
 }
 
+// RFC-4180-ish CSV parser: handles quoted fields, embedded commas/newlines and
+// "" escapes. Returns an array of rows, each an array of cell strings.
+function parseCsv(text) {
+  if (text.charCodeAt(0) === 0xfeff) text = text.slice(1); // strip BOM
+  const rows = [];
+  let field = '', row = [], inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; } else inQuotes = false;
+      } else field += ch;
+    } else if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === ',') {
+      row.push(field); field = '';
+    } else if (ch === '\r') {
+      // ignore; newline handled on \n
+    } else if (ch === '\n') {
+      row.push(field); rows.push(row); row = []; field = '';
+    } else {
+      field += ch;
+    }
+  }
+  if (field !== '' || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+// Read the trade-deals CSV into a list of row objects keyed by header — same
+// shape as readDealsXlsx().
+function readDealsCsv(p) {
+  if (!fs.existsSync(p)) {
+    console.error(`[warn] deals file not found: ${p}; deals will be empty`);
+    return [];
+  }
+  const rows = parseCsv(fs.readFileSync(p, 'utf8')).filter((r) => r.some((c) => c.trim() !== ''));
+  if (!rows.length) return [];
+  const header = rows[0].map((h) => h.trim());
+  const records = [];
+  for (let i = 1; i < rows.length; i++) {
+    const obj = {};
+    let empty = true;
+    for (let j = 0; j < header.length; j++) {
+      const key = header[j];
+      if (!key) continue;
+      const v = (rows[i][j] ?? '').trim();
+      if (v !== '') empty = false;
+      obj[key] = v;
+    }
+    if (!empty) records.push(obj);
+  }
+  return records;
+}
+
+// Read the deals source, dispatching on file extension (.csv vs .xlsx).
+function readDealRecords(p) {
+  return p.toLowerCase().endsWith('.csv') ? readDealsCsv(p) : readDealsXlsx(p);
+}
+
 // Build a lookup: normalised country name -> [deal, ...].
 //
 // A workbook row's country_name may name a group rather than one country:
@@ -327,7 +387,7 @@ function main() {
   const source = readJSON(path.join(UPDATED_DIR, srcFile));
   const master = readJSON(MASTER_PATH);
   const census = readJSON(CENSUS_PATH);
-  const dealRecords = readDealsXlsx(DEALS_XLSX_PATH);
+  const dealRecords = readDealRecords(DEALS_CSV_PATH);
   const dealsIndex = buildDealsIndex(dealRecords);
   const seenNames = new Set(); // lowercased base names processed
   let sawEU = false;

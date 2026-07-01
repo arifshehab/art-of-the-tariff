@@ -4,51 +4,16 @@ import { Tariff, TariffData, TariffType, TariffStatus, Deal } from '@/types/tari
  * Adapter from the statutory source files (statutory_tariffs_*.json,
  * upcoming_301_tariffs.json) to the Tariff/TariffType shape the rest of the app
  * consumes. The sources use authority codes, product codes, decimal rates and a
- * flat status vocabulary; this maps each of those onto the legacy shape so
- * lib/tariffs.ts and the components need no changes.
+ * flat status vocabulary. This layer only reshapes rate/status formatting
+ * (decimal → percent, source status vocabulary → TariffStatus) — it does not
+ * derive display labels or grouping. Those are computed on demand from the raw
+ * `authority`/`name` codes by lib/tariffs.ts (groupOf, categoryKey, tariffLabel),
+ * so TariffType stays a direct mirror of the source record.
  *
  * normalize() accepts multiple sources and merges them by country code: a
  * country's tariff_types/deals are concatenated across sources (the first
  * source to mention a country defines its display name).
  */
-
-// authority code → display group name (must match groupOf() in lib/tariffs.ts).
-const AUTHORITY_LABELS: Record<string, string> = {
-  s122: 'Section 122',
-  s232: 'Section 232',
-  s301: 'Section 301',
-};
-
-// product code → display category. Auto/MHD labels intentionally match
-// CATEGORY_ALIASES so mergeCategories() collapses them the same as before.
-const PRODUCT_LABELS: Record<string, string> = {
-  steel: 'Steel',
-  aluminum: 'Aluminum',
-  autos: 'Automobiles',
-  auto_parts: 'Automobile parts',
-  mhd_vehicles: 'Medium- and heavy-duty vehicles',
-  mhd_parts: 'Medium- and heavy-duty vehicle parts',
-  buses: 'Buses',
-  semiconductors: 'Semiconductors',
-  softwood_lumber: 'Softwood lumber',
-  wood_furniture: 'Wood furniture',
-  kitchen_cabinets: 'Kitchen cabinets',
-  section_122: 'All goods',
-};
-
-// Section 301 product code → sub-category label. For S301 the sub-category is
-// the distinguishing key (filter option + panel heading), so each investigation
-// theme gets its own short label.
-const S301_SUBCATEGORIES: Record<string, string> = {
-  china_301: 'Technology Transfer, Intellectual Property and Innovation',
-  maritime_cargo_handling_equipment: 'Maritime',
-  forced_labour: 'Forced Labour',
-  excess_capacity: 'Excess Capacity',
-  unreasonable_policies: 'Unreasonable Policies',
-  pharmaceutical_pricing: 'Pharmaceutical Pricing',
-  intellectual_property: 'Intellectual Property',
-  labor_rights_human_rights_and_fundamental_freedoms_and_the_rule_of_law: 'Labor Rights',
-};
 
 interface RawTariffType {
   authority: string;
@@ -94,17 +59,10 @@ function mapStatus(status: string): TariffStatus {
   return 'active';
 }
 
-/** Fallback label for an unknown product code: "forced_labour" → "Forced Labour". */
-function prettify(code: string): string {
-  return code.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-}
-
 function mapTariffType(t: RawTariffType): TariffType {
-  const isS301 = t.authority === 's301';
   return {
-    name: AUTHORITY_LABELS[t.authority] ?? t.authority,
-    product_category: isS301 ? 'All goods' : (PRODUCT_LABELS[t.name] ?? t.name),
-    sub_category: isS301 ? (S301_SUBCATEGORIES[t.name] ?? prettify(t.name)) : undefined,
+    authority: t.authority,
+    name: t.name,
     rate: toPercent(t.rate),
     status: mapStatus(t.status),
     effective_date: t.effective_date,

@@ -22,7 +22,7 @@ export const STATUS_SCALES: Record<string, [string, string]> = {
 };
 
 /** Rates at or above this map to the darkest end of the scales. */
-export const MAX_SCALE_RATE = 50;
+export const MAX_SCALE_RATE = 100;
 
 export const GREY = '#c0c0c0';      // Countries outside the selection
 export const NO_DATA = '#c0c0c0';   // countries not in the dataset
@@ -37,23 +37,102 @@ function lerpColor(a: string, b: string, t: number): string {
   ).join('');
 }
 
+/** authority code ("s232") → display group ("Section 232"). Anything else is "Others". */
 export function groupOf(tt: TariffType): TariffGroup {
-  if (tt.name === 'Section 122' || tt.name === 'Section 232' || tt.name === 'Section 301') {
-    return tt.name;
+  switch (tt.authority) {
+    case 's122': return 'Section 122';
+    case 's232': return 'Section 232';
+    case 's301': return 'Section 301';
+    default: return 'Others';
   }
-  return 'Others';
 }
 
-// Section 232 "X" + "X parts" categories are treated as a single category.
+// Section 232 "X" + "X parts" raw codes collapse into one combined category.
 const CATEGORY_ALIASES: Record<string, string> = {
-  'Automobiles': 'Automobiles and parts',
-  'Automobile parts': 'Automobiles and parts',
-  'Medium & heavy-duty vehicles': 'Medium & heavy-duty vehicles and parts',
-  'Medium & heavy-duty vehicle parts': 'Medium & heavy-duty vehicles and parts',
+  autos: 'autos_and_parts',
+  auto_parts: 'autos_and_parts',
+  mhd_vehicles: 'mhd_and_parts',
+  mhd_parts: 'mhd_and_parts',
 };
 
-export function canonicalCategory(product_category: string): string {
-  return CATEGORY_ALIASES[product_category] ?? product_category;
+/** Merges related Section 232 raw codes ("autos"/"auto_parts") onto one canonical code. */
+export function canonicalCategory(name: string): string {
+  return CATEGORY_ALIASES[name] ?? name;
+}
+
+/**
+ * The filter key for a tariff entry: its raw `name` code, canonicalized for
+ * Section 232 (see canonicalCategory). Section 122 has one raw code
+ * ("section_122"); Section 301's raw code is itself a distinct filter option
+ * (each investigation theme, e.g. "forced_labour").
+ */
+export function categoryKey(tt: TariffType): string {
+  return groupOf(tt) === 'Section 232' ? canonicalCategory(tt.name) : tt.name;
+}
+
+// Display label per group + raw/canonical code. Falls back to prettifying the
+// code itself ("forced_labour" → "Forced Labour") for anything not listed —
+// keeps this map from needing an entry for every future code.
+const CODE_LABELS: Partial<Record<TariffGroup, Record<string, string>>> = {
+  'Section 232': {
+    steel: 'Steel',
+    aluminum: 'Aluminum',
+    autos_and_parts: 'Automobiles and parts',
+    mhd_and_parts: 'Medium & heavy-duty vehicles and parts',
+    buses: 'Buses',
+    semiconductors: 'Semiconductors',
+    softwood_lumber: 'Softwood lumber',
+    wood_furniture: 'Wood furniture',
+    kitchen_cabinets: 'Kitchen cabinets',
+  },
+  'Section 301': {
+    china_301: 'Technology Transfer, Intellectual Property and Innovation',
+    maritime_cargo_handling_equipment: 'Maritime',
+    forced_labour: 'Forced Labour',
+    excess_capacity: 'Excess Capacity',
+    unreasonable_policies: 'Unreasonable Policies',
+    pharmaceutical_pricing: 'Pharmaceutical Pricing',
+    intellectual_property: 'Intellectual Property',
+    labor_rights_human_rights_and_fundamental_freedoms_and_the_rule_of_law: 'Labor Rights',
+  },
+};
+
+/** "forced_labour" → "Forced Labour" (fallback for any code not in CODE_LABELS). */
+function prettify(code: string): string {
+  return code.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+/** Human label for a filter group + its raw/canonical code. */
+export function tariffLabel(group: FilterGroup, key: string): string {
+  if (group === 'Section 122') return 'All goods';
+  return CODE_LABELS[group as TariffGroup]?.[key] ?? prettify(key);
+}
+
+// Shortened labels for the FilterBar's pinned pills, where space is tight.
+// Only add an entry here for codes whose full label doesn't fit comfortably as
+// a pill — anything unlisted just falls back to the full label (tariffLabel).
+const SHORT_LABELS: Partial<Record<TariffGroup, Record<string, string>>> = {
+  'Section 232': {
+    aluminum: 'Alum',
+    semiconductors: 'Semicon',
+    mhd_and_parts: 'MHD Vehicles',
+    autos_and_parts: 'Autos',
+    softwood_lumber: 'Lumber',
+    wood_furniture: 'Furniture',
+    kitchen_cabinets: 'Cabinets',
+  },
+  'Section 301': {
+    china_301: 'Tech Transfer',
+    maritime_cargo_handling_equipment: 'Maritime',
+    pharmaceutical_pricing: 'Pharma',
+    intellectual_property: 'IP',
+    labor_rights_human_rights_and_fundamental_freedoms_and_the_rule_of_law: 'Labor rights',
+  },
+};
+
+/** Short label for a pinned pill; falls back to the full label (tariffLabel) when none is defined. */
+export function tariffShortLabel(group: FilterGroup, key: string): string {
+  return SHORT_LABELS[group as TariffGroup]?.[key] ?? tariffLabel(group, key);
 }
 
 /** Of several tariff entries, the one with the highest numeric rate (for combined categories). */
@@ -107,11 +186,6 @@ export function getMergedTariffTypes(tariff: Tariff): TariffType[] {
   return getVisibleTariffTypes(tariff);
 }
 
-/** Selection key for a Section 301 entry. */
-function s301Key(tt: TariffType): string {
-  return tt.sub_category ?? 'General';
-}
-
 /**
  * Collapse Section 232 "X" + "X parts" entries into a single combined category
  * (matching the filter). The combined rate is the higher of the two; if the two
@@ -121,8 +195,8 @@ export function mergeCategories(types: TariffType[]): TariffType[] {
   const s232 = new Map<string, TariffType[]>();
   const rest: TariffType[] = [];
   for (const t of types) {
-    if (t.name === 'Section 232') {
-      const key = canonicalCategory(t.product_category);
+    if (groupOf(t) === 'Section 232') {
+      const key = canonicalCategory(t.name);
       const arr = s232.get(key) ?? [];
       arr.push(t);
       s232.set(key, arr);
@@ -137,7 +211,7 @@ export function mergeCategories(types: TariffType[]): TariffType[] {
     const distinctRates = new Set(group.map(g => parseRate(g.rate) ?? -1));
     let rate = top.rate;
     if (distinctRates.size > 1 && !rate.includes('*')) rate += '*';
-    merged.push({ ...top, product_category: key, sub_category: undefined, rate });
+    merged.push({ ...top, name: key, rate });
   }
 
   return [...rest, ...merged];
@@ -153,16 +227,53 @@ export const OTHERS_KEY = '__all_others__';
 /** Sentinel key for the Deal filter. */
 export const DEAL_KEY = '__deal__';
 
+/**
+ * FilterBar's "pinned pill" queue. Lives here (rather than in FilterBar's own
+ * state) so it's a single global value shared across every FilterBar instance
+ * (map/list/imports each mount their own FilterBar) and survives view switches.
+ */
+export interface QueueItem {
+  group: FilterGroup;
+  key: string;
+}
+
+export const DEFAULT_FILTER_QUEUE: QueueItem[] = [
+  { group: 'Section 301', key: 'forced_labour' },
+  { group: 'Deal',        key: DEAL_KEY         },
+  { group: 'Section 232', key: 'steel'          },
+];
+
+export const MAX_FILTER_QUEUE = 4;
+
+// Authority number shown before the option label, e.g. "232 · Steel". Deal
+// and Others have no statutory authority number, so they show unprefixed.
+const AUTHORITY_PREFIX: Partial<Record<FilterGroup, string>> = {
+  'Section 122': '122',
+  'Section 232': '232',
+  'Section 301': '301',
+};
+
+export function filterPillLabel(group: FilterGroup, rawLabel: string): string {
+  const prefix = AUTHORITY_PREFIX[group];
+  if (!prefix) return rawLabel;
+  // "All goods" (Section 122's only category) adds nothing beyond the section
+  // number itself — skip the "· All goods" suffix.
+  if (rawLabel === 'All goods') return prefix;
+  return `${prefix} · ${rawLabel}`;
+}
+
+/** Adds a newly-activated selection to the front of the pill queue (capped, no duplicates). */
+export function pushFilterQueue(queue: QueueItem[], group: FilterGroup, key: string): QueueItem[] {
+  if (queue.some(q => q.group === group && q.key === key)) return queue;
+  return [{ group, key }, ...queue].slice(0, MAX_FILTER_QUEUE);
+}
+
 /** Does a tariff entry match the given filter selection? (Deal is not a tariff type.) */
 export function matchesSelection(tt: TariffType, selection: TariffSelection): boolean {
   if (selection.group === 'Deal') return false;
   if (groupOf(tt) !== selection.group) return false;
-  switch (selection.group) {
-    case 'Section 122': return true;
-    case 'Section 232': return canonicalCategory(tt.product_category) === selection.key;
-    case 'Section 301': return s301Key(tt) === selection.key;
-    case 'Others': return true;
-  }
+  if (selection.group === 'Section 122' || selection.group === 'Others') return true;
+  return categoryKey(tt) === selection.key;
 }
 
 /** Deal colour by status: active = green, pending = blue (both at the 20% shade). */
@@ -175,45 +286,47 @@ export function dealColor(deal: { status: string }): string {
 /** The filter selection that corresponds to a tariff entry (e.g. clicked in the panel). */
 export function selectionFor(tt: TariffType): TariffSelection {
   const group = groupOf(tt);
-  const key =
-    group === 'Section 122' ? 'All goods'
-    : group === 'Section 232' ? canonicalCategory(tt.product_category)
-    : group === 'Section 301' ? s301Key(tt)
-    : OTHERS_KEY;
+  const key = group === 'Others' ? OTHERS_KEY : categoryKey(tt);
   return { group, key };
 }
 
 /** The selectable tariffs under each filter category. */
 export function getFilterOptions(tariffs: Tariff[]): Record<FilterGroup, FilterOption[]> {
+  const s122 = new Set<string>();
   const s232 = new Set<string>();
   const s301 = new Set<string>();
-  let hasS122 = false;
   let hasOthers = false;
   let hasDeals = false;
   for (const country of tariffs) {
     if (country.deals.length > 0) hasDeals = true;
     for (const tt of getVisibleTariffTypes(country)) {
       const g = groupOf(tt);
-      if (g === 'Section 122') hasS122 = true;
-      else if (g === 'Section 232') s232.add(canonicalCategory(tt.product_category));
-      else if (g === 'Section 301') s301.add(s301Key(tt));
+      if (g === 'Section 122') s122.add(categoryKey(tt));
+      else if (g === 'Section 232') s232.add(categoryKey(tt));
+      else if (g === 'Section 301') s301.add(categoryKey(tt));
       else if (g === 'Others') hasOthers = true;
     }
   }
+  const withLabels = (group: TariffGroup, keys: Set<string>): FilterOption[] =>
+    [...keys].sort().map(key => ({ key, label: tariffLabel(group, key) }));
   return {
-    'Section 122': hasS122 ? [{ key: 'All goods', label: 'All goods' }] : [],
-    'Section 232': [...s232].sort().map(k => ({ key: k, label: k })),
-    'Section 301': [...s301].sort().map(k => ({ key: k, label: k })),
+    'Section 122': withLabels('Section 122', s122),
+    'Section 232': withLabels('Section 232', s232),
+    'Section 301': withLabels('Section 301', s301),
     'Others': hasOthers ? [{ key: OTHERS_KEY, label: 'All other tariffs' }] : [],
     'Deal': hasDeals ? [{ key: DEAL_KEY, label: 'All deals' }] : [],
   };
 }
 
+/** The tariff entry a country resolves to under the current selection (the highest-rate match), or null. */
+export function tariffForSelection(country: Tariff, selection: TariffSelection): TariffType | null {
+  if (selection.group === 'Deal') return null;
+  return highestRate(getVisibleTariffTypes(country).filter(t => matchesSelection(t, selection))) ?? null;
+}
+
 /** The rate string for a country under the current selection, or null if none applies. */
 export function rateForSelection(country: Tariff, selection: TariffSelection): string | null {
-  if (selection.group === 'Deal') return null;
-  const match = highestRate(getVisibleTariffTypes(country).filter(t => matchesSelection(t, selection)));
-  return match ? match.rate : null;
+  return tariffForSelection(country, selection)?.rate ?? null;
 }
 
 /** Status of the tariff a selection refers to (drives the legend scale). Defaults to active. */

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import statutoryData from '@/data/statutory_tariffs_2026-06-28.json';
+import statutoryData from '@/data/statutory_tariffs_2026-07-01.json';
 import upcoming301Data from '@/data/upcoming_301_tariffs.json';
 import { normalize } from '@/lib/normalizeTariffs';
 
